@@ -1,18 +1,30 @@
 const nodemailer = require('nodemailer');
+const { smtp } = require('../config/mailConfig');
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.gmail_user,
-    pass: process.env.gmail_pass,
-  },
-});
+const sendMail = async (email, code) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: smtp.host,
+      port: smtp.port,
+      secure: smtp.secure,
+      auth: {
+        user: smtp.user,
+        pass: smtp.pass,
+      },
+    });
 
-exports.sendCode = async (email, code) => {
-  await transporter.sendMail({
-    from: `"Vet Clinic" <${process.env.gmail_user}>`,
-    to: email,
-    subject: 'Ваш код подтверждения',
-    text: `Код подтверждения: ${code}`,
-  });
+    const mailOptions = {
+      from: smtp.user,
+      to: email,
+      subject: 'Подтверждение регистрации',
+      text: `Ваш код подтверждения: ${code}`,
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Письмо отправлено:', info.response);
+  } catch (error) {
+    console.log('Ошибка при отправке письма:', error);
+  }
 };
+
+module.exports = sendMail;

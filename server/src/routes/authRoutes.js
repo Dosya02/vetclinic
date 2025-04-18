@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const authController = require('../controllers/authController');
+const { sendVerificationCode } = require('../controllers/authController');
 
-router.post('/register', authController.register);
-router.post('/verify-code', authController.verifyCode);
-router.post('/login', authController.login);
+router.post('/send-code', sendVerificationCode);
 
 module.exports = router;
