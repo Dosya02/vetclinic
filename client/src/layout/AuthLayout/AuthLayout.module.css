@@ -1,0 +1,62 @@
+.wrapper {
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #e7ecf3;
+}
+
+.main {
+	position: relative;
+	width: 1400px;
+	height: 80vh;
+	background-color: #fff;
+}
+
+.imageWrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+.imageWrapper::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.13);
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.content {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #f8fafc;
+}
+
+.link {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	color: #5a8aa2;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.link:hover {
+	color: #4a7990;
+}

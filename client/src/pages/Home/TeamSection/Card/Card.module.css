@@ -1,0 +1,41 @@
+.teamCard {
+	display: grid;
+	grid-template-rows: 500px auto 1fr auto;
+}
+
+.imageBlock {
+	width: 100%;
+	height: 500px;
+}
+
+.image {
+	width: 100%;
+	height: 100%;
+	border-radius: 40px;
+	object-fit: cover;
+}
+
+.textBlock {
+	text-align: center;
+	margin-block: 50px;
+}
+
+.title {
+	color: #0E2F51;
+	font-size: 30px;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+}
+
+.text {
+	color: #0E2F51;
+	font-size: 20px;
+	line-height: 1.2;
+	letter-spacing: 0.2em;
+	margin-top: 50px;
+}
+
+.buttonBlock {
+	justify-self: center;
+}

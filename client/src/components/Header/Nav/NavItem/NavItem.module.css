@@ -1,0 +1,14 @@
+.item {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.link {
+	display: block;
+	color: #DCE3EB;
+	transition: all .3s ease;
+}
+
+.link:hover {
+	opacity: 0.7;
+}

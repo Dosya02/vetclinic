@@ -1,0 +1,35 @@
+.intro {
+	position: relative;
+	width: 100%;
+	height: calc(100vh - 87.56px);
+	display: flex;
+	align-items: center;
+	background-size: cover;
+	background-position: center;
+}
+
+.intro::after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.25);
+}
+
+.content {
+	position: relative;
+	width: 600px;
+	display: flex;
+	flex-direction: column;
+	gap: 92px;
+	z-index: 1;
+}
+
+.title {
+	color: #FFFFFF;
+	font-size: 48px;
+	font-weight: 700;
+	line-height: 1.2;
+}

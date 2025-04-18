@@ -1,0 +1,27 @@
+.about {
+	position: relative;
+	padding-block: 120px;
+	overflow: hidden;
+}
+
+.textContent {
+	width: 100%;
+	max-width: 800px;
+}
+
+.imageContent {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding-block: 120px;
+	overflow: hidden;
+}
+
+.imageContent img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	border-radius: 80px;
+	transform: translateX(40%);
+}

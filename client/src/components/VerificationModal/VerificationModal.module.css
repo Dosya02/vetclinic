@@ -1,0 +1,103 @@
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: all .3s ease;
+}
+
+.modalActive {
+	opacity: 1;
+	visibility: visible;
+}
+
+.content {
+	width: 90%;
+	height: 90%;
+	display: grid;
+	grid-template-columns: auto 720px;
+	gap: 90px;
+	align-items: center;
+	background-color: #fff;
+	padding: 50px 100px;
+}
+
+.text {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 45px;
+	letter-spacing: 0.1em;
+	text-align: center;
+}
+
+.text span {
+	color: #5A8AA2;
+}
+
+.codeInputs {
+	display: flex;
+	gap: 20px;
+	margin-block: 60px;
+}
+
+.codeInput {
+	width: 100px;
+	aspect-ratio: 1;
+	font-size: 24px;
+	font-weight: 700;
+	padding: 10px;
+	text-align: center;
+	background-color: #E7ECF3;
+	border-radius: 20px;
+}
+
+.codeInputError {
+	border: 2px solid #ff4d4f;
+}
+
+.errorText {
+	color: #ff4d4f;
+	margin-bottom: 20px;
+	text-align: center;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.button {
+	border-radius: 75px;
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 20px 40px;
+	transition: all .3s ease;
+}
+
+.cancelButton {
+	background-color: #E7ECF3;
+	color: #5A8AA2;
+}
+
+.cancelButton:hover {
+	background-color: #5A8AA2;
+	color: #E7ECF3;
+}
+
+.sendButton {
+	background-color: #5A8AA2;
+	color: #DCE3EB;
+}
+
+.sendButton:hover {
+	background-color: #DCE3EB;
+	color: #5A8AA2;
+}

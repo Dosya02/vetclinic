@@ -1,0 +1,28 @@
+.features {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 30px;
+}
+
+.features .featureItem:last-child {
+	grid-column: span 2;
+	justify-self: center;
+}
+
+.featureItem {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.featureIcon {
+	width: 50px;
+	aspect-ratio: 1;
+}
+
+.featureText {
+	width: 284px;
+	color: #7191B5;
+	font-size: 24px;
+	line-height: 1.2;
+}

@@ -1,0 +1,29 @@
+.info {
+	background-color: #e7ecf3;
+	border-radius: 40px;
+	margin: 50px 0;
+	padding: 50px;
+}
+
+.infoInner {
+	background-color: #f8fafc;
+	border-radius: 30px;
+	padding: 20px 40px;
+}
+
+.infoTitle {
+	font-size: 40px;
+	letter-spacing: 0.15em;
+}
+
+.infoTitle span {
+	color: #2c7ac8;
+	font-weight: 700;
+}
+
+.infoSubtitle {
+	color: #7191b5;
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: 0.15em;
+}

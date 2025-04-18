@@ -1,0 +1,11 @@
+.team {
+	background-color: #E7ECF3;
+	padding-block: 120px;
+}
+
+.teamList {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 60px;
+	margin-top: 100px;
+}
