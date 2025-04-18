@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import styles from './RegistrationPage.module.css'
+import styles from './RegistrationPage.module.css';
 import { Link, useOutletContext } from 'react-router-dom';
+import { sendVerificationCode } from 'src/api/auth';
 
 export const RegistrationPage = () => {
 	const { setModalActive, setEmail } = useOutletContext();
@@ -18,7 +19,7 @@ export const RegistrationPage = () => {
 		}));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (!formData.agree) {
@@ -26,47 +27,48 @@ export const RegistrationPage = () => {
 			return;
 		}
 
-		setEmail(formData.email)
-		setModalActive(true)
-
-		console.log(formData);
+		try {
+			await sendVerificationCode(formData.email);
+			setEmail(formData.email);
+			setModalActive(true);
+		} catch (err) {
+			alert('Не удалось отправить код. Попробуйте позже.');
+		}
 	};
 
 	return (
-		<>
-			<div className={styles.content}>
-				<h3 className={styles.title}>Регистрация</h3>
-				<form className={styles.form} onSubmit={handleSubmit}>
+		<div className={styles.content}>
+			<h3 className={styles.title}>Регистрация</h3>
+			<form className={styles.form} onSubmit={handleSubmit}>
+				<input
+					className={styles.input}
+					type='email'
+					id='email'
+					name='email'
+					placeholder='Введите почту'
+					value={formData.email}
+					onChange={handleChange}
+					required
+				/>
+				<label className={styles.checkboxLabel}>
 					<input
-						className={styles.input}
-						type='email'
-						id='email'
-						name='email'
-						placeholder='Введите почту'
-						value={formData.email}
+						className={styles.checkbox}
+						type="checkbox"
+						id="agree"
+						name="agree"
+						checked={formData.agree}
 						onChange={handleChange}
 						required
 					/>
-					<label className={styles.checkboxLabel}>
-						<input
-							className={styles.checkbox}
-							type="checkbox"
-							id="agree"
-							name="agree"
-							checked={formData.agree}
-							onChange={handleChange}
-							required
-						/>
-						<span>Я согласен с условиями предоставления услуг</span>
-					</label>
-					<button className={styles.button} type='submit'>
-						Зарегистрироваться
-					</button>
-				</form>
-				<p className={styles.text}>
-					Уже есть аккаунт? <Link className={styles.textLink} to='/login'>Войти</Link>
-				</p>
-			</div>
-		</>
+					<span>Я согласен с условиями предоставления услуг</span>
+				</label>
+				<button className={styles.button} type='submit'>
+					Зарегистрироваться
+				</button>
+			</form>
+			<p className={styles.text}>
+				Уже есть аккаунт? <Link className={styles.textLink} to='/login'>Войти</Link>
+			</p>
+		</div>
 	);
-}
+};
