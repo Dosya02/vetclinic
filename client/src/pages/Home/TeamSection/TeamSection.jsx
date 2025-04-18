@@ -1,5 +1,5 @@
 import { TeamImg1, TeamImg2, TeamImg3 } from 'src/assets'
-import { Container, Title } from 'src/components'
+import { Container, Section, Title } from 'src/components'
 import { TeamCard } from './Card/Card'
 import styles from './TeamSection.module.css'
 
@@ -23,10 +23,10 @@ export const TeamSection = () => {
 	]
 
 	return (
-		<section className={styles.team}>
+		<Section id='team'>
 			<Container>
 				<div className={styles.content}>
-					<Title text='Познакомьтесь с нашей командой' align='center' />
+					<Title text='Познакомьтесь с нашей командой' />
 					<div className={styles.teamList}>
 						{team.map((doctor, index) => (
 							<TeamCard
@@ -39,6 +39,6 @@ export const TeamSection = () => {
 					</div>
 				</div>
 			</Container>
-		</section>
+		</Section>
 	)
 }

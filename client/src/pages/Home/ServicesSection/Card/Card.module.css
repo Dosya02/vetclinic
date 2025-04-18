@@ -1,0 +1,38 @@
+.card {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #E7ECF3;
+	border-radius: 30px;
+	padding: 40px 20px;
+	text-align: center;
+}
+
+.card:nth-child(even) {
+	background-color: transparent;
+}
+
+.image {
+	width: 200px;
+	height: 200px;
+	object-fit: cover;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	color: #0E2F51;
+	font-size: 24px;
+	font-weight: 600;
+	letter-spacing: 0.07em;
+	margin: 20px 0;
+	min-height: 72px;
+}
+
+.text {
+	color: #0E2F51;
+	font-size: 14px;
+	line-height: 20px;
+	letter-spacing: 0.15em;
+}

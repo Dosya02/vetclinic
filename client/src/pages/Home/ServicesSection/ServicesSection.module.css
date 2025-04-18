@@ -1,10 +1,12 @@
-.services {
-	padding-block: 120px;
+.servicesList {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 30px;
+	margin-block: 100px;
 }
 
-.subtitle {
-	color: #0E2F51;
-	font-size: 40px;
-	letter-spacing: 0.07em;
-	margin-top: 20px;
+.buttonContainer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

@@ -1,4 +1,4 @@
-import { Button } from 'src/components'
+import { NavButton } from 'src/components'
 import styles from './Card.module.css'
 
 export const TeamCard = ({ name, image, position }) => (
@@ -16,7 +16,7 @@ export const TeamCard = ({ name, image, position }) => (
 		</div>
 		<div />
 		<div className={styles.buttonBlock}>
-			<Button />
+			<NavButton text='Записаться' to='/appointment' />
 		</div>
 	</div>
 )

@@ -1,4 +1,7 @@
 import styles from './Button.module.css'
 
-export const Button = () =>
-	<a className={styles.button} href="#">Записаться</a>
+export const Button = ({ text, onClick }) => (
+	<button className={styles.button} onClick={onClick}>
+		{text}
+	</button>
+)

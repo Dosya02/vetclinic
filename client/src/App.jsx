@@ -1,14 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { AuthLayout, DefaultLayout } from "src/layout";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { AuthLayout, DefaultLayout } from 'src/layout'
 import {
-  AboutUsPage,
-  HomePage,
   LoginPage,
-  ProfilePage,
   RegistrationPage,
+  HomePage,
+  ProfilePage,
   ServicesPage,
-  TeamPage
-} from "src/pages";
+  AppointmentPage,
+} from 'src/pages'
 
 export const App = () => {
   return (
@@ -20,10 +19,9 @@ export const App = () => {
         </Route>
         <Route element={<DefaultLayout />}>
           <Route path='/' element={<HomePage />} />
-          <Route path='/about-us' element={<AboutUsPage />} />
           <Route path='/services' element={<ServicesPage />} />
-          <Route path='/team' element={<TeamPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/appointment' element={<AppointmentPage />} />
         </Route>
       </Routes>
     </Router>

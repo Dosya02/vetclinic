@@ -84,6 +84,10 @@ h6 {
   font-weight: 400;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   width: 100%;
@@ -93,7 +97,6 @@ body {
   font-weight: 400;
   font-family: 'Comfortaa', sans-serif;
   line-height: 1.5;
-  scroll-behavior: smooth;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;

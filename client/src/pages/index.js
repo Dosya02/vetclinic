@@ -1,17 +1,15 @@
-import { LoginPage } from "./Login/LoginPage";
-import { RegistrationPage } from "./Registration/RegistrationPage";
-import { HomePage } from "./Home/HomePage";
-import { AboutUsPage } from "./AboutUs/AboutUsPage";
-import { ServicesPage } from "./Services/ServicesPage";
-import { TeamPage } from "./Team/TeamPage";
-import { ProfilePage } from "./Profile/ProfilePage";
+import { LoginPage } from './Login/LoginPage'
+import { RegistrationPage } from './Registration/RegistrationPage'
+import { HomePage } from './Home/HomePage'
+import { ServicesPage } from './Services/ServicesPage'
+import { ProfilePage } from './Profile/ProfilePage'
+import { AppointmentPage } from './Appointment/Appointment'
 
 export {
 	LoginPage,
 	RegistrationPage,
 	HomePage,
-	AboutUsPage,
 	ServicesPage,
-	TeamPage,
-	ProfilePage
+	ProfilePage,
+	AppointmentPage,
 }

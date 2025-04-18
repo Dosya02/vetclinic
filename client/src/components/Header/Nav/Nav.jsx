@@ -4,19 +4,19 @@ import styles from './Nav.module.css'
 export const Nav = () => {
 	const navItems = [
 		{
-			to: '/',
+			to: '/#intro',
 			title: 'Главная',
 		},
 		{
-			to: '/about-us',
+			to: '/#about-us',
 			title: 'О Нас',
 		},
 		{
-			to: '/team',
+			to: '/#team',
 			title: 'Врачи',
 		},
 		{
-			to: '/services',
+			to: '/#services',
 			title: 'Услуги',
 		},
 	]

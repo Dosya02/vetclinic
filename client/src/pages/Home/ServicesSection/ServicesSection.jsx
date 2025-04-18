@@ -1,4 +1,4 @@
-import { Container, Title } from 'src/components'
+import { Container, NavButton, Section, Title } from 'src/components'
 import { SyringeIcon, BagVetPetIcon, ToothIcon } from 'src/assets'
 import { ServiceCard } from './Card/Card'
 import styles from './ServicesSection.module.css'
@@ -23,16 +23,16 @@ export const ServicesSection = () => {
 	]
 
 	return (
-		<section className={styles.services}>
+		<Section className={styles.anotherClass} id='services'>
 			<Container>
-				<Title text='Услуги' />
-				<h3 className={styles.subtitle}>
-					Услуги по уходу за домашними животными
-				</h3>
+				<Title text='Услуги по уходу за домашними животными' />
 				<div className={styles.servicesList}>
 					{services.map((service, index) => <ServiceCard key={index} service={service} />)}
 				</div>
+				<div className={styles.buttonContainer}>
+					<NavButton text='Другие услуги' to='/services' />
+				</div>
 			</Container>
-		</section>
+		</Section>
 	)
 }
