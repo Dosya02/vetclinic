@@ -8,10 +8,12 @@ import {
   ServicesPage,
   AppointmentPage,
 } from 'src/pages'
+import { ScrollToTop } from 'src/utils/ScrollToTop/ScrollToTop'
 
 export const App = () => {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path='/login' element={<LoginPage />} />

@@ -1,7 +1,7 @@
 .intro {
 	position: relative;
 	width: 100%;
-	height: calc(100vh - 87.56px);
+	height: 100vh;
 	display: flex;
 	align-items: center;
 	background-size: cover;
