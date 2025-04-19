@@ -5,6 +5,15 @@ const mongoose = require('mongoose');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
+const dbURI = process.env.MONGO_URI;
+
+mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => {
+    console.log('Подключение к базе данных MongoDB Atlas успешно!');
+  })
+  .catch((error) => {
+    console.error('Ошибка при подключении к базе данных:', error);
+  });
 
 
 app.use(cors({
@@ -18,11 +27,3 @@ app.use(cors({
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 
-mongoose.connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('MongoDB connected');
-    app.listen(process.env.PORT, () => {
-      console.log(`Server running on port ${process.env.PORT}`);
-    });
-  })
-  .catch(err => console.error('MongoDB error:', err));
