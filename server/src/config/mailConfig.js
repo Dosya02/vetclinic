@@ -1,10 +1,9 @@
 module.exports = {
-    smtp: {
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  };
-  
+  smtp: {
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    redirectUri: process.env.REDIRECT_URI,
+    refreshToken: process.env.REFRESH_TOKEN,
+    user: process.env.EMAIL_USER,
+  },
+};
