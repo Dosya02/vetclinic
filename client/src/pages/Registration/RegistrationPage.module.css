@@ -17,60 +17,23 @@
 .form {
 	display: flex;
 	flex-direction: column;
+	gap: 40px;
 	margin-top: 80px;
 }
 
-.input {
-	width: 100%;
-	background-color: #e7ecf3;
-	border-radius: 5px;
-	color: #7191b5;
-	font-size: 24px;
-	font-weight: 600;
-	padding: 20px 30px;
-}
-
-.checkboxLabel {
-	display: flex;
-	align-items: center;
-	gap: 15px;
+.buttonWrapper {
 	margin-top: 40px;
 }
 
-.checkbox {
-	width: 25px;
-	height: 25px;
-	background-color: #e7ecf3;
-}
-
-.button {
-	width: 100%;
-	background-color: #5a8aa2;
-	border-radius: 5px;
-	color: #f8fafc;
-	font-size: 32px;
-	font-weight: 700;
-	line-height: 1.2;
-	margin-top: 100px;
-	padding: 20px 40px;
-	transition: all .3s ease;
-}
-
-.button:hover {
-	background-color: #4a7990;
-	color: #FFFFFF;
-}
-
 .text {
-	font-size: 20px;
 	margin-top: 20px;
 }
 
-.textLink {
-	color: #5a8aa2;
+.link {
+	color: var(--bg-button);
 	font-weight: 700;
 }
 
-.textLink:hover {
-	color: #4a7990;
+.link:hover {
+	color: var(--bg-button-hover);
 }

@@ -1,0 +1,16 @@
+.button {
+	width: 100%;
+	background-color: var(--bg-button);
+	border-radius: 5px;
+	color: var(--text-secondary);
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.2;
+	padding: 20px 40px;
+	transition: all .3s ease;
+}
+
+.button:hover {
+	background-color: var(--bg-button-hover);
+	color: #FFFFFF;
+}

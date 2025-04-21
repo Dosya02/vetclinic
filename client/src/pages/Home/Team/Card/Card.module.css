@@ -1,0 +1,36 @@
+.card {
+	display: grid;
+	grid-template-rows: 500px auto 1fr auto;
+}
+
+.imageWrapper {
+	width: 100%;
+	height: 500px;
+}
+
+.image {
+	border-radius: 40px;
+}
+
+.textWrapper {
+	text-align: center;
+	margin-block: 50px;
+}
+
+.title {
+	font-size: 30px;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+}
+
+.text {
+	font-size: 20px;
+	line-height: 1.2;
+	letter-spacing: 0.2em;
+	margin-top: 50px;
+}
+
+.buttonWrapper {
+	justify-self: center;
+}

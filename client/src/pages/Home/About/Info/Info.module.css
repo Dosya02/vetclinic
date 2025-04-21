@@ -1,0 +1,29 @@
+.info {
+	background-color: var(--bg-secondary);
+	border-radius: 40px;
+	margin: 50px 0;
+	padding: 50px;
+}
+
+.inner {
+	background-color: var(--bg-primary);
+	border-radius: 30px;
+	padding: 20px 40px;
+}
+
+.title {
+	font-size: 40px;
+	letter-spacing: 0.15em;
+}
+
+.title span {
+	color: var(--text-accent-secondary);
+	font-weight: 700;
+}
+
+.subtitle {
+	color: var(--text-accent-primary);
+	font-size: 32px;
+	font-weight: 700;
+	letter-spacing: 0.15em;
+}

@@ -1,0 +1,25 @@
+.button {
+	background-color: var(--bg-button);
+	border-radius: 75px;
+	color: var(--text-secondary);
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 1;
+	padding: 20px 40px;
+	transition: all .3s ease;
+}
+
+.button:hover {
+	background-color: var(--text-secondary);
+	color: var(--bg-button);
+}
+
+.button.reverse {
+	background-color: var(--text-secondary);
+	color: var(--bg-button);
+}
+
+.button.reverse:hover {
+	background-color: var(--bg-button);
+	color: var(--text-secondary);
+}

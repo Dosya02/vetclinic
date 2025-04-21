@@ -1,0 +1,23 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.input {
+	width: 100%;
+	background-color: var(--bg-secondary);
+	border-width: 2px;
+	border-style: solid;
+	border-color: transparent;
+	border-radius: 10px;
+	color: var(--text-accent-primary);
+	font-size: 24px;
+	font-weight: 600;
+	padding: 16px 26px;
+	transition: all .3s ease;
+}
+
+.input:focus {
+	border-color: var(--text-primary);
+}

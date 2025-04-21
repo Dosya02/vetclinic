@@ -1,0 +1,9 @@
+.bottom {
+	background-color: var(--bg-header);
+	padding-block: 20px;
+}
+
+.text {
+	font-size: 10px;
+	letter-spacing: 0.05em;
+}

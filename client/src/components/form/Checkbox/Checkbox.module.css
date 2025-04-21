@@ -1,0 +1,26 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.label {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	align-items: center;
+	gap: 15px;
+}
+
+.checkbox {
+	display: block;
+	width: 25px;
+	aspect-ratio: 1;
+	background-color: var(--bg-secondary);
+}
+
+.text {
+	display: inline-block;
+	font-size: 18px;
+	line-height: 1;
+}
