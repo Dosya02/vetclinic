@@ -23,7 +23,7 @@ export const TeamSection = () => {
 	]
 
 	return (
-		<Section id='team'>
+		<Section id='team' className={styles.team}>
 			<Container>
 				<div className={styles.content}>
 					<Title text='Познакомьтесь с нашей командой' />

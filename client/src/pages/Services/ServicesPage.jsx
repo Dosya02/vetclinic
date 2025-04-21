@@ -1,7 +1,11 @@
+import { Intro } from './Intro/Intro'
+import { ServicesList } from './ServicesList/ServicesList';
+
 export const ServicesPage = () => {
 	return (
 		<>
-			<h1>This is ServicesPage!</h1>
+			<Intro />
+			<ServicesList />
 		</>
 	);
 }
