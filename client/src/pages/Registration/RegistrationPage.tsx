@@ -1,95 +1,135 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { setStep, setEmail, setAgree } from "../../store/reducers";
+import { ChangeEvent, FC, FormEvent, useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { ErrorMessage, FormButton, FormCheckbox, FormInput, Loader, Modal } from "../../components";
+import { pageConfig } from "../../config";
+import { RegistrationSteps } from "../../enums";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { useSendCodeMutation } from "../../store/api";
+import { sendVerificationCode } from "../../store/reducers";
 import { validateEmail } from "../../utils";
-import { FormButton, FormCheckbox, FormInput, Modal } from "../../components";
 import { VerifyCodeModal } from "./VerifyCodeModal/VerifyCodeModal";
-import { SetPasswordModal } from "./SetPasswordModal/SetPasswordModal";
 import styles from "./RegistrationPage.module.css";
+import { SetPasswordModal } from "./SetPasswordModal/SetPasswordModal";
 
 export const RegistrationPage: FC = () => {
-	const { step, email, agree } = useAppSelector(state => state.registrationReducer);
+	const { loading, error } = useAppSelector(state => state.authReducer);
 	const dispatch = useAppDispatch();
-	const [sendCode] = useSendCodeMutation();
 
-	const [emailErrorMessage, setEmailErrorMessage] = useState("");
-	const [isAgreedError, setIsAgreedError] = useState(false);
+	const navigate = useNavigate();
 
-	const [isVerifyCodeModalActive, setIsVerifyCodeModalActive] = useState(false);
-	const [isSetPasswordModalActive, setIsSetPasswordModalActive] = useState(false);
+	const [step, setStep] = useState<RegistrationSteps>(RegistrationSteps.SEND_CODE);
+	const [modals, setModals] = useState({
+		isVerifyCodeModal: false,
+		isSetPasswordModal: false,
+	});
 
-	const openVerifyCodeModal = () => setIsVerifyCodeModalActive(true);
-	const closeVerifyCodeModal = () => setIsVerifyCodeModalActive(false);
+	const openModal = useCallback((modal: keyof typeof modals): void => {
+		setModals(prev => ({ ...prev, [modal]: true }));
+	}, []);
 
-	const openSetPasswordModal = () => setIsSetPasswordModalActive(true);
-	const closeSetPasswordModal = () => setIsSetPasswordModalActive(false);
+	const closeModal = useCallback((modal: keyof typeof modals): void => {
+		setModals(prev => ({ ...prev, [modal]: false }));
+	}, []);
 
-	useEffect(() => {
-		if (step === "code") {
-			closeSetPasswordModal();
-			openVerifyCodeModal();
-		} else if (step === "password") {
-			closeVerifyCodeModal();
-			openSetPasswordModal();
-		} else {
-			closeVerifyCodeModal();
-			closeSetPasswordModal();
-		}
-	}, [step]);
+	const [formState, setFormState] = useState({
+		email: "",
+		emailErrorMessage: "",
+		agree: false,
+		agreeErrorMessage: "",
+	});
 
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		dispatch(setEmail(e.target.value));
-		setEmailErrorMessage("");
+		setFormState(prev => ({
+			...prev,
+			email: e.target.value,
+			emailErrorMessage: "",
+		}));
 	}
 
-	const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		dispatch(setAgree(e.target.checked));
-
-		if (e.target.checked) {
-			setIsAgreedError(false);
-		}
+	const handleAgreeChange = (e: ChangeEvent<HTMLInputElement>): void => {
+		setFormState(prev => ({
+			...prev,
+			agree: e.target.checked,
+			agreeErrorMessage: "",
+		}));
 	}
 
-	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 
-		const errorMessage = validateEmail(email);
-		if (errorMessage) {
-			setEmailErrorMessage(errorMessage);
-			return;
-		}
+		const emailError = validateEmail(formState.email);
+		const agreeError = formState.agree ? "" : "Вы должны согласиться с условиями.";
 
-		if (!agree) {
-			setIsAgreedError(true);
+		if (emailError || agreeError) {
+			setFormState(prev => ({
+				...prev,
+				emailErrorMessage: emailError,
+				agreeErrorMessage: agreeError,
+			}));
 			return;
 		}
 
 		try {
-			await sendCode({ email }).unwrap();
-			dispatch(setStep("code"));
-		} catch (error) {
-			console.error("Ошибка при отправке кода: ", error);
+			const resultAction = await dispatch(sendVerificationCode({ email: formState.email }));
+
+			if (sendVerificationCode.fulfilled.match(resultAction)) {
+				setStep(RegistrationSteps.VERIFY_CODE);
+				return;
+			}
+
+			console.error("Ошибка при отправке кода.");
+		} catch (err) {
+			console.error("Ошибка при выполнении запроса:", err);
 		}
-	};
+	}
+
+	useEffect(() => {
+		switch (step) {
+			case RegistrationSteps.SEND_CODE:
+				setModals({
+					isVerifyCodeModal: false,
+					isSetPasswordModal: false,
+				});
+				break;
+			case RegistrationSteps.VERIFY_CODE:
+				closeModal("isSetPasswordModal");
+				openModal("isVerifyCodeModal");
+				break;
+			case RegistrationSteps.SET_PASSWORD:
+				closeModal("isVerifyCodeModal");
+				openModal("isSetPasswordModal");
+				break;
+			case RegistrationSteps.COMPLETED:
+				setModals({
+					isVerifyCodeModal: false,
+					isSetPasswordModal: false,
+				});
+				navigate(pageConfig.profile);
+				break;
+			default:
+				break;
+		}
+	}, [step, closeModal, openModal, navigate]);
 
 	return (
 		<div className={styles.content}>
 			<h3 className={styles.title}>Регистрация</h3>
 			<form className={styles.form} onSubmit={handleSubmit}>
+				{error
+					&& step === RegistrationSteps.SEND_CODE
+					&& <ErrorMessage message={error} />
+				}
 				<FormInput
 					type="email"
 					placeholder="Введите почту"
-					value={email}
+					value={formState.email}
 					onChange={handleEmailChange}
-					errorMessage={emailErrorMessage}
+					errorMessage={formState.emailErrorMessage}
 				/>
 				<FormCheckbox
 					text="Я согласен с условиями предоставления услуг"
-					checked={agree}
-					onChange={handleCheckboxChange}
-					errorMessage={isAgreedError ? "Вы должны согласиться с условиями" : undefined}
+					checked={formState.agree}
+					onChange={handleAgreeChange}
+					errorMessage={formState.agreeErrorMessage}
 				/>
 				<div className={styles.buttonWrapper}>
 					<FormButton text="Регистрация" />
@@ -98,13 +138,19 @@ export const RegistrationPage: FC = () => {
 			<p className={styles.text}>
 				Уже есть аккаунт? <Link className={styles.link} to='/login'>Войти</Link>
 			</p>
-
-			<Modal isActive={isVerifyCodeModalActive}>
-				<VerifyCodeModal onClose={closeVerifyCodeModal} />
+			{loading && <Loader />}
+			<Modal isActive={modals.isVerifyCodeModal}>
+				<VerifyCodeModal
+					email={formState.email}
+					setStep={setStep}
+					onClose={() => closeModal("isVerifyCodeModal")}
+				/>
 			</Modal>
-
-			<Modal isActive={isSetPasswordModalActive}>
-				<SetPasswordModal />
+			<Modal isActive={modals.isSetPasswordModal}>
+				<SetPasswordModal
+					email={formState.email}
+					setStep={setStep}
+				/>
 			</Modal>
 		</div>
 	);

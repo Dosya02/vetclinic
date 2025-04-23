@@ -12,6 +12,7 @@ export { default as ToothIcon } from "./tooth.png";
 export { default as MailIcon } from "./mail-icon.png";
 export { default as PasswordShowIcon } from "./password-show-icon.svg";
 export { default as PasswordHideIcon } from "./password-hide-icon.svg";
+export { default as LoaderIcon } from "./loader.svg";
 
 export { default as AuthBgImg } from "./auth-bg.jpg";
 export { default as GoogleMapImg } from "./google-map.png";

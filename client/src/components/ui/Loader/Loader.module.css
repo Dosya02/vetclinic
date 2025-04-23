@@ -1,4 +1,4 @@
-.modal {
+.wrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -8,12 +8,10 @@
 	align-items: center;
 	justify-content: center;
 	background-color: rgba(0, 0, 0, 0.25);
-	opacity: 0;
-	visibility: hidden;
-	transition: all .3s ease;
+	z-index: 10;
 }
 
-.modal.active {
-	opacity: 1;
-	visibility: visible;
+.loader {
+	width: 200px;
+	aspect-ratio: 1;
 }

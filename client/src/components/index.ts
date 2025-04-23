@@ -10,6 +10,7 @@ export { NavButton } from "./ui/NavButton/NavButton";
 export { ErrorMessage } from "./ui/ErrorMessage/ErrorMessage";
 export { Modal } from "./ui/Modal/Modal";
 export { Button } from "./ui/Button/Button";
+export { Loader } from "./ui/Loader/Loader";
 
 export { FormInput } from "./form/Input/Input";
 export { FormButton } from "./form/Button/Button";

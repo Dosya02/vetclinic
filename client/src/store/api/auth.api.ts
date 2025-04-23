@@ -1,33 +1,15 @@
-import { api } from "./api";
+import { api } from "./api"
+import { IUser } from "../../models";
 
 export const authApi = api.injectEndpoints({
-	endpoints: (builder) => ({
-		sendCode: builder.mutation({
-			query: ({ email }) => ({
-				url: "/auth/register",
-				method: "POST",
-				body: { email },
-			}),
-		}),
-		verifyCode: builder.mutation({
-			query: ({ email, verificationCode }) => ({
-				url: "/auth/verify-code",
-				method: "POST",
-				body: { email, verificationCode },
-			}),
-		}),
-		createPassword: builder.mutation({
-			query: ({ email, password }) => ({
-				url: "/auth/set-password",
-				method: "POST",
-				body: { email, password },
+	endpoints: builder => ({
+		getUserInfo: builder.query<IUser, void>({
+			query: () => ({
+				url: "/auth/profile",
+				method: "GET",
 			}),
 		}),
 	}),
 });
 
-export const {
-	useSendCodeMutation,
-	useVerifyCodeMutation,
-	useCreatePasswordMutation,
-} = authApi;
+export const { useGetUserInfoQuery } = authApi;

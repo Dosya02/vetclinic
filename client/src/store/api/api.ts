@@ -6,6 +6,13 @@ export const api = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
 		baseUrl: API_URL,
+		prepareHeaders: (headers) => {
+			const token = localStorage.getItem("userToken");
+			if (token) {
+				headers.set("authorization", `Bearer ${token}`);
+			}
+			return headers;
+		},
 	}),
 	endpoints: () => ({}),
 });

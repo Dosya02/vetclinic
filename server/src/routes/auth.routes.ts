@@ -1,17 +1,20 @@
 import express from "express";
-import { registerUser, verifyCode, setPassword, loginUser } from "../controllers/auth.controller";
-import { authenticateToken } from "../middlewares/auth.middleware";
-import { AuthenticatedRequest } from "../types/express";
+import {
+	sendVerificationCode,
+	verifyCode,
+	setPassword,
+	loginUser,
+	getUserProfile
+} from "../controllers/auth.controller";
+import { validateToken } from "../middlewares";
 
 const router = express.Router();
 
-router.post("/register", registerUser);
-router.post("/verify-code", verifyCode);
-router.post("/set-password", setPassword);
+router.post("/registration/send-code", sendVerificationCode);
+router.post("/registration/verify-code", verifyCode);
+router.post("/registration/set-password", setPassword);
 router.post("/login", loginUser);
 
-router.get("/me", authenticateToken, (req: AuthenticatedRequest, res) => {
-	res.status(200).json({ message: "Token is valid!", user: req.user });
-});
+router.get("/profile", validateToken, getUserProfile);
 
 export default router;

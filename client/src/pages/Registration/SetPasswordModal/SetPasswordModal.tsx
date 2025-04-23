@@ -1,41 +1,58 @@
 import { ChangeEvent, FC, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { setPassword, setStep } from "../../../store/reducers";
-import { useCreatePasswordMutation } from "../../../store/api";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { validatePassword } from "../../../utils";
 import { FormButton, FormPasswordInput } from "../../../components";
+import { useAppDispatch } from "../../../hooks";
+import { setPassword } from "../../../store/reducers";
+import { validatePassword } from "../../../utils";
 import styles from "./SetPasswordModal.module.css";
+import { RegistrationSteps } from "../../../enums";
 
-export const SetPasswordModal: FC = () => {
-	const navigate = useNavigate();
-	const { email, password } = useAppSelector(state => state.registrationReducer);
+interface Props {
+	email: string
+	setStep: (step: RegistrationSteps) => void
+}
+
+export const SetPasswordModal: FC<Props> = ({ email, setStep }) => {
 	const dispatch = useAppDispatch();
 
-	const [createPassword] = useCreatePasswordMutation();
-
-	const [errorMessage, setErrorMessage] = useState("");
+	const [formState, setFormState] = useState({
+		password: "",
+		passwordErrorMessage: "",
+	});
 
 	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		dispatch(setPassword(e.target.value));
-		setErrorMessage("");
+		setFormState(prev => ({
+			...prev,
+			password: e.target.value,
+			passwordErrorMessage: "",
+		}));
 	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const error = validatePassword(password);
-		if (error) {
-			setErrorMessage(error);
+		const passwordError = validatePassword(formState.password);
+
+		if (passwordError) {
+			setFormState(prev => ({
+				...prev,
+				passwordErrorMessage: passwordError,
+			}));
 			return;
 		}
 
 		try {
-			await createPassword({ email, password }).unwrap();
-			dispatch(setStep("email"));
-			navigate("/");
-		} catch (error) {
-			console.error("Ошибка при установке пароля: ", error);
+			const resultAction = await dispatch(
+				setPassword({ email, password: formState.password })
+			);
+
+			if (setPassword.fulfilled.match(resultAction)) {
+				setStep(RegistrationSteps.COMPLETED);
+				return;
+			}
+
+			console.error("Ошибка при установке пароля.");
+		} catch (err) {
+			console.error("Ошибка при выполнении запроса:", err);
 		}
 	}
 
@@ -48,9 +65,9 @@ export const SetPasswordModal: FC = () => {
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<FormPasswordInput
 						placeholder="Введите пароль"
-						value={password}
+						value={formState.password}
 						onChange={handlePasswordChange}
-						errorMessage={errorMessage}
+						errorMessage={formState.passwordErrorMessage}
 					/>
 					<FormButton text="Подтвердить" />
 				</form>

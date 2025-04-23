@@ -1,27 +1,34 @@
-import { ChangeEvent, FC, KeyboardEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { setCode, setStep } from "../../../store/reducers";
+import { ChangeEvent, FC, useState, KeyboardEvent } from "react";
 import { MailIcon } from "../../../assets";
-import { Button, FormPinInput, Image } from "../../../components";
+import { Button, ErrorMessage, FormPinInput, Image } from "../../../components";
+import { RegistrationSteps } from "../../../enums";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { verifyCode } from "../../../store/reducers";
 import styles from "./VerifyCodeModal.module.css";
-import { useVerifyCodeMutation } from "../../../store/api";
 
 interface Props {
+	email: string
+	setStep: (step: RegistrationSteps) => void
 	onClose: () => void
 }
 
-export const VerifyCodeModal: FC<Props> = ({ onClose }) => {
-	const { email, code } = useAppSelector(state => state.registrationReducer);
+export const VerifyCodeModal: FC<Props> = ({ email, setStep, onClose }) => {
+	const { error } = useAppSelector(state => state.authReducer);
 	const dispatch = useAppDispatch();
 
-	const [verifyCode] = useVerifyCodeMutation();
+	const [code, setCode] = useState<string[]>(Array(6).fill(""));
+	const [codeErrorMessage, setCodeErrorMessage] = useState("");
 
 	const handleCodeChange = (e: ChangeEvent<HTMLInputElement>, index: number): void => {
 		const value = e.target.value;
 
 		if (!/^\d?$/.test(value)) return;
 
-		dispatch(setCode({ index, value }));
+		setCode(prev => {
+			const newCode = [...prev];
+			newCode[index] = value;
+			return newCode;
+		});
 
 		if (value && e.target.nextElementSibling instanceof HTMLInputElement) {
 			e.target.nextElementSibling.focus();
@@ -38,13 +45,22 @@ export const VerifyCodeModal: FC<Props> = ({ onClose }) => {
 	const handleClick = async () => {
 		const verificationCode = code.join("");
 
-		try {
-			const response = await verifyCode({ email, verificationCode }).unwrap();
-			console.log("Код подтвержден: ", response);
+		if (verificationCode.length !== 6) {
+			setCodeErrorMessage("Введите 6-значный код");
+			return;
+		}
 
-			dispatch(setStep("password"));
-		} catch (error) {
-			console.error("Ошибка подтверждения кода: ", error);
+		try {
+			const resultAction = await dispatch(verifyCode({ email, verificationCode }));
+
+			if (verifyCode.fulfilled.match(resultAction)) {
+				setStep(RegistrationSteps.SET_PASSWORD);
+				return;
+			}
+
+			console.error("Ошибка при верификации кода.");
+		} catch (err) {
+			console.error("Ошибка при выполнении запроса:", err);
 		}
 	}
 
@@ -57,15 +73,19 @@ export const VerifyCodeModal: FC<Props> = ({ onClose }) => {
 				<p className={styles.text}>
 					Код подтверждения отправлен на адрес <span>{email}</span>. Чтобы продолжить, введите этот код.
 				</p>
-				<div className={styles.inputs}>
-					{code.map((digit, index) => (
-						<FormPinInput
-							key={index}
-							value={digit}
-							onChange={(e) => handleCodeChange(e, index)}
-							onKeyDown={(e) => handleKeyDown(e, index)}
-						/>
-					))}
+				{error && <ErrorMessage message={error} />}
+				<div className={styles.inputsWrapper}>
+					<div className={styles.inputs}>
+						{code.map((digit, index) => (
+							<FormPinInput
+								key={index}
+								value={digit}
+								onChange={(e) => handleCodeChange(e, index)}
+								onKeyDown={(e) => handleKeyDown(e, index)}
+							/>
+						))}
+					</div>
+					{codeErrorMessage && <ErrorMessage message={codeErrorMessage} />}
 				</div>
 				<div className={styles.buttons}>
 					<Button type="reverse" text="Отмена" onClick={onClose} />

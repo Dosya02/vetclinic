@@ -1,5 +1,1 @@
-export {
-	useSendCodeMutation,
-	useVerifyCodeMutation,
-	useCreatePasswordMutation,
-} from "./auth.api";
+export { useGetUserInfoQuery } from "./auth.api";

@@ -1,9 +1,12 @@
-import { Response, NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import env from "../utils/validateEnv";
-import { AuthenticatedRequest, JwtPayload } from "../types/express";
 
-export const authenticateToken = (
+export interface AuthenticatedRequest extends Request {
+	userId?: string;
+}
+
+export const validateToken = async (
 	req: AuthenticatedRequest,
 	res: Response,
 	next: NextFunction,
@@ -11,19 +14,18 @@ export const authenticateToken = (
 	const authHeader = req.headers.authorization;
 
 	if (!authHeader || !authHeader.startsWith("Bearer ")) {
-		res.status(401).json({ message: "Authorization header missing or malformed." });
+		res.status(401).json({ message: "Unauthorized." });
 		return;
 	}
 
 	const token = authHeader.split(" ")[1];
 
 	try {
-		const decoded = jwt.verify(token, env.JWT_SECRET) as JwtPayload;
-		req.user = decoded;
+		const decoded = jwt.verify(token, env.JWT_SECRET) as { userId: string };
+		req.userId = decoded.userId;
 		next();
-	} catch (error) {
-		console.error(error);
-		res.status(403).json({ message: "Invalid or expired token." });
+	} catch {
+		res.status(401).json({ message: "Invalid or expired token." });
 		return;
 	}
-};
+}

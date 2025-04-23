@@ -5,15 +5,15 @@ import jwt from "jsonwebtoken";
 import User from "../models/user";
 import env from "../utils/validateEnv";
 import { sendEmail } from "../utils/email";
+import { AuthenticatedRequest } from "../middlewares";
 
-export const registerUser = async (req: Request, res: Response) => {
+export const sendVerificationCode = async (req: Request, res: Response) => {
 	const { email } = req.body;
 
 	const existingUser = await User.findOne({ email });
 
 	if (existingUser) {
-		res.status(400).json({ message: "User with this email already exists." });
-		console.log("User with this email already exists.");
+		res.status(400).json({ message: "Пользователь с такой почтой уже существует." });
 		return;
 	}
 
@@ -39,10 +39,8 @@ export const registerUser = async (req: Request, res: Response) => {
 		await sendEmail(mailOptions);
 
 		res.status(200).json({ message: "Verification code sent to email." });
-		console.log("Verification code sent to email!");
 	} catch (error) {
-		console.error("Email sending error: ", error);
-		res.status(500).json({ message: "Error sending email." });
+		res.status(500).json({ message: error });
 	}
 }
 
@@ -53,21 +51,16 @@ export const verifyCode = async (req: Request, res: Response) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			res.status(404).json({ message: "User not found." });
-			console.log("User not found in verify code.")
+			res.status(404).json({ message: "Пользователь не найден." });
 			return;
 		}
-
-		console.log("Verification code expires at: ", user.verificationCodeExpires);
-		console.log("Current time: ", new Date());
 
 		if (
 			user.verificationCode !== verificationCode ||
 			!user.verificationCodeExpires ||
 			user.verificationCodeExpires.getTime() < Date.now()
 		) {
-			res.status(400).json({ message: "Invalid or expired code." });
-			console.log("Invalid or expired code in verify code.")
+			res.status(400).json({ message: "Недействительный код." });
 			return;
 		}
 
@@ -76,11 +69,9 @@ export const verifyCode = async (req: Request, res: Response) => {
 		user.verificationCodeExpires = undefined;
 		await user.save();
 
-		res.status(200).json({ message: "Code verified successfully." });
-		console.log("Code verified successfully in verify code.")
+		res.status(200).json({ message: "Код успешно подтвержден." });
 	} catch (error) {
-		console.error("Error verifying code: ", error);
-		res.status(500).json({ message: "Internal server error." });
+		res.status(500).json({ message: error });
 	}
 }
 
@@ -91,12 +82,12 @@ export const setPassword = async (req: Request, res: Response) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			res.status(404).json({ message: "User not found." });
+			res.status(404).json({ message: "Пользователь не найден." });
 			return;
 		}
 
 		if (!user.isVerified) {
-			res.status(403).json({ message: "Email not verified." });
+			res.status(403).json({ message: "Электронная почта не подтверждена." });
 			return;
 		}
 
@@ -105,20 +96,21 @@ export const setPassword = async (req: Request, res: Response) => {
 
 		await user.save();
 
-		// Генерация JWT-токена
 		const token = jwt.sign(
 			{ userId: user._id, email: user.email },
 			env.JWT_SECRET,
 			{ expiresIn: "7d" }
 		);
 
+		const { firstName, lastName, birthDate, avatar } = user;
+
 		res.status(200).json({
-			message: "Password set successfully.",
+			message: "Пароль успешно установлен.",
 			token,
+			userInfo: { email, firstName, lastName, birthDate, avatar },
 		});
 	} catch (error) {
-		console.error("Error setting password: ", error);
-		res.status(500).json({ message: "Internal server error." });
+		res.status(500).json({ message: error });
 	}
 }
 
@@ -129,19 +121,19 @@ export const loginUser = async (req: Request, res: Response) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			res.status(404).json({ message: "User not found." });
+			res.status(404).json({ message: "Пользователь не найден." });
 			return;
 		}
 
 		if (!user.isVerified) {
-			res.status(403).json({ message: "Email not verified." });
+			res.status(403).json({ message: "Электронная почта не подтверждена." });
 			return;
 		}
 
-		const isPasswordValid = await bcrypt.compare(password, user.password);
+		const isPasswordValid = await bcrypt.compare(password, user.password!);
 
 		if (!isPasswordValid) {
-			res.status(401).json({ message: "Invalid password." });
+			res.status(401).json({ message: "Неправильный пароль." });
 			return;
 		}
 
@@ -151,12 +143,29 @@ export const loginUser = async (req: Request, res: Response) => {
 			{ expiresIn: "7d" }
 		);
 
+		const { firstName, lastName, birthDate, avatar } = user;
+
 		res.status(200).json({
-			message: "Login successful.",
+			message: "Успешная авторизация.",
 			token,
+			userInfo: { email, firstName, lastName, birthDate, avatar },
 		});
 	} catch (error) {
-		console.error("Error logging in: ", error);
-		res.status(500).json({ message: "Internal server error." });
+		res.status(500).json({ message: error });
 	}
 };
+
+export const getUserProfile = async (req: AuthenticatedRequest, res: Response) => {
+	try {
+		const user = await User.findById(req.userId).select("-password -verificationCode -verificationCodeExpires");
+
+		if (!user) {
+			res.status(404).json({ message: "Пользователь не найден." });
+			return;
+		}
+
+		res.status(200).json(user);
+	} catch (error) {
+		res.status(500).json({ message: error });
+	}
+}

@@ -1,5 +1,2 @@
-import { pageConfig } from "./pages.config";
-
-export {
-	pageConfig,
-}
+export { apiConfig } from "./api.config";
+export { pageConfig } from "./pages.config";
