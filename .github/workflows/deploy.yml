@@ -41,5 +41,5 @@ jobs:
       # Шаг 7: Компиляция TypeScript в JavaScript
       - run: cd server && npx tsc
 
-      # Шаг 8: Синхронизация серверного кода с сервером
+      # Шаг 8: Синхронизация серверного кода с сервером (из папки server)
       - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./server/ n132844@n132844.hostnl1.fornex.org:/home/n132844/server
