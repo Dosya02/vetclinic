@@ -19,33 +19,27 @@ jobs:
       - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
       - run: chmod 600 "$HOME/.ssh/key"
 
-      # Шаг 3: Проверка текущей директории и содержимого
-      - run: pwd
-      - run: ls -al
-
-      # Шаг 4: Переход в папку client и установка зависимостей
+      # Шаг 3: Установка зависимостей для фронтенда и сборка
       - run: cd client && npm install
-
-      # Шаг 5: Сборка фронтенда
       - run: cd client && npm run build
 
-      # Шаг 6: Проверка, что директория build существует
+      # Шаг 4: Проверка, что директория dist существует
       - run: |
-          if [ -d "client/build" ]; then
+          if [ -d "client/dist" ]; then
             echo "Build directory exists, proceeding with deployment"
           else
             echo "Build directory does not exist, aborting deployment"
             exit 1
           fi
 
-      # Шаг 7: Синхронизация фронтенда (build) с сервером
-      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete client/build/ n132844@n132844.hostnl1.fornex.org:/home/n132844/public_html/doctoraibolit.kz
+      # Шаг 5: Синхронизация фронтенда (dist) с сервером
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./client/dist/ n132844@n132844.hostnl1.fornex.org:/home/n132844/public_html/doctoraibolit.kz
 
-      # Шаг 8: Установка зависимостей для бэкенда (TypeScript и другие зависимости)
+      # Шаг 6: Установка зависимостей для бэкенда (TypeScript и другие зависимости)
       - run: cd server && npm ci
 
-      # Шаг 9: Компиляция TypeScript в JavaScript
+      # Шаг 7: Компиляция TypeScript в JavaScript
       - run: cd server && npx tsc
 
-      # Шаг 10: Синхронизация серверного кода с сервером (из папки server)
-      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete server/ n132844@n132844.hostnl1.fornex.org:/home/n132844/server
+      # Шаг 8: Синхронизация серверного кода с сервером (из папки server)
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./server/ n132844@n132844.hostnl1.fornex.org:/home/n132844/server
