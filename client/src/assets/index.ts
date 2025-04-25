@@ -13,14 +13,21 @@ export { default as MailIcon } from "./mail-icon.png";
 export { default as PasswordShowIcon } from "./password-show-icon.svg";
 export { default as PasswordHideIcon } from "./password-hide-icon.svg";
 export { default as LoaderIcon } from "./loader.svg";
+export { default as PetCardIcon } from "./pet-card.svg";
 
 export { default as AuthBgImg } from "./auth-bg.jpg";
 export { default as GoogleMapImg } from "./google-map.png";
 export { default as HomeIntroImg } from "./home-intro.svg";
 export { default as AboutImg } from "./about-image.jpg";
+export { default as AvatarImg } from "./avatar.png";
+export { default as AppointmentBgImg } from "./appointment-bg.png";
+export { default as NoImageImg } from "./no-image.jpg";
 
 export { default as TeamImg1 } from "./team/doctor-1.jpg";
 export { default as TeamImg2 } from "./team/doctor-2.jpg";
 export { default as TeamImg3 } from "./team/doctor-3.jpg";
+
+export { default as DogImg } from "./pets/dog.png";
+export { default as RabbitImg } from "./pets/rabbit.png";
 
 export * from "./services";

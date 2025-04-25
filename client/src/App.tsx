@@ -13,6 +13,7 @@ import {
 import { useAppDispatch, useAppSelector } from "./hooks";
 import { useGetUserInfoQuery } from "./store/api";
 import { setCredentials } from "./store/reducers";
+import { ScrollToTop } from "./utils";
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -29,6 +30,7 @@ export const App: FC = () => {
 
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path={pageConfig.login} element={<LoginPage />} />

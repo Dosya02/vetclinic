@@ -1,0 +1,45 @@
+.heading {
+	display: flex;
+	gap: 60px;
+	margin-bottom: 60px;
+}
+
+.avatarWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.avatarText {
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+	cursor: pointer;
+	text-decoration: underline;
+	text-decoration-thickness: 2px;
+	transition: all 0.2s ease;
+}
+
+.avatarText:hover {
+	color: var(--text-accent-primary);
+}
+
+.titleWrapper {
+	display: flex;
+	flex-direction: column;
+	letter-spacing: 0.05em;
+	padding: 20px;
+}
+
+.title {
+	font-size: 32px;
+	font-weight: 700;
+}
+
+.subtitle {
+	font-size: 24px;
+	font-weight: 600;
+}

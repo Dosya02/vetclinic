@@ -8,6 +8,7 @@ interface Props {
 	value: string
 	onChange: (e: ChangeEvent<HTMLInputElement>) => void,
 	errorMessage?: string
+	disabled?: boolean
 }
 
 export const FormInput: FC<Props> = ({
@@ -16,6 +17,7 @@ export const FormInput: FC<Props> = ({
 	value = "",
 	onChange,
 	errorMessage,
+	disabled = false,
 }) => (
 	<div className={styles.wrapper}>
 		<input
@@ -24,6 +26,7 @@ export const FormInput: FC<Props> = ({
 			placeholder={placeholder}
 			value={value}
 			onChange={onChange}
+			disabled={disabled}
 		/>
 		{errorMessage && <ErrorMessage message={errorMessage} />}
 	</div>

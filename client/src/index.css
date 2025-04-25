@@ -1,4 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Unbounded:wght@200..900&display=swap');
+
+@font-face {
+	font-family: "Bounded";
+	src: url("../public/fonts/bounded/Bounded-Regular.ttf");
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "Bounded";
+	src: url("../public/fonts/bounded/Bounded-Black.ttf");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
 
 :root {
 	--info: #2F86EB;
@@ -15,10 +30,12 @@
 
 	--text-primary: #0E2F51;
 	--text-secondary: #DCE3EB;
+	--text-secondary-70: rgba(220, 227, 235, 0.7);
 	--text-accent-primary: #7191B5;
 	--text-accent-secondary: #2C7AC8;
 
 	--font-family: "Comfortaa", sans-serif;
+	--font-family-title: "Bounded", sans-serif;
 }
 
 * {

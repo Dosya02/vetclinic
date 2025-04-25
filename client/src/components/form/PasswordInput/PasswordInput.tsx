@@ -4,10 +4,11 @@ import { ErrorMessage, Image } from "../../../components";
 import styles from "./PasswordInput.module.css";
 
 interface Props {
-	placeholder: string;
-	value: string;
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-	errorMessage?: string;
+	placeholder: string
+	value: string
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void
+	errorMessage?: string
+	disabled?: boolean
 }
 
 export const FormPasswordInput: FC<Props> = ({
@@ -15,6 +16,7 @@ export const FormPasswordInput: FC<Props> = ({
 	value = "",
 	onChange,
 	errorMessage,
+	disabled = false,
 }) => {
 	const [showPassword, setShowPassword] = useState(false);
 
@@ -31,11 +33,13 @@ export const FormPasswordInput: FC<Props> = ({
 					placeholder={placeholder}
 					value={value}
 					onChange={onChange}
+					disabled={disabled}
 				/>
 				<button
 					className={styles.button}
 					type="button"
 					onClick={toggleVisibility}
+					disabled={disabled}
 				>
 					{showPassword
 						? <Image src={PasswordShowIcon} alt="show password" />

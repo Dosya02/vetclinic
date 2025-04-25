@@ -1,11 +1,12 @@
 import { FC } from "react";
-import { FooterTop } from "./Top/Top";
-import { FooterBottom } from "./Bottom/Bottom";
+import { Container, Logo } from "../../../components";
 import styles from "./Footer.module.css";
 
 export const Footer: FC = () => (
 	<footer className={styles.footer}>
-		<FooterTop />
-		<FooterBottom />
+		<Container>
+			<Logo variant="dark" />
+			<p className={styles.text}>© Все права защищены</p>
+		</Container>
 	</footer>
 );

@@ -1,7 +1,15 @@
 import { FC } from "react";
+import { AuthorizedForm } from "./AuthorizedForm/AuthorizedForm";
+import styles from "./AppointmentPage.module.css";
+import { AppointmentBgImg } from "../../assets";
 
 export const AppointmentPage: FC = () => {
 	return (
-		<h1>Appointment Page</h1>
+		<div
+			className={styles.wrapper}
+			style={{ backgroundImage: `url(${AppointmentBgImg})` }}
+		>
+			<AuthorizedForm />
+		</div>
 	);
 }

@@ -7,10 +7,8 @@
 .input {
 	width: 100%;
 	background-color: var(--bg-secondary);
-	border-width: 2px;
-	border-style: solid;
-	border-color: transparent;
-	border-radius: 10px;
+	border: 2px solid transparent;
+	border-radius: 20px;
 	color: var(--text-accent-primary);
 	font-size: 24px;
 	font-weight: 600;

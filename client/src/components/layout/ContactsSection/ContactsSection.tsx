@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { Container, Image, Title } from "../../../../components";
-import { GoogleMapImg, LocationIcon, PhoneIcon } from "../../../../assets";
-import styles from "./Top.module.css";
+import { GoogleMapImg, LocationIcon, PhoneIcon } from "../../../assets";
+import { Container, Section, Title, Image } from "../../../components";
+import styles from "./ContactsSection.module.css";
 
-export const FooterTop: FC = () => (
-	<div className={styles.top}>
+export const ContactsSection: FC = () => (
+	<Section className={styles.contacts}>
 		<Container>
 			<div className={styles.content}>
 				<div className={styles.contacts}>
@@ -33,5 +33,5 @@ export const FooterTop: FC = () => (
 				<Image src={GoogleMapImg} alt="google map img" />
 			</div>
 		</Container>
-	</div>
-)
+	</Section>
+);
