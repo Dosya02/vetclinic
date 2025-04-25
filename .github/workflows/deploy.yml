@@ -1,0 +1,36 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Шаг 1: Проверка исходного кода
+      - uses: actions/checkout@v2
+
+      # Шаг 2: Настройка SSH ключа
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.key }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+
+      # Шаг 3: Установка зависимостей для фронтенда и сборка
+      - run: cd client && npm ci
+      - run: cd client && npm run build
+
+      # Шаг 4: Синхронизация фронтенда (build) с сервером
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./client/build/ n132844@n132844.hostnl1.fornex.org:/home/n132844/public_html/doctoraibolit.kz
+
+      # Шаг 5: Установка зависимостей для бэкенда (TypeScript и другие зависимости)
+      - run: cd server && npm ci
+
+      # Шаг 6: Компиляция TypeScript в JavaScript
+      - run: cd server && npx tsc
+
+      # Шаг 7: Синхронизация серверного кода с сервером
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete ./server/ n132844@n132844.hostnl1.fornex.org:/home/n132844/server
