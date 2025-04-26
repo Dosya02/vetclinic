@@ -32,8 +32,8 @@ export const sendVerificationCode = async (req: Request, res: Response) => {
 
 		const mailOptions = {
 			to: email,
-			subject: "Your verification code",
-			text: `Your verification code is: ${verificationCode}`,
+			subject: "Код для верификации на сайта ВетКлиники",
+			text: `Ваш код для верификации ${verificationCode}`,
 		};
 
 		await sendEmail(mailOptions);
