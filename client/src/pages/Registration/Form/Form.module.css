@@ -1,0 +1,12 @@
+.form {
+	width: 100%;
+	display: grid;
+	gap: 40px;
+	margin-top: 80px;
+}
+
+.buttonWrapper {
+	display: flex;
+	justify-content: center;
+	margin-top: 40px;
+}

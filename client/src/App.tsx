@@ -1,19 +1,24 @@
 import { FC, useEffect } from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { pageConfig } from "./config";
-import { AuthLayout, DefaultLayout } from "./layouts";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
+  AccountDetails,
   AppointmentPage,
   HomePage,
   LoginPage,
+  ProfileAppointments,
   ProfilePage,
+  ProfilePets,
+  PetDetails,
   RegistrationPage,
   ServicesPage
 } from "./pages";
+import { pageConfig } from "./config";
 import { useAppDispatch, useAppSelector } from "./hooks";
+import { AuthLayout, DefaultLayout } from "./layouts";
 import { useGetUserInfoQuery } from "./store/api";
 import { setCredentials } from "./store/reducers";
 import { ScrollToTop } from "./utils";
+import { ProtectedRoute } from "./components";
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +45,22 @@ export const App: FC = () => {
           <Route path={pageConfig.home} element={<HomePage />} />
           <Route path={pageConfig.services} element={<ServicesPage />} />
           <Route path={pageConfig.appointment} element={<AppointmentPage />} />
-          <Route path={pageConfig.profile} element={<ProfilePage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path={pageConfig.profile} element={<ProfilePage />}>
+              <Route
+                path={pageConfig.profileAccountDetails}
+                element={<AccountDetails />} />
+              <Route
+                path={pageConfig.profilePets}
+                element={<ProfilePets />} />
+              <Route
+                path={pageConfig.profilePetDetails}
+                element={<PetDetails />} />
+              <Route
+                path={pageConfig.profileAppointments}
+                element={<ProfileAppointments />} />
+            </Route>
+          </Route>
         </Route>
       </Routes>
     </Router>

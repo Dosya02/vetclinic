@@ -1,34 +1,23 @@
-import { ChangeEvent, FC, useState, KeyboardEvent } from "react";
+import { ChangeEvent, FC, KeyboardEvent } from "react";
 import { MailIcon } from "../../../assets";
 import { Button, ErrorMessage, FormPinInput, Image } from "../../../components";
-import { RegistrationSteps } from "../../../enums";
+import { AuthSteps } from "../../../enums";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { verifyCode } from "../../../store/reducers";
+import { changeCode, changeStep, verifyCode } from "../../../store/reducers";
 import styles from "./VerifyCodeModal.module.css";
 
 interface Props {
-	email: string
-	setStep: (step: RegistrationSteps) => void
 	onClose: () => void
 }
 
-export const VerifyCodeModal: FC<Props> = ({ email, setStep, onClose }) => {
-	const { error } = useAppSelector(state => state.authReducer);
+export const VerifyCodeModal: FC<Props> = ({ onClose }) => {
+	const { error, email, code, codeErrorMessage } = useAppSelector(state => state.authReducer);
 	const dispatch = useAppDispatch();
-
-	const [code, setCode] = useState<string[]>(Array(6).fill(""));
-	const [codeErrorMessage, setCodeErrorMessage] = useState("");
 
 	const handleCodeChange = (e: ChangeEvent<HTMLInputElement>, index: number): void => {
 		const value = e.target.value;
 
-		if (!/^\d?$/.test(value)) return;
-
-		setCode(prev => {
-			const newCode = [...prev];
-			newCode[index] = value;
-			return newCode;
-		});
+		dispatch(changeCode({ index, value }));
 
 		if (value && e.target.nextElementSibling instanceof HTMLInputElement) {
 			e.target.nextElementSibling.focus();
@@ -45,16 +34,11 @@ export const VerifyCodeModal: FC<Props> = ({ email, setStep, onClose }) => {
 	const handleClick = async () => {
 		const verificationCode = code.join("");
 
-		if (verificationCode.length !== 6) {
-			setCodeErrorMessage("Введите 6-значный код");
-			return;
-		}
-
 		try {
 			const resultAction = await dispatch(verifyCode({ email, verificationCode }));
 
 			if (verifyCode.fulfilled.match(resultAction)) {
-				setStep(RegistrationSteps.SET_PASSWORD);
+				dispatch(changeStep(AuthSteps.SET_PASSWORD));
 				return;
 			}
 

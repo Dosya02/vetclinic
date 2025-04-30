@@ -22,6 +22,7 @@ export { default as AboutImg } from "./about-image.jpg";
 export { default as AvatarImg } from "./avatar.png";
 export { default as AppointmentBgImg } from "./appointment-bg.png";
 export { default as NoImageImg } from "./no-image.jpg";
+export { default as PawImg } from "./paw.webp";
 
 export { default as TeamImg1 } from "./team/doctor-1.jpg";
 export { default as TeamImg2 } from "./team/doctor-2.jpg";

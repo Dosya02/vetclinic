@@ -1,0 +1,6 @@
+export enum AuthSteps {
+	SEND_CODE,
+	VERIFY_CODE,
+	SET_PASSWORD,
+	COMPLETED,
+}

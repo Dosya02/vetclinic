@@ -10,3 +10,6 @@ export { Modal } from "./Modal/Modal";
 export { NavButton } from "./NavButton/NavButton";
 export { Section } from "./Section/Section";
 export { Title } from "./Title/Title";
+export { BackButton } from "./BackButton/BackButton";
+export { Table } from "./Table/Table";
+export { ProtectedRoute } from "./ProtectedRoute/ProtectedRoute";

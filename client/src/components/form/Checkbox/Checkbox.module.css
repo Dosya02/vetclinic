@@ -1,7 +1,7 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 12px;
 }
 
 .label {
@@ -16,7 +16,7 @@
 	display: block;
 	width: 25px;
 	aspect-ratio: 1;
-	background-color: var(--bg-secondary);
+	background-color: var(--text-secondary);
 }
 
 .text {

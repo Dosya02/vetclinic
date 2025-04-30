@@ -49,7 +49,7 @@ export const FormImageDropdown: FC<Props> = ({
 				) : (
 					<span className={styles.placeholder}>{placeholder}</span>
 				)}
-				<Icon name="arrow-down" size={30} color="#0E2F51" />
+				<Icon className={styles.icon} name="arrow-down" />
 			</div>
 			{open &&
 				<ul className={styles.options}>

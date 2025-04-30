@@ -4,7 +4,7 @@ import { IntroSection } from "./Intro/IntroSection";
 import { AboutSection } from "./About/AboutSection";
 import { TeamSection } from "./Team/TeamSection";
 import { ServicesSection } from "./Services/ServicesSection";
-import { ContactsSection } from "../../components";
+import { ContactsSection } from "./Contacts/ContactsSection";
 
 export const HomePage: FC = () => {
 	const location = useLocation();

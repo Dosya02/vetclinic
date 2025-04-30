@@ -1,16 +1,10 @@
-import { LoginPage } from "./Login/LoginPage";
-import { RegistrationPage } from "./Registration/RegistrationPage";
-
-import { HomePage } from "./Home/HomePage";
-import { ServicesPage } from "./Services/ServicesPage";
-import { AppointmentPage } from "./Appointment/AppointmentPage";
-import { ProfilePage } from "./Profile/ProfilePage";
-
-export {
-	LoginPage,
-	RegistrationPage,
-	HomePage,
-	ServicesPage,
-	AppointmentPage,
-	ProfilePage,
-}
+export { LoginPage } from "./Login/LoginPage";
+export { RegistrationPage } from "./Registration/RegistrationPage";
+export { HomePage } from "./Home/HomePage";
+export { ServicesPage } from "./Services/ServicesPage";
+export { AppointmentPage } from "./Appointment/AppointmentPage";
+export { ProfilePage } from "./Profile/ProfilePage";
+export { ProfilePets } from "./ProfilePets/ProfilePets";
+export { ProfileAppointments } from "./ProfileAppointments/ProfileAppointments";
+export { AccountDetails } from "./AccountDetails/AccountDetails";
+export { PetDetails } from "./PetDetails/PetDetails";

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { NavItem } from "./Item/Item";
 import styles from "./Nav.module.css";
+import { useTranslation } from "react-i18next";
 
 type navItem = {
 	to: string
@@ -10,28 +11,32 @@ type navItem = {
 const navItems: navItem[] = [
 	{
 		to: "/#intro",
-		title: "Главная",
+		title: "nav.main",
 	},
 	{
 		to: "/#about-us",
-		title: "О Нас",
+		title: "nav.aboutUs",
 	},
 	{
 		to: "/#team",
-		title: "Врачи",
+		title: "nav.team",
 	},
 	{
 		to: "/#services",
-		title: "Услуги",
+		title: "nav.services",
 	},
 ]
 
-export const Nav: FC = () => (
-	<nav className={styles.nav}>
-		<ul className={styles.list}>
-			{navItems.map((navItem, index) =>
-				<NavItem key={index} to={navItem.to} title={navItem.title} />
-			)}
-		</ul>
-	</nav>
-);
+export const Nav: FC = () => {
+	const { t } = useTranslation();
+
+	return (
+		<nav className={styles.nav}>
+			<ul className={styles.list}>
+				{navItems.map((navItem, index) =>
+					<NavItem key={index} to={navItem.to} title={t(navItem.title)} />
+				)}
+			</ul>
+		</nav>
+	);
+}

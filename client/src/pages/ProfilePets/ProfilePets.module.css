@@ -1,0 +1,40 @@
+.list {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 60px;
+}
+
+.item {
+	width: 100%;
+	height: 400px;
+	background-color: white;
+	border: 1px solid var(--text-primary);
+	border-radius: 40px;
+	transition: all 0.2s ease;
+}
+
+.item:hover {
+	background-color: var(--bg-secondary);
+}
+
+.link {
+	position: relative;
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+
+.link::before,
+.link::after {
+	content: "";
+	position: absolute;
+	top: calc((100% - 2px) / 2);
+	left: calc((100% - 100px) / 2);
+	width: 100px;
+	height: 2px;
+	background-color: var(--text-primary);
+}
+
+.link::after {
+	rotate: 90deg;
+}

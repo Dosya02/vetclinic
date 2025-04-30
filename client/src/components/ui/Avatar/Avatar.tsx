@@ -4,8 +4,8 @@ import { useAppSelector } from "../../../hooks";
 import styles from "./Avatar.module.css";
 
 interface Props {
-	size?: string | number
-	border?: boolean
+	size?: string | number;
+	border?: boolean;
 }
 
 export const Avatar: FC<Props> = ({ size = "auto", border = false }) => {

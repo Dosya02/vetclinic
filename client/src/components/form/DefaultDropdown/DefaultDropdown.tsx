@@ -24,18 +24,18 @@ export const FormDefaultDropdown: FC<Props> = ({
 				setOpen(false);
 			}
 		};
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => document.removeEventListener('mousedown', handleClickOutside);
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
 
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.wrapper} ref={ref}>
 			<div className={styles.control} onClick={() => setOpen(!open)}>
 				{!value && placeholder &&
 					<span className={styles.placeholder}>{placeholder}</span>
 				}
 				{value && <span className={styles.value}>{value}</span>}
-				<Icon name="arrow-down" size={30} color="#0E2F51" />
+				<Icon className={styles.icon} name="arrow-down" />
 			</div>
 			{open &&
 				<ul className={styles.options}>

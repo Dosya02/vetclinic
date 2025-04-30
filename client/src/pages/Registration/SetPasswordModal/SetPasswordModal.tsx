@@ -1,52 +1,26 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent } from "react";
 import { FormButton, FormPasswordInput } from "../../../components";
-import { useAppDispatch } from "../../../hooks";
-import { setPassword } from "../../../store/reducers";
-import { validatePassword } from "../../../utils";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { changePassword, changeStep, setPassword } from "../../../store/reducers";
+import { AuthSteps } from "../../../enums";
 import styles from "./SetPasswordModal.module.css";
-import { RegistrationSteps } from "../../../enums";
 
-interface Props {
-	email: string
-	setStep: (step: RegistrationSteps) => void
-}
-
-export const SetPasswordModal: FC<Props> = ({ email, setStep }) => {
+export const SetPasswordModal: FC = () => {
+	const { email, password, passwordErrorMessage } = useAppSelector(state => state.authReducer);
 	const dispatch = useAppDispatch();
 
-	const [formState, setFormState] = useState({
-		password: "",
-		passwordErrorMessage: "",
-	});
-
 	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		setFormState(prev => ({
-			...prev,
-			password: e.target.value,
-			passwordErrorMessage: "",
-		}));
+		dispatch(changePassword(e.target.value));
 	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const passwordError = validatePassword(formState.password);
-
-		if (passwordError) {
-			setFormState(prev => ({
-				...prev,
-				passwordErrorMessage: passwordError,
-			}));
-			return;
-		}
-
 		try {
-			const resultAction = await dispatch(
-				setPassword({ email, password: formState.password })
-			);
+			const resultAction = await dispatch(setPassword({ email, password }));
 
 			if (setPassword.fulfilled.match(resultAction)) {
-				setStep(RegistrationSteps.COMPLETED);
+				dispatch(changeStep(AuthSteps.COMPLETED));
 				return;
 			}
 
@@ -65,9 +39,9 @@ export const SetPasswordModal: FC<Props> = ({ email, setStep }) => {
 				<form className={styles.form} onSubmit={handleSubmit}>
 					<FormPasswordInput
 						placeholder="Введите пароль"
-						value={formState.password}
+						value={password}
 						onChange={handlePasswordChange}
-						errorMessage={formState.passwordErrorMessage}
+						errorMessage={passwordErrorMessage}
 					/>
 					<FormButton text="Подтвердить" />
 				</form>

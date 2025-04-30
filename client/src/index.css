@@ -34,8 +34,12 @@
 	--text-accent-primary: #7191B5;
 	--text-accent-secondary: #2C7AC8;
 
+	--text-input: #6B91AC;
+
 	--font-family: "Comfortaa", sans-serif;
 	--font-family-title: "Bounded", sans-serif;
+
+	--border-radius: 16px;
 }
 
 * {

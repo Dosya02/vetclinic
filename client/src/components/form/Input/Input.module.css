@@ -1,19 +1,25 @@
 .wrapper {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 12px;
 }
 
 .input {
 	width: 100%;
-	background-color: var(--bg-secondary);
+	background-color: var(--text-secondary);
 	border: 2px solid transparent;
-	border-radius: 20px;
-	color: var(--text-accent-primary);
+	border-radius: var(--border-radius);
+	color: var(--text-input);
 	font-size: 24px;
-	font-weight: 600;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: 0.03em;
 	padding: 16px 26px;
 	transition: all .3s ease;
+}
+
+.input::placeholder {
+	color: var(--text-accent-primary);
 }
 
 .input:focus {

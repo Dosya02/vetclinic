@@ -3,13 +3,18 @@ import { ErrorMessage } from "../../../components";
 import styles from "./Checkbox.module.css";
 
 interface Props {
-	text: string
-	checked: boolean
-	onChange: (e: ChangeEvent<HTMLInputElement>) => void
-	errorMessage?: string;
+	text: string;
+	checked: boolean;
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+	errorMessage: string;
 }
 
-export const FormCheckbox: FC<Props> = ({ text, checked, onChange, errorMessage }) => (
+export const FormCheckbox: FC<Props> = ({
+	text,
+	checked,
+	onChange,
+	errorMessage,
+}) => (
 	<div className={styles.wrapper}>
 		<label className={styles.label}>
 			<input

@@ -1,67 +1,36 @@
-import { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent } from "react";
 import { ErrorMessage, FormButton, FormInput, FormPasswordInput, Loader } from "../../components";
-import styles from "./LoginPage.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { validateEmail, validatePassword } from "../../utils";
-import { login } from "../../store/reducers";
+import { changeEmail, changePassword, login } from "../../store/reducers";
 import { pageConfig } from "../../config";
+import styles from "./LoginPage.module.css";
 
 export const LoginPage: FC = () => {
 	const navigate = useNavigate();
-	const { loading, error } = useAppSelector(state => state.authReducer);
+	const { loading, error, email, emailErrorMessage, password, passwordErrorMessage } = useAppSelector(state => state.authReducer);
 	const dispatch = useAppDispatch();
 
-	const [formState, setFormState] = useState({
-		email: "",
-		emailErrorMessage: "",
-		password: "",
-		passwordErrorMessage: "",
-	});
-
 	const handleEmailChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		setFormState(prev => ({
-			...prev,
-			email: e.target.value,
-			emailErrorMessage: "",
-		}));
+		dispatch(changeEmail(e.target.value));
 	}
 
 	const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		setFormState(prev => ({
-			...prev,
-			password: e.target.value,
-			passwordErrorMessage: "",
-		}));
+		dispatch(changePassword(e.target.value));
 	}
 
 	const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
 		e.preventDefault();
 
-		const emailError = validateEmail(formState.email);
-		const passwordError = validatePassword(formState.password);
-
-		if (emailError || passwordError) {
-			setFormState(prev => ({
-				...prev,
-				emailErrorMessage: emailError,
-				passwordErrorMessage: passwordError,
-			}));
-			return;
-		}
-
 		try {
-			const resultAction = await dispatch(login({
-				email: formState.email,
-				password: formState.password,
-			}));
+			const resultAction = await dispatch(login({ email, password }));
 
 			if (!login.fulfilled.match(resultAction)) {
 				console.error("Ошибка при авторизации.");
 				return;
 			}
 
-			navigate(pageConfig.profile);
+			navigate(`${pageConfig.profile}/${pageConfig.profileAccountDetails}`);
 		} catch (err) {
 			console.error("Ошибка при выполнении запроса:", err);
 		}
@@ -73,20 +42,19 @@ export const LoginPage: FC = () => {
 			<form className={styles.form} onSubmit={handleSubmit}>
 				{error && <ErrorMessage message={error} />}
 				<FormInput
-					type="email"
 					placeholder="Введите почту"
-					value={formState.email}
+					value={email}
 					onChange={handleEmailChange}
-					errorMessage={formState.emailErrorMessage}
+					errorMessage={emailErrorMessage}
 				/>
 				<FormPasswordInput
 					placeholder="Введите пароль"
-					value={formState.password}
+					value={password}
 					onChange={handlePasswordChange}
-					errorMessage={formState.passwordErrorMessage}
+					errorMessage={passwordErrorMessage}
 				/>
 				<div className={styles.buttonWrapper}>
-					<FormButton text="Войти" />
+					<FormButton text="Войти" fullWidth />
 				</div>
 			</form>
 			<p className={styles.text}>

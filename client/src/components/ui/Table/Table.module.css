@@ -1,0 +1,25 @@
+.table {
+	width: 100%;
+	table-layout: fixed;
+	border-collapse: collapse;
+}
+
+.table th,
+.table td {
+	font-weight: 400;
+	font-family: var(--font-family-title);
+	line-height: 1.2;
+	letter-spacing: 0.05em;
+	text-align: center;
+}
+
+.table th {
+	color: var(--text-primary);
+	font-size: 28px;
+	padding: 20px 10px;
+}
+
+.table td {
+	color: var(--text-input);
+	padding: 10px;
+}

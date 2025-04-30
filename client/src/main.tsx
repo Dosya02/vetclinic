@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { store } from "./store/store.ts";
 import { App } from "./App.tsx";
+import "./localization/i18n.ts";
 import "./index.css";
 
 const container = document.getElementById("root");

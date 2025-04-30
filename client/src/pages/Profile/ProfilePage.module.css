@@ -3,3 +3,8 @@
 	grid-template-columns: auto 1fr;
 	gap: 100px;
 }
+
+.list {
+	display: flex;
+	flex-direction: column;
+}

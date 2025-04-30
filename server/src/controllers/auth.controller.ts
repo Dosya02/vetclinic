@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import crypto from "crypto";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import User from "../models/user";
 import env from "../utils/validateEnv";
+import { User } from "../models";
 import { sendEmail } from "../utils/email";
 import { AuthenticatedRequest } from "../middlewares";
 

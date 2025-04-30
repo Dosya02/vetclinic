@@ -37,6 +37,17 @@
 	letter-spacing: 0.03em;
 }
 
+.icon {
+	width: 30px;
+	aspect-ratio: 1;
+	fill: var(--text-accent-primary);
+	transition: all 0.2s ease;
+}
+
+.control:hover .icon {
+	fill: var(--text-primary);
+}
+
 .value {
 	display: flex;
 	align-items: center;
