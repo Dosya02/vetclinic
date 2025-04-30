@@ -1,28 +1,41 @@
-import { FC, useState } from "react";
+import { FC } from "react";
+import { Outlet } from "react-router-dom";
 import { Container, Section } from "../../components";
+import { pageConfig } from "../../config";
+import { SidebarItem } from "./SidebarItem/SidebarItem";
 import styles from "./ProfilePage.module.css";
-import { Sidebar } from "./Sidebar/Sidebar";
-import { AccountDetails } from "./AccountDetails/AccountDetails";
 
-export type TabType = "accountDetails" | "petCards" | "appointments";
+const sidebarItems = [
+	{
+		title: "Личный кабинет",
+		link: pageConfig.profileAccountDetails,
+		icon: "user",
+	},
+	{
+		title: "Карта питомца",
+		link: pageConfig.profilePets,
+		icon: "pet-card",
+	},
+	{
+		title: "Записи",
+		link: pageConfig.profileAppointments,
+		icon: "medical-receipt",
+	},
+];
 
-export const ProfilePage: FC = () => {
-	const [tab, setTab] = useState<TabType>("accountDetails");
-
-	const changeTab = (tab: TabType) => setTab(tab);
-
-	return (
-		<Section>
-			<Container>
-				<div className={styles.wrapper}>
-					<Sidebar tab={tab} changeTab={changeTab} />
-					<div className={styles.content}>
-						{tab === "accountDetails" && <AccountDetails />}
-						{tab === "petCards" && <h1>Hello country!</h1>}
-						{tab === "appointments" && <h1>Hello city!</h1>}
-					</div>
-				</div>
-			</Container>
-		</Section>
-	);
-}
+export const ProfilePage: FC = () => (
+	<Section>
+		<Container>
+			<div className={styles.wrapper}>
+				<aside className={styles.sidebar}>
+					<ul className={styles.list}>
+						{sidebarItems.map(item =>
+							<SidebarItem key={item.link} item={item} />
+						)}
+					</ul>
+				</aside>
+				<Outlet />
+			</div>
+		</Container>
+	</Section>
+);

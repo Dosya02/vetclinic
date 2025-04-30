@@ -1,6 +1,6 @@
 export enum PetTypes {
-	CAT,
-	DOG,
-	RABBIT,
-	LIZARD,
+	CAT = "cat",
+	DOG = "dog",
+	RABBIT = "rabbit",
+	LIZARD = "lizard",
 }

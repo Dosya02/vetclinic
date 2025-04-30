@@ -1,0 +1,9 @@
+.title {
+	font-size: 32px;
+	font-weight: 700;
+	font-family: var(--font-family-title);
+	line-height: 1;
+	letter-spacing: 0.05em;
+	margin-bottom: 20px;
+	text-align: center;
+}

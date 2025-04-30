@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { Image } from "../../components";
+import { Outlet } from "react-router-dom";
+import { BackButton, Image } from "../../components";
 import { AuthBgImg } from "../../assets";
 import { pageConfig } from "../../config";
 import styles from "./AuthLayout.module.css";
@@ -13,9 +13,9 @@ export const AuthLayout: FC = () => {
 					<Image src={AuthBgImg} alt="auth bg image" />
 				</div>
 				<div className={styles.content}>
-					<Link className={styles.link} to={pageConfig.home}>
-						← На главную
-					</Link>
+					<div className={styles.link}>
+						<BackButton to={pageConfig.home} text="На главную" />
+					</div>
 					<Outlet />
 				</div>
 			</main>

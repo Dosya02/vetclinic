@@ -1,5 +1,8 @@
 class ApiConfig {
-	baseUrl = "https://vetclinic-4dz3.onrender.com/api";
+	baseUrl = "http://localhost:5000/api";
+	authUrl = `${this.baseUrl}/auth`;
+	loginUrl = `${this.authUrl}/login`;
+	registrationUrl = `${this.authUrl}/registration`;
 }
 
 export const apiConfig = new ApiConfig(); 

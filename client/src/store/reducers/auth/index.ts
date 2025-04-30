@@ -1,11 +1,11 @@
 export {
 	default as authReducer,
+	changeEmail,
+	changePassword,
+	changeAgree,
+	changeCode,
+	changeStep,
 	setCredentials,
 	logout,
 } from "./auth.slice";
-export {
-	sendVerificationCode,
-	verifyCode,
-	setPassword,
-	login,
-} from "./auth.actions";
+export * from "./actions";

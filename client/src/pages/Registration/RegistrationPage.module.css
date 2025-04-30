@@ -13,18 +13,6 @@
 	letter-spacing: 0.05em;
 }
 
-.form {
-	width: 100%;
-	display: flex;
-	flex-direction: column;
-	gap: 40px;
-	margin-top: 80px;
-}
-
-.buttonWrapper {
-	margin-top: 40px;
-}
-
 .text {
 	margin-top: 20px;
 }

@@ -1,11 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
-const API_URL = "https://vetclinic-4dz3.onrender.com"
+import { apiConfig } from "../../config";
 
 export const api = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
-		baseUrl: API_URL,
+		baseUrl: apiConfig.baseUrl,
 		prepareHeaders: (headers) => {
 			const token = localStorage.getItem("userToken");
 			if (token) {

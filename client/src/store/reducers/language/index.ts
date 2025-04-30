@@ -1,0 +1,1 @@
+export { default as languageReducer, setLanguage } from "./language.slice";
