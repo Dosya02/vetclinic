@@ -18,7 +18,7 @@ import { AuthLayout, DefaultLayout } from "./layouts";
 import { useGetUserInfoQuery } from "./store/api";
 import { setCredentials } from "./store/reducers";
 import { ScrollToTop } from "./utils";
-import { ProtectedRoute } from "@components";
+import { ProtectedRoute } from "./components";
 
 export const App: FC = () => {
   const dispatch = useAppDispatch();
