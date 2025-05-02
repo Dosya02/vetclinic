@@ -8,16 +8,19 @@ import { DropdownProvider } from "../../../context";
 
 const pets: IPet[] = [
 	{
+		id: "1",
 		name: "Лайка",
 		type: PetTypes.DOG,
 		imageUrl: DogImg,
 	},
 	{
+		id: "2",
 		name: "Бэнни",
 		type: PetTypes.RABBIT,
 		imageUrl: RabbitImg,
 	},
 	{
+		id: "3",
 		name: "Ранго",
 		type: PetTypes.LIZARD,
 	},
@@ -132,10 +135,10 @@ export const AuthorizedForm: FC = () => {
 					</div>
 					<div className={styles.input}>
 						<FormInput
-							type="text"
 							placeholder="Напишите свой комментарий"
 							value={formState.comment}
 							onChange={handleCommentChange}
+							errorMessage=""
 						/>
 					</div>
 					<FormButton text="Записаться" />

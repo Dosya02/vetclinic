@@ -5,4 +5,4 @@ class ApiConfig {
 	registrationUrl = `${this.authUrl}/registration`;
 }
 
-export const apiConfig = new ApiConfig(); 
+export const apiConfig = new ApiConfig();
