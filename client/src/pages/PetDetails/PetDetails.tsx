@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { useParams } from "react-router-dom";
 import { DogImg } from "../../assets";
 import { BackButton } from "../../components";
 import { PetAvatar } from "./PetAvatar/PetAvatar";
@@ -10,8 +9,8 @@ import styles from "./PetDetails.module.css";
 import { PetVaccinations } from "./PetVaccinations/PetVaccinations";
 
 export const PetDetails: FC = () => {
-	const { slugAndId } = useParams();
-	const id = slugAndId?.split("-").pop();
+	// const { slugAndId } = useParams();
+	// const id = slugAndId?.split("-").pop();
 
 	return (
 		<div className={styles.wrapper}>
