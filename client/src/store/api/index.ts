@@ -1,1 +1,0 @@
-export { useGetUserInfoQuery } from "./auth.api";

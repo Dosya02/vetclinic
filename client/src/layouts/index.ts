@@ -1,4 +1,4 @@
-import { AuthLayout } from "./Auth/AuthLayout";
-import { DefaultLayout } from "./Default/DefaultLayout";
+import { AuthLayout } from './Auth/AuthLayout';
+import { Index } from './Default';
 
-export { AuthLayout, DefaultLayout }
+export { AuthLayout, Index };

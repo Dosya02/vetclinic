@@ -1,14 +1,14 @@
-import { FC } from "react";
-import { PawImg } from "../../../assets";
-import { Image } from "../../../components";
-import styles from "./PetAvatar.module.css";
+import { FC } from 'react';
+import { PawImg } from '../../../assets/images';
+import { Image } from '../../../components';
+import styles from './PetAvatar.module.css';
 
 interface Props {
-	imageUrl?: string;
+  imageUrl?: string;
 }
 
 export const PetAvatar: FC<Props> = ({ imageUrl }) => (
-	<div className={styles.image}>
-		<Image src={imageUrl || PawImg} alt="pet avatar" />
-	</div>
+  <div className={styles.image}>
+    <Image src={imageUrl || PawImg} alt="pet avatar"/>
+  </div>
 );
