@@ -1,0 +1,42 @@
+// Fonts
+$font-family-primary: "Comfortaa", sans-serif;
+$font-family-secondary: "Bounded", sans-serif;
+
+// Font styles
+$font-style-normal: normal;
+$font-style-italic: italic;
+
+// Font sizes
+$font-size-base: 20;
+
+// Font weights
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line heights
+$line-height-100: 1;
+$line-height-120: 1.2;
+$line-height-150: 1.5;
+
+// Letter spacings
+$letter-spacing-1: 0.01em;
+$letter-spacing-3: 0.03em;
+$letter-spacing-5: 0.05em;
+
+// Border
+$border-radius: 16;
+
+// Container sizes
+$s-container-width: 1200;
+$s-container-padding-x: 15;
+
+// Section
+$s-section-padding-y: 120;
+
+// Transitions
+$trans-duration: 0.2s;
+$trans-timing-function: ease;
+$trans-default: $trans-duration $trans-timing-function;

@@ -1,0 +1,31 @@
+.c-header {
+	@include box-size(100%, auto);
+	position: sticky;
+	top: 0;
+	left: 0;
+	padding-block: rem(20);
+	background-color: $c-bg-header;
+	z-index: 5;
+
+	&__inner {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+}
+
+.c-header-actions {
+	&__auth {
+		display: flex;
+
+		&-icon {
+			@include square(rem(40));
+			fill: $c-text-light;
+			transition: $trans-default;
+
+			@include hover {
+				fill: $c-text-light-70;
+			}
+		}
+	}
+}

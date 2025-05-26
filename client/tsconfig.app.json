@@ -32,26 +32,23 @@
       "@images": [
         "assets/images"
       ],
-      "@api/*": [
-        "api/*"
+      "@styles/*": [
+        "assets/styles/*"
       ],
       "@components": [
         "components"
       ],
-      "@config": [
-        "config"
-      ],
-      "@context": [
-        "context"
+      "@constants": [
+        "constants"
       ],
       "@layouts": [
         "layouts"
       ],
-      "@localization": [
-        "localization"
+      "@localization/*": [
+        "localization/*"
       ],
       "@models": [
-        "api/models"
+        "models"
       ],
       "@pages": [
         "pages"
@@ -60,10 +57,7 @@
         "routes"
       ],
       "@store/*": [
-        "api/store/*"
-      ],
-      "@styles/*": [
-        "styles/*"
+        "store/*"
       ],
       "@utils/*": [
         "utils/*"

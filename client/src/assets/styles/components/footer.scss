@@ -1,0 +1,15 @@
+.c-footer {
+	background-color: $c-bg-footer;
+	padding-block: rem(20);
+
+	&__inner {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+
+	&__copyright {
+		font-size: rem(10);
+		letter-spacing: $letter-spacing-5;
+	}
+}

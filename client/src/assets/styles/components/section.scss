@@ -1,0 +1,8 @@
+.c-section {
+	background-color: $c-bg-primary;
+	padding-block: rem($s-section-padding-y);
+
+	&.alternate {
+		background-color: $c-bg-secondary;
+	}
+}

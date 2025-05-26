@@ -1,0 +1,22 @@
+.c-modal {
+	@include flex-center;
+	@include hide;
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	transition: var(--transition);
+
+	&.active {
+		@include show;
+	}
+
+	&.light {
+		background-color: $c-bg-secondary;
+	}
+
+	&.dark {
+		background-color: $c-black-25;
+	}
+}

@@ -1,0 +1,5 @@
+img {
+	@include box-size;
+	border-radius: inherit;
+	object-fit: cover;
+}

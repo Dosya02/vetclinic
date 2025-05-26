@@ -1,0 +1,19 @@
+.c-nav {
+	&__list {
+		display: flex;
+		gap: rem(40);
+	}
+
+	&__label {
+		display: inline-block;
+		color: $c-text-light;
+		font-weight: $font-weight-medium;
+		line-height: $line-height-100;
+		letter-spacing: $letter-spacing-5;
+		transition: opacity $trans-default;
+
+		@include hover {
+			opacity: 0.7;
+		}
+	}
+}
