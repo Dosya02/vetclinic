@@ -1,0 +1,41 @@
+.c-appointment {
+  @include box-size();
+  min-height: 100vh;
+  padding: rem(60) 0 rem(90);
+  
+  &__form {
+    display: grid;
+    gap: rem(30);
+    
+    //&--anonym {
+    //  grid-template-columns: repeat(2, 1fr);
+    //
+    //  & > *:not(:nth-child(2), :nth-child(3)) {
+    //    grid-column: span 2;
+    //  }
+    //}
+    
+    &-button {
+      margin-top: rem(30);
+      justify-self: center;
+    }
+  }
+  
+  &__inner {
+    @include box-size(rem(1030), auto);
+    padding: rem(80) rem(110) rem(60);
+    border: rem(1) solid $c-text-light;
+    border-radius: rem(55);
+    background-color: $c-text-light-70;
+    margin-inline: auto;
+  }
+  
+  &__title {
+    font-family: $font-family-secondary;
+    font-size: rem(48);
+    font-weight: $font-weight-bold;
+    line-height: $line-height-120;
+    margin-bottom: rem(75);
+    letter-spacing: $letter-spacing-5;
+  }
+}

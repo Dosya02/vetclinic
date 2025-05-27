@@ -1,0 +1,153 @@
+.c-home-services {
+  &__inner {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  &__items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-block: rem(100);
+  }
+  
+  &__item {
+    padding: rem(40) rem(20);
+    border-radius: rem(30);
+    background-color: $c-bg-secondary;
+    
+    &:nth-child(even) {
+      background-color: transparent;
+    }
+  }
+  
+  &__button {
+    align-self: center;
+  }
+}
+
+.c-home-service-card {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+  &__icon {
+    @include square(rem(200));
+    fill: $c-text-primary;
+    stroke: $c-text-primary;
+  }
+  
+  &__title {
+    font-size: rem(24);
+    font-weight: $font-weight-semibold;
+    display: flex;
+    align-items: center;
+    min-height: rem(72);
+    letter-spacing: $letter-spacing-7;
+    margin-block: rem(20);
+  }
+  
+  &__text {
+    font-size: rem(14);
+    line-height: rem(20);
+    letter-spacing: $letter-spacing-15;
+  }
+}
+
+.c-services {
+  &__intro {
+    @include box-size(100%, 100vh);
+    position: relative;
+    display: flex;
+    align-items: center;
+    
+    &::after {
+      @include abs-full;
+      content: "";
+      background-color: $c-black-25;
+    }
+    
+    &-inner {
+      position: relative;
+      z-index: 1;
+      color: $c-text-light;
+    }
+    
+    &-title {
+      font-family: $font-family-secondary;
+      margin-bottom: rem(80);
+      letter-spacing: $letter-spacing-1;
+    }
+    
+    &-text {
+      font-size: rem(48);
+      font-weight: $font-weight-bold;
+    }
+  }
+  
+  &__content {
+    &-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: rem(60);
+    }
+  }
+  
+  &__banner {
+    @include box-size(100%, rem(350));
+    display: flex;
+    align-items: center;
+    margin-top: rem(80);
+    border-radius: rem(50);
+    background-color: $c-bg-secondary;
+    
+    &-content {
+      @include flex-center;
+      flex-direction: column;
+      flex-grow: 1;
+      height: 100%;
+      padding: rem(20);
+      gap: rem(20);
+    }
+    
+    &-title {
+      font-size: rem(30);
+      font-weight: $font-weight-bold;
+      color: $c-text-accent;
+    }
+    
+    &-image {
+      @include box-size(rem(500));
+      border-top-right-radius: rem(50);
+      border-bottom-right-radius: rem(50);
+    }
+  }
+}
+
+.c-service-card {
+  &__image {
+    @include box-size(100%, rem(250));
+    border-radius: rem(30);
+  }
+  
+  &__title-wrapper {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto 1fr;
+    gap: rem(20);
+    margin-block: rem(40);
+  }
+  
+  &__icon {
+    @include square(rem(100));
+  }
+  
+  &__title {
+    font-weight: $font-weight-bold;
+    line-height: $line-height-100;
+  }
+  
+  &__text {
+    line-height: $line-height-120;
+    letter-spacing: $letter-spacing-7;
+  }
+}

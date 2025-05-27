@@ -1,29 +1,71 @@
 .c-input {
-	&__wrapper {
-		display: flex;
-		flex-direction: column;
-		gap: rem(8);
-	}
-
-	&__input {
-		@include box-size(100%, auto);
-		background-color: $c-bg-secondary;
-		border: rem(1) solid transparent;
-		border-radius: rem(5);
-		color: $c-text-secondary;
-		font-size: rem(24);
-		font-weight: $font-weight-semibold;
-		line-height: $line-height-100;
-		letter-spacing: $letter-spacing-3;
-		padding: rem(16) rem(30);
-		transition: $trans-default;
-
-		&::placeholder {
-			color: $c-text-secondary;
-		}
-
-		&:focus {
-			border-color: $c-text-primary;
-		}
-	}
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  
+  &__wrapper {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    row-gap: rem(30);
+  }
+  
+  &__label {
+    &--appointment-with-label {
+      @include text-truncate;
+      font-family: $font-family-secondary;
+      font-size: rem(36);
+      font-weight: $font-weight-bold;
+      line-height: $line-height-120;
+      position: absolute;
+      top: 50%;
+      left: rem(30);
+      max-width: rem(275);
+      letter-spacing: $letter-spacing-5;
+      translate: 0 -50%;
+    }
+  }
+  
+  &__input {
+    @include box-size(100%, auto);
+    font-size: rem(24);
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-187-5;
+    padding: rem(17) rem(30);
+    transition: $trans-default;
+    letter-spacing: $letter-spacing-3;
+    color: $c-text-secondary;
+    background-color: $c-bg-secondary;
+    
+    &::placeholder {
+      color: $c-text-secondary;
+    }
+    
+    &--auth {
+      border-radius: rem(5);
+    }
+    
+    &--profile {
+      border-radius: rem(30);
+    }
+    
+    &--appointment,
+    &--appointment-with-label {
+      font-weight: $font-weight-bold;
+      letter-spacing: $letter-spacing-5;
+      border: rem(2) solid $c-text-primary;
+      border-radius: rem(23);
+      background-color: $c-text-light-70;
+      
+      &:focus {
+        border-color: $c-text-secondary;
+      }
+    }
+    
+    &--appointment-with-label {
+      padding-left: rem(320);
+      text-align: right;
+    }
+  }
 }

@@ -1,3 +1,4 @@
+export * from './BgContainer';
 export * from './Container';
 export * from './Icon';
 export * from './Image';

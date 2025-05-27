@@ -41,6 +41,9 @@
       "@constants": [
         "constants"
       ],
+      "@data": [
+        "data"
+      ],
       "@layouts": [
         "layouts"
       ],

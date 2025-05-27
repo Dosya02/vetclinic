@@ -1,60 +1,66 @@
 .o-wrapper {
-	@include box-size;
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+  @include box-size;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  
+  main {
+    flex: 1;
+  }
+}
 
-	main {
-		flex: 1;
-	}
+.o-bg-container {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .o-auth-wrapper {
-	@include box-size;
-	@include flex-center;
-	min-height: 100vh;
-	background-color: $c-bg-secondary;
-	padding: rem(15);
-
-	main {
-		@include box-size(rem($s-container-width));
-		position: relative;
-	}
-
-	&__image {
-		position: relative;
-
-		&::after {
-			@include box-size;
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			background-color: $c-black-25;
-		}
-	}
-
-	&__content {
-		@include box-size(50%);
-		@include flex-center;
-		position: absolute;
-		top: 0;
-		right: 0;
-		background-color: $c-bg-primary;
-		padding: rem(60) rem(80);
-		overflow: hidden;
-	}
-
-	&__link {
-		position: absolute;
-		top: rem(20);
-		left: 2rem(20);
-	}
+  @include box-size;
+  @include flex-center;
+  min-height: 100vh;
+  padding: rem(15);
+  background-color: $c-bg-secondary;
+  
+  main {
+    @include box-size(rem($s-container-width));
+    position: relative;
+  }
+  
+  &__image {
+    position: relative;
+    
+    &::after {
+      @include box-size;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: "";
+      background-color: $c-black-25;
+    }
+  }
+  
+  &__content {
+    @include box-size(50%);
+    @include flex-center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    padding: rem(60) rem(80);
+    background-color: $c-bg-primary;
+  }
+  
+  &__link {
+    position: absolute;
+    top: rem(20);
+    left: 2 rem(20);
+  }
 }
 
 .o-container {
-	width: 100%;
-	max-width: rem($s-container-width);
-	margin-inline: auto;
-	padding-inline: rem($s-container-padding-x);
+  width: 100%;
+  max-width: rem($s-container-width);
+  margin-inline: auto;
+  padding-inline: rem($s-container-padding-x);
 }

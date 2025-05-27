@@ -1,38 +1,30 @@
 .c-button {
-	width: auto;
-	background-color: $c-button-bg;
-	color: $c-text-light;
-	font-size: rem(32);
-	font-weight: $font-weight-bold;
-	line-height: $line-height-120;
-	letter-spacing: $letter-spacing-3;
-	padding: rem(20) rem(40);
-	transition: $trans-default;
-
-	@include hover {
-		background-color: $c-text-light;
-		color: $c-button-bg;
-	}
-
-	&--reverse {
-		background-color: $c-text-light;
-		color: $c-button-bg;
-
-		@include hover {
-			background-color: $c-button-bg;
-			color: $c-text-light;
-		}
-	}
-
-	&--full-width {
-		width: 100%;
-	}
-
-	&--border-default {
-		border-radius: rem(5);
-	}
-
-	&--border-rounded {
-		border-radius: rem(75);
-	}
+  font-size: rem(32);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-120;
+  padding: rem(20) rem(40);
+  transition: $trans-default;
+  letter-spacing: $letter-spacing-3;
+  color: $c-text-light;
+  border-radius: rem(5);
+  background-color: $c-button-bg;
+  
+  @include hover {
+    color: $c-button-bg;
+    background-color: $c-text-light;
+  }
+  
+  &--reverse {
+    color: $c-button-bg;
+    background-color: $c-text-light;
+    
+    @include hover {
+      color: $c-text-light;
+      background-color: $c-button-bg;
+    }
+  }
+  
+  &--rounded {
+    border-radius: rem(75);
+  }
 }

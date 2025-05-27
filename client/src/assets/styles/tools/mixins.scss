@@ -21,6 +21,13 @@
   translate: -50% -50%;
 }
 
+@mixin abs-full {
+  @include box-size;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 @mixin hide {
   opacity: 0;
   visibility: hidden;
@@ -37,10 +44,16 @@
       @content;
     }
   }
-
+  
   @media (any-hover: none) {
     &:active {
       @content;
     }
   }
+}
+
+@mixin text-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

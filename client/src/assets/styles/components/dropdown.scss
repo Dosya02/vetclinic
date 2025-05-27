@@ -1,0 +1,21 @@
+.c-dropdown {
+  cursor: pointer;
+  
+  &__select {
+    padding: rem(17) rem(30);
+    transition: $trans-default;
+    border: rem(2) solid $c-text-primary;
+    border-radius: rem(23);
+    background-color: $c-text-light-70;
+    
+    @include hover {
+      border-color: $c-text-secondary;
+    }
+    
+    &-icon {
+      @include square(rem(30));
+      fill: $c-text-primary;
+      stroke: $c-text-primary;
+    }
+  }
+}

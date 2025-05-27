@@ -1,6 +1,20 @@
+h1 {
+  font-size: rem(48);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-120;
+  color: $c-bg-primary;
+}
+
 h2 {
-	font-size: rem(48);
-	font-weight: $font-weight-bold;
-	line-height: $line-height-120;
-	letter-spacing: $letter-spacing-1;
+  font-size: rem(48);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-120;
+  letter-spacing: $letter-spacing-1;
+}
+
+h3 {
+  font-size: rem(40);
+  font-weight: $font-weight-bold;
+  line-height: $line-height-120;
+  letter-spacing: $letter-spacing-15;
 }

@@ -1,3 +1,3 @@
-export * from './IUser.ts';
-export * from './IService.ts';
-export * from './IPet.ts';
+export * from './ServiceModel.ts';
+export * from './UserModel.ts';
+export * from './PetModel.ts';

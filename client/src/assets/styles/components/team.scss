@@ -1,0 +1,35 @@
+.c-team {
+  &__items {
+    display: grid;
+    margin-top: rem(100);
+    grid-template-columns: repeat(3, 1fr);
+    gap: rem(60);
+  }
+}
+
+.c-team-card {
+  display: grid;
+  align-items: center;
+  grid-template-rows: rem(500) auto 1fr auto;
+  
+  &__image {
+    @include box-size(100%, rem(500));
+    border-radius: rem(40);
+  }
+  
+  &__content {
+    margin-block: rem(50);
+  }
+  
+  &__title {
+    font-size: rem(30);
+    font-weight: $font-weight-semibold;
+    letter-spacing: $letter-spacing-5;
+  }
+  
+  &__text {
+    line-height: $line-height-120;
+    margin-top: rem(50);
+    letter-spacing: $letter-spacing-3;
+  }
+}
