@@ -1,0 +1,49 @@
+.c-checkbox {
+	display: flex;
+	flex-direction: column;
+	gap: rem(8);
+
+	&__label {
+		@include box-size(100%, auto);
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: center;
+		gap: rem(15);
+	}
+
+	&__input {
+		display: none;
+	}
+
+	&__input:checked~&__checkmark::after {
+		@include show;
+	}
+
+	&__checkmark {
+		@include square(rem(40));
+		position: relative;
+		background-color: $c-bg-secondary;
+		border-radius: rem(5);
+		transition: $trans-default;
+
+		&::after {
+			@include hide;
+			content: "";
+			position: absolute;
+			left: calc((100% - rem(10)) / 2);
+			top: calc((100% - rem(28)) / 2);
+			width: rem(12);
+			height: rem(24);
+			border: solid $c-text-secondary;
+			border-width: 0 rem(3) rem(3) 0;
+			transform: rotate(45deg);
+		}
+	}
+
+	&__text {
+		display: inline-block;
+		font-size: rem(18);
+		line-height: $line-height-100;
+		letter-spacing: $letter-spacing-3;
+	}
+}

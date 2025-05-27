@@ -1,0 +1,11 @@
+a {
+	display: inline-block;
+	color: $c-text-secondary;
+	font-weight: $font-weight-semibold;
+	letter-spacing: $letter-spacing-5;
+	transition: $trans-default;
+
+	@include hover {
+		color: $c-text-accent;
+	}
+}

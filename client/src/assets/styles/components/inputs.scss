@@ -1,0 +1,29 @@
+.c-input {
+	&__wrapper {
+		display: flex;
+		flex-direction: column;
+		gap: rem(8);
+	}
+
+	&__input {
+		@include box-size(100%, auto);
+		background-color: $c-bg-secondary;
+		border: rem(1) solid transparent;
+		border-radius: rem(5);
+		color: $c-text-secondary;
+		font-size: rem(24);
+		font-weight: $font-weight-semibold;
+		line-height: $line-height-100;
+		letter-spacing: $letter-spacing-3;
+		padding: rem(16) rem(30);
+		transition: $trans-default;
+
+		&::placeholder {
+			color: $c-text-secondary;
+		}
+
+		&:focus {
+			border-color: $c-text-primary;
+		}
+	}
+}

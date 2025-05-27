@@ -1,0 +1,25 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 60px;
+	margin-top: 60px;
+}
+
+.inputs {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	column-gap: 20px;
+	row-gap: 8px;
+}
+
+.errorMessage {
+	grid-column: 1 / -1;
+}
+
+.buttons {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}

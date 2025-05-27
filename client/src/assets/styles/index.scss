@@ -10,12 +10,18 @@
 @import "generic/scrollbar";
 // 4. Elements
 @import "elements/base";
+@import "elements/headings";
+@import "elements/links";
 @import "elements/media";
 // 5. Objects
 @import "objects/containers";
 // 6. Components
+@import "components/button";
+@import "components/checkbox";
+@import "components/error";
 @import "components/footer";
 @import "components/header";
+@import "components/inputs";
 @import "components/logo";
 @import "components/modal";
 @import "components/nav";

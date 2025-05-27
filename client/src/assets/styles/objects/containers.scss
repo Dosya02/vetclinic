@@ -1,11 +1,54 @@
 .o-wrapper {
-	height: 100%;
+	@include box-size;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 
 	main {
 		flex: 1;
+	}
+}
+
+.o-auth-wrapper {
+	@include box-size;
+	@include flex-center;
+	min-height: 100vh;
+	background-color: $c-bg-secondary;
+	padding: rem(15);
+
+	main {
+		@include box-size(rem($s-container-width));
+		position: relative;
+	}
+
+	&__image {
+		position: relative;
+
+		&::after {
+			@include box-size;
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			background-color: $c-black-25;
+		}
+	}
+
+	&__content {
+		@include box-size(50%);
+		@include flex-center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: $c-bg-primary;
+		padding: rem(60) rem(80);
+		overflow: hidden;
+	}
+
+	&__link {
+		position: absolute;
+		top: rem(20);
+		left: 2rem(20);
 	}
 }
 

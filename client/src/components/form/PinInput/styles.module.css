@@ -1,0 +1,16 @@
+.input {
+	width: 100px;
+	aspect-ratio: 1;
+	font-size: 24px;
+	font-weight: 700;
+	padding: 10px;
+	text-align: center;
+	background-color: var(--bg-secondary);
+	border: 2px solid transparent;
+	border-radius: var(--border-radius);
+	transition: var(--transition);
+}
+
+.input:focus {
+	border-color: var(--text-primary);
+}

@@ -1,0 +1,31 @@
+.wrapper {
+	display: grid;
+	grid-template-columns: auto 720px;
+	align-items: center;
+	gap: 90px;
+	background-color: var(--bg-primary);
+	padding: 150px 100px;
+}
+
+.icon {
+	width: 300px;
+	aspect-ratio: 1;
+}
+
+.content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.text {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 2;
+	letter-spacing: 0.1em;
+	text-align: center;
+}
+
+.text span {
+	color: var(--text-secondary);
+}
