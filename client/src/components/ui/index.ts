@@ -1,3 +1,4 @@
+export * from './Avatar';
 export * from './BgContainer';
 export * from './Container';
 export * from './Icon';

@@ -25,7 +25,7 @@ export const AnonymForm: FC = () => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
-  
+
   return (
     <form
       className="c-appointment__form c-appointment__form--anonym"
@@ -40,7 +40,7 @@ export const AnonymForm: FC = () => {
       <Dropdown
         type="with-image"
         options={dropdownOptions2}
-        value={{ name: '' }}
+        value={{ name: 'Mishman' }}
         placeholder="Тип"
       />
       <Dropdown

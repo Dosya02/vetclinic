@@ -2,11 +2,13 @@
   @include box-size();
   min-height: 100vh;
   padding: rem(60) 0 rem(90);
-  
+
   &__form {
+    @include box-size(100%, auto);
     display: grid;
     gap: rem(30);
-    
+    overflow: hidden;
+
     //&--anonym {
     //  grid-template-columns: repeat(2, 1fr);
     //
@@ -14,13 +16,13 @@
     //    grid-column: span 2;
     //  }
     //}
-    
+
     &-button {
       margin-top: rem(30);
       justify-self: center;
     }
   }
-  
+
   &__inner {
     @include box-size(rem(1030), auto);
     padding: rem(80) rem(110) rem(60);
@@ -29,7 +31,7 @@
     background-color: $c-text-light-70;
     margin-inline: auto;
   }
-  
+
   &__title {
     font-family: $font-family-secondary;
     font-size: rem(48);

@@ -1,21 +1,53 @@
 .c-dropdown {
   cursor: pointer;
-  
+
   &__select {
-    padding: rem(17) rem(30);
+    @include box-size(100%, auto);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: rem(16) rem(30);
     transition: $trans-default;
     border: rem(2) solid $c-text-primary;
     border-radius: rem(23);
     background-color: $c-text-light-70;
-    
+
     @include hover {
       border-color: $c-text-secondary;
     }
-    
+
+    &-value {
+      @include box-size(100%, auto);
+      display: flex;
+      align-items: center;
+      column-gap: rem(40);
+
+      span {
+        @include text-truncate;
+        display: inline-block;
+        font-family: $font-family-secondary;
+        font-size: rem(36);
+        font-weight: $font-weight-bold;
+        line-height: $line-height-120;
+        letter-spacing: $letter-spacing-5;
+      }
+    }
+
+    &-image {
+      @include square(rem(100));
+    }
+
     &-icon {
       @include square(rem(30));
+
       fill: $c-text-primary;
       stroke: $c-text-primary;
+    }
+  }
+
+  &--with-image {
+    .c-dropdown__select {
+      padding: rem(8) rem(30);
     }
   }
 }
