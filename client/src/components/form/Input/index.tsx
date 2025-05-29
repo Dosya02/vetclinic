@@ -8,7 +8,7 @@ interface Props {
   value: string;
   type: 'auth' | 'appointment' | 'appointment-with-label' | 'profile' | 'with-label';
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string;
+  errorMessage: string | null;
   disabled?: boolean;
 }
 

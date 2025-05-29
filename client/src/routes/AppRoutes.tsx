@@ -1,8 +1,14 @@
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { ScrollToTop } from '@components';
-import { DefaultLayout } from '@layouts';
-import { AppointmentPage, HomePage, ServicesPage } from '@pages';
+import { AuthLayout, DefaultLayout } from '@layouts';
+import {
+  AppointmentPage,
+  HomePage,
+  LoginPage,
+  RegistrationPage,
+  ServicesPage,
+} from '@pages';
 import { APP_ROUTES } from '@routes';
 
 export const AppRoutes: React.FC = () => {
@@ -15,6 +21,13 @@ export const AppRoutes: React.FC = () => {
             <Route element={<HomePage/>} path={APP_ROUTES.HOME}/>
             <Route element={<ServicesPage/>} path={APP_ROUTES.SERVICES}/>
             <Route element={<AppointmentPage/>} path={APP_ROUTES.APPOINTMENT}/>
+          </Route>
+          <Route element={<AuthLayout/>}>
+            <Route element={<LoginPage/>} path={APP_ROUTES.LOGIN}/>
+            <Route
+              element={<RegistrationPage/>}
+              path={APP_ROUTES.REGISTRATION}
+            />
           </Route>
         </Routes>
       </Suspense>

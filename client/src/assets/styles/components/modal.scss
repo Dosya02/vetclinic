@@ -1,22 +1,53 @@
 .c-modal {
-	@include flex-center;
-	@include hide;
-	position: fixed;
-	top: 0;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	transition: var(--transition);
+  @include flex-center;
+  @include hide;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  transition: var(--transition);
+  
+  &.active {
+    @include show;
+  }
+  
+  &.light {
+    background-color: $c-bg-secondary;
+  }
+  
+  &.dark {
+    background-color: $c-black-25;
+  }
+}
 
-	&.active {
-		@include show;
-	}
-
-	&.light {
-		background-color: $c-bg-secondary;
-	}
-
-	&.dark {
-		background-color: $c-black-25;
-	}
+.c-modal-email {
+  &__content {
+    @include box-size(100%, auto);
+    display: flex;
+    flex-direction: column;
+    max-width: rem(1000);
+    padding: rem(120);
+    background-color: $c-bg-primary;
+    gap: rem(60);
+  }
+  
+  &__text {
+    font-size: rem(24);
+    font-weight: $font-weight-semibold;
+    line-height: $line-height-200;
+    letter-spacing: $letter-spacing-1;
+  }
+  
+  &__form {
+    @include box-size(100%, auto);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: rem(40);
+    
+    &-email {
+      @include box-size(100%, auto);
+    }
+  }
 }
