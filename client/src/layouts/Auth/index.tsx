@@ -6,18 +6,16 @@ import { AuthBgImg } from '@images';
 
 export const AuthLayout: FC = () => {
   return (
-    <div className="o-auth-wrapper">
+    <div className="c-auth">
       <main>
-        <div className="o-auth-wrapper__image">
-          <Image src={AuthBgImg} alt="auth bg"/>
-        </div>
-        <div className="o-auth-wrapper__content">
+        <Image className="c-auth__image" src={AuthBgImg} />
+        <div className="c-auth__content">
           <NavToText
-            className="o-auth-wrapper__link"
+            className="c-auth__content-link"
             to={APP_ROUTES.HOME}
             text="← На главную"
           />
-          <Outlet/>
+          <Outlet />
         </div>
       </main>
     </div>

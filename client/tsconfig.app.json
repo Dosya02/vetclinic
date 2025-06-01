@@ -26,9 +26,6 @@
     /* Absolute path */
     "baseUrl": "./src",
     "paths": {
-      "*": [
-        "*"
-      ],
       "@icons": [
         "assets/icons"
       ],
@@ -65,7 +62,7 @@
       "@store/*": [
         "store/*"
       ],
-      "@utils": [
+      "@utils/*": [
         "utils"
       ]
     }

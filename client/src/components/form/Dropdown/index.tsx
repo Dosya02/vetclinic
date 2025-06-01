@@ -9,7 +9,7 @@ export interface DropdownOption {
   imageUrl?: string;
 }
 
-interface DropdownProps {
+interface Props {
   options: DropdownOption[];
   selected: DropdownOption | null;
   onSelect: (value: string) => void;
@@ -17,7 +17,7 @@ interface DropdownProps {
   variant?: 'default' | 'image' | 'compact' | 'label';
 }
 
-export const Dropdown: FC<DropdownProps> = ({
+export const Dropdown: FC<Props> = ({
   options,
   selected,
   onSelect,
