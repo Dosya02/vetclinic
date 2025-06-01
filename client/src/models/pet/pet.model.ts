@@ -1,8 +1,10 @@
-import { BreedModel } from 'models/Breed';
-import { SpeciesModel } from 'models/Species';
-import { StructuredDateModel } from 'models/StructuredDate';
-import { VaccinationRecordModel } from 'models/VaccinationRecord';
-import { VisitModel } from 'models/Visit';
+import {
+	BreedModel,
+	SpeciesModel,
+	StructuredDateModel,
+	VaccinationRecordModel,
+	VisitModel,
+} from "@models";
 
 /**
  * Модель питомца (PetModel)
@@ -25,7 +27,7 @@ export interface PetModel {
 	name: string;
 	species: SpeciesModel;
 	breed: BreedModel;
-	birthDate: StructuredDateModel;
+	birthDate?: StructuredDateModel;
 	features?: string[];
 	imageUrl?: string;
 	vaccinations?: VaccinationRecordModel[];

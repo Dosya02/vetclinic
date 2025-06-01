@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { BgContainer } from '@components';
 import { AppointmentBgImg } from '@images';
-import { AnonymForm } from './AnonymForm';
+import { GuestForm } from './GuestForm';
 
 export const AppointmentPage: FC = () => (
   <BgContainer className="c-appointment" image={AppointmentBgImg}>
@@ -9,7 +9,7 @@ export const AppointmentPage: FC = () => (
       <h2 className="c-appointment__title u-text-center">
         Записаться на прием
       </h2>
-      <AnonymForm/>
+      <GuestForm />
     </div>
   </BgContainer>
 );

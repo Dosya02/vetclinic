@@ -26,6 +26,9 @@
     /* Absolute path */
     "baseUrl": "./src",
     "paths": {
+      "*": [
+        "*"
+      ],
       "@icons": [
         "assets/icons"
       ],

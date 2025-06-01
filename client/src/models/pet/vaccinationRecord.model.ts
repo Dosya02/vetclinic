@@ -1,4 +1,4 @@
-import { StructuredDateModel } from 'models/StructuredDate';
+import { StructuredDateModel } from 'models/shared/date.model';
 
 /**
  * Запись о вакцинации (VaccinationRecordModel)
