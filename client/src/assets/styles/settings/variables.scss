@@ -7,7 +7,7 @@ $font-style-normal: normal;
 $font-style-italic: italic;
 
 // Font sizes
-$font-size-base: 20;
+$font-size-base: 20px;
 
 // Font weights
 $font-weight-light: 300;
@@ -17,13 +17,6 @@ $font-weight-semibold: 600;
 $font-weight-bold: 700;
 $font-weight-black: 900;
 
-// Line heights
-$line-height-100: 1;
-$line-height-120: 1.2;
-$line-height-150: 1.5;
-$line-height-187-5: 1.875;
-$line-height-200: 2;
-
 // Letter spacings
 $letter-spacing-1: 0.01em;
 $letter-spacing-3: 0.03em;
@@ -32,14 +25,14 @@ $letter-spacing-7: 0.07em;
 $letter-spacing-15: 0.15em;
 
 // Border
-$border-radius: 16;
+$border-radius: 16px;
 
 // Container sizes
-$s-container-width: 1200;
-$s-container-padding-x: 15;
+$s-container-width: 1200px;
+$s-container-padding-x: 15px;
 
 // Section
-$s-section-padding-y: 120;
+$s-section-padding-y: 120px;
 
 // Transitions
 $trans-duration: 0.2s;

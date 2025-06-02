@@ -1,35 +1,35 @@
 .c-team {
   &__items {
     display: grid;
-    margin-top: rem(100);
+    margin-top: 100px;
     grid-template-columns: repeat(3, 1fr);
-    gap: rem(60);
+    gap: 60px;
   }
 }
 
 .c-team-card {
   display: grid;
   align-items: center;
-  grid-template-rows: rem(500) auto 1fr auto;
+  grid-template-rows: 500px auto 1fr auto;
   
   &__image {
-    @include box-size(100%, rem(500));
-    border-radius: rem(40);
+    @include box-size(100%, 500px);
+    border-radius: 40px;
   }
   
   &__content {
-    margin-block: rem(50);
+    margin-block: 50px;
   }
   
   &__title {
-    font-size: rem(30);
+    font-size: 30px;
     font-weight: $font-weight-semibold;
     letter-spacing: $letter-spacing-5;
   }
   
   &__text {
-    line-height: $line-height-120;
-    margin-top: rem(50);
+    line-height: 1.2;
+    margin-top: 50px;
     letter-spacing: $letter-spacing-3;
   }
 }

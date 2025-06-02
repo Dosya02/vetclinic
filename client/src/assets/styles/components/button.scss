@@ -1,12 +1,12 @@
 .c-button {
-  font-size: rem(32);
+  font-size: 24px;
   font-weight: $font-weight-bold;
-  line-height: $line-height-120;
-  padding: rem(20) rem(40);
+  line-height: 1.5;
+  padding: 20px 30px;
   transition: $trans-default;
   letter-spacing: $letter-spacing-3;
   color: $c-text-light;
-  border-radius: rem(5);
+  border-radius: 5px;
   background-color: $c-button-bg;
   
   @include hover {
@@ -25,6 +25,6 @@
   }
   
   &--rounded {
-    border-radius: rem(75);
+    border-radius: 75px;
   }
 }

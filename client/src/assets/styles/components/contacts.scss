@@ -2,29 +2,29 @@
   &__inner {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: rem(100);
+    gap: 100px;
   }
   
   &__items {
     display: flex;
     flex-direction: column;
-    gap: rem(60);
+    gap: 60px;
   }
   
   &__item {
     display: flex;
     align-items: flex-start;
-    gap: rem(30);
+    gap: 30px;
     
     &-icon {
-      @include square(rem(48));
+      @include square(48px);
       fill: $c-text-primary;
       stroke: $c-text-primary;
     }
     
     &-text {
-      font-size: rem(28);
-      line-height: $line-height-120;
+      font-size: 28px;
+      line-height: 1.2;
       letter-spacing: $letter-spacing-5;
       
       span {

@@ -18,6 +18,6 @@ export const Card: FC<Props> = ({ doctor }) => (
       <p className="c-team-card__text">{doctor.position}</p>
     </div>
     <div/>
-    <Button text="Записаться"/>
+    <Button text="Записаться" rounded/>
   </div>
 );

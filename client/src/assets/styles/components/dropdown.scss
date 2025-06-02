@@ -1,151 +1,169 @@
 .c-dropdown {
-	position: relative;
-
-	&__trigger {
-		width: 100%;
-		background-color: $c-text-light-70;
-		border: 1px solid $c-text-primary;
-		border-radius: 23px;
-		padding: 20px 30px;
-
-		&--image {
-			padding-block: 10px;
-		}
-
-		&--compact {
-			width: auto;
-			background-color: $c-text-light;
-			border: unset;
-			border-radius: 15px;
-			padding: 8px 20px;
-		}
-	}
-
-	&__content {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		column-gap: 30px;
-		text-align: left;
-
-		&--label {
-			text-align: right;
-		}
-
-		&-image {
-			width: 100px;
-			aspect-ratio: 1;
-		}
-
-		&-label {
-			font-size: 36px;
-			font-weight: $font-weight-black;
-			font-family: $font-family-secondary;
-			line-height: 1;
-			text-align: left;
-		}
-
-		&-icon {
-			width: 100%;
-			aspect-ratio: 1;
-			max-width: 30px;
-		}
-	}
-
-	&__content-text {
-		flex: 1;
-		font-size: 36px;
-		font-weight: $font-weight-black;
-		font-family: $font-family-secondary;
-		line-height: 1;
-		letter-spacing: $letter-spacing-5;
-
-		&--compact {
-			color: $c-bg-footer;
-			font-size: 20px;
-			font-weight: $font-weight-medium;
-			font-family: $font-family-primary;
-		}
-
-		&--label {
-			color: $c-text-secondary;
-			font-size: 24px;
-			font-weight: $font-weight-bold;
-			font-family: $font-family-primary;
-			line-height: 1.875;
-		}
-	}
-
-	&__options {
-		@include hide;
-		position: absolute;
-		top: 100%;
-		left: 0;
-		width: 100%;
-		background-color: $c-text-light;
-		border: 1px solid $c-text-primary;
-		border-radius: 23px;
-		transform: translateY(5px);
-		transition: $trans-default;
-		z-index: 1;
-
-		&--active {
-			@include show;
-		}
-
-		&--compact {
-			width: auto;
-			border: unset;
-			border-radius: 15px;
-		}
-	}
-
-	&__option {
-		cursor: pointer;
-		display: flex;
-		align-items: center;
-		column-gap: 30px;
-		color: $c-text-secondary;
-		font-size: 24px;
-		font-weight: $font-weight-bold;
-		font-family: $font-family-primary;
-		line-height: 1.875;
-		padding: 20px 30px;
-		transition: $trans-default;
-
-		&:first-child {
-			border-top-left-radius: inherit;
-			border-top-right-radius: inherit;
-		}
-
-		&:last-child {
-			border-bottom-left-radius: inherit;
-			border-bottom-right-radius: inherit;
-		}
-
-		&:hover {
-			background-color: $c-white;
-		}
-
-		&--active {
-			background-color: $c-white;
-		}
-
-		&--image {
-			padding-block: 10px;
-		}
-
-		&--compact {
-			color: $c-bg-footer;
-			font-size: 20px;
-			font-weight: $font-weight-medium;
-			padding: 8px 20px;
-		}
-
-		&-image {
-			width: 100%;
-			max-width: 100px;
-			aspect-ratio: 1;
-		}
-	}
+  position: relative;
+  
+  &__trigger {
+    width: 100%;
+    padding: 20px 30px;
+    transition: $trans-default;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-color: $c-bg-secondary;
+    
+    &:hover,
+    &--active {
+      border-color: $c-text-primary;
+    }
+    
+    &--image {
+      padding-block: 10px;
+    }
+    
+    &--compact {
+      width: auto;
+      padding: 8px 20px;
+      border-radius: 15px;
+      background-color: $c-text-light;
+    }
+    
+    &--rounded {
+      border-radius: 30px;
+    }
+  }
+  
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    column-gap: 30px;
+    
+    &--label {
+      text-align: right;
+    }
+    
+    &-image {
+      width: 100px;
+      aspect-ratio: 1;
+    }
+    
+    &-label {
+      font-family: $font-family-secondary;
+      font-size: 24px;
+      font-weight: $font-weight-black;
+      line-height: 1.5;
+      text-align: left;
+      letter-spacing: $letter-spacing-5;
+    }
+    
+    &-text {
+      font-size: 24px;
+      font-weight: $font-weight-semibold;
+      line-height: 1.5;
+      flex: 1;
+      letter-spacing: $letter-spacing-5;
+      color: $c-text-secondary;
+      
+      &--bold {
+        font-family: $font-family-secondary;
+        font-weight: $font-weight-black;
+        color: $c-text-primary;
+      }
+      
+      &--compact {
+        font-size: 20px;
+        font-weight: $font-weight-medium;
+        line-height: 1;
+        color: $c-bg-footer;
+      }
+      
+      &--label {
+        font-family: $font-family-primary;
+        font-weight: $font-weight-bold;
+        color: $c-text-secondary;
+      }
+    }
+    
+    &-icon {
+      width: 100%;
+      max-width: 30px;
+      aspect-ratio: 1;
+    }
+  }
+  
+  &__options {
+    @include hide;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    transition: $trans-default;
+    transform: translateY(5px);
+    border: 2px solid $c-text-primary;
+    border-radius: 5px;
+    background-color: $c-bg-secondary;
+    
+    &--active {
+      @include show;
+    }
+    
+    &--compact {
+      width: auto;
+      border: unset;
+      border-radius: 15px;
+    }
+    
+    &--rounded {
+      border-radius: 30px;
+    }
+  }
+  
+  &__option {
+    font-family: $font-family-primary;
+    font-size: 24px;
+    font-weight: $font-weight-semibold;
+    line-height: 1.5;
+    display: flex;
+    align-items: center;
+    padding: 20px 30px;
+    cursor: pointer;
+    transition: $trans-default;
+    color: $c-text-secondary;
+    column-gap: 30px;
+    
+    &:first-child {
+      border-top-left-radius: inherit;
+      border-top-right-radius: inherit;
+    }
+    
+    &:last-child {
+      border-bottom-right-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+    
+    &:hover {
+      background-color: $c-white;
+    }
+    
+    &--active {
+      background-color: $c-white;
+    }
+    
+    &--image {
+      padding-block: 10px;
+    }
+    
+    &--compact {
+      font-size: 20px;
+      font-weight: $font-weight-medium;
+      padding: 8px 20px;
+      color: $c-bg-footer;
+    }
+    
+    &-image {
+      width: 100%;
+      max-width: 100px;
+      aspect-ratio: 1;
+    }
+  }
 }

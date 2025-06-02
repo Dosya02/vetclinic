@@ -1,14 +1,13 @@
 .c-textarea {
   &__textarea {
     @include box-size(100%, auto);
-    font-size: rem(32);
+    font-size: 32px;
     font-weight: $font-weight-bold;
-    line-height: $line-height-187-5;
-    padding: rem(17) rem(30);
+    padding: 17px 30px;
     letter-spacing: $letter-spacing-5;
     color: $c-text-secondary;
-    border: rem(2) solid $c-text-primary;
-    border-radius: rem(23);
+    border: 2px solid $c-text-primary;
+    border-radius: 23px;
     background-color: $c-text-light-70;
     
     &::placeholder {

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Icon } from '@components';
 import { ANCHORS, ICONS } from '@constants';
-import { scrollToHashElement } from '@utils';
+import { scrollToHashElement } from '@helpers';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 interface Props {

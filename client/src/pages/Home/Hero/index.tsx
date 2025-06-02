@@ -13,7 +13,7 @@ export const HeroSection: FC<Props> = ({ id }) => (
         <h1 className="c-hero__title">
           Вашему любимцу всегда окажут помощь
         </h1>
-        <Button text="Записаться"/>
+        <Button text="Записаться" rounded/>
       </div>
     </Container>
   </BgContainer>

@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { NAV_ITEMS } from '@constants';
-import { scrollToHashElement } from '@utils';
+import { scrollToHashElement } from '@helpers';
 
 export const HeaderNav: FC = () => {
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ export const HeaderNav: FC = () => {
         {NAV_ITEMS.map(({ id, label }) => (
           <li
             key={id}
-            className="c-nav__item u-cursor-pointer"
+            className="c-nav__item"
             onClick={() => handleClick(id)}
           >
             <span className="c-nav__label">{label}</span>

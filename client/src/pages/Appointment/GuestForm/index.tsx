@@ -1,79 +1,50 @@
-import { FC, FormEvent } from 'react';
-import { Button, Input, Textarea } from '@components';
+import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { Dropdown, Input } from '@components';
+import { DROPDOWN_VARIANT, INPUT_VARIANT } from '@constants';
+import { DropdownOption } from '@types';
+
+const options: DropdownOption[] = [
+  { value: '1', label: 'Option 1' },
+  { value: '2', label: 'Option 2' },
+  { value: '3', label: 'Option 3' },
+];
 
 export const GuestForm: FC = () => {
+  const [name, setName] = useState<string>('');
+  const [selected, setSelected] = useState<DropdownOption | null>(null);
+  
+  const handleChangeName = (e: ChangeEvent<HTMLInputElement>): void => {
+    setName(e.target.value);
+  };
+  
+  const handleSelect = (value: string): void => {
+    const found = options.find(opt => opt.value === value) || null;
+    setSelected(found);
+  };
+  
   const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
-
+  
   return (
     <form
       className="c-appointment__form c-appointment__form--guest"
       onSubmit={handleSubmit}
     >
-      <Input
-        placeholder="Введите ФИО"
-        type="appointment-with-label"
-        label="ФИО"
-        value="Сапарбаев Жандос"
-        onChange={() => {
-        }}
-        errorMessage=""
+      <Dropdown
+        options={options}
+        selected={selected}
+        onSelect={handleSelect}
+        variant={DROPDOWN_VARIANT.DEFAULT}
+        placeholder="День"
       />
       <Input
-        placeholder="Имя питомца"
-        type="appointment"
-        value=""
-        onChange={() => {
-        }}
-        errorMessage=""
-      />
-      <Input
-        placeholder="Выберите услугу"
-        type="appointment-with-label"
-        label="Услуга"
-        value="Врач на дом"
-        onChange={() => {
-        }}
-        errorMessage=""
-      />
-      <Input
-        placeholder="Введите свой адрес"
-        type="appointment-with-label"
-        label="Адрес"
-        value=""
-        onChange={() => {
-        }}
-        errorMessage=""
-      />
-      <Input
-        placeholder="Выберите врача"
-        type="appointment-with-label"
-        label="Врач"
-        value="Лавров М."
-        onChange={() => {
-        }}
-        errorMessage=""
-      />
-      <Input
-        placeholder="Введите ФИО"
-        type="appointment-with-label"
+        value={name}
+        onChange={handleChangeName}
+        variant={INPUT_VARIANT.DEFAULT}
         label="Дата и время"
-        value="04.25.24 13:00"
-        onChange={() => {
-        }}
+        placeholder="Введите имя"
         errorMessage=""
-      />
-      <Textarea
-        value=""
-        onChange={() => {
-        }}
-        placeholder="Напишите свой комментарий"
-      />
-      <Button
-        className="c-appointment__form-button"
-        text="Записаться"
-        type="submit"
       />
     </form>
   );

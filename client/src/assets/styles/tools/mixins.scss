@@ -28,6 +28,14 @@
   left: 0;
 }
 
+@mixin fixed-full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
 @mixin hide {
   opacity: 0;
   visibility: hidden;

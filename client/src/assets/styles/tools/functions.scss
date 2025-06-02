@@ -1,9 +1,0 @@
-@use "sass:math";
-
-@function rem($px) {
-  @if math.is-unitless($px) {
-    @return math.div($px, 16) + rem;
-  } @else {
-    @error "Не используйте единицы измерения при работе с функцией px-to-rem()! Передавайте аргументом только числа.";
-  }
-}

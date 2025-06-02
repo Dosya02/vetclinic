@@ -12,12 +12,12 @@
   }
   
   &__inner {
-    @include box-size(rem(600), auto);
+    @include box-size(600px, auto);
     position: relative;
     z-index: 1;
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    gap: rem(90);
+    gap: 90px;
   }
 }

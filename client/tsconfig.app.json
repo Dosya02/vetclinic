@@ -44,6 +44,9 @@
       "@data": [
         "data"
       ],
+      "@hooks": [
+        "hooks"
+      ],
       "@layouts": [
         "layouts"
       ],
@@ -62,8 +65,14 @@
       "@store/*": [
         "store/*"
       ],
-      "@utils/*": [
-        "utils"
+      "@helpers": [
+        "utils/helpers"
+      ],
+      "@types": [
+        "utils/types"
+      ],
+      "@validators": [
+        "utils/validators"
       ]
     }
   },

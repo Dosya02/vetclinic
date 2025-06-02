@@ -1,0 +1,90 @@
+.c-auth {
+  @include box-size;
+  @include flex-center;
+  min-height: 100vh;
+  padding: 15px;
+  background-color: $c-bg-secondary;
+  
+  &__image {
+    position: relative;
+    
+    &::after {
+      @include abs-full;
+      content: "";
+      background-color: $c-black-25;
+    }
+  }
+  
+  &__inner {
+    @include box-size(50%);
+    @include flex-center;
+    position: absolute;
+    top: 0;
+    right: 0;
+    overflow: hidden;
+    padding: 60px 80px;
+    background-color: $c-bg-primary;
+    
+    &-link {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+  }
+  
+  &__content {
+    width: 100%;
+    
+    &-title {
+      font-weight: $font-weight-semibold;
+      text-align: center;
+      letter-spacing: $letter-spacing-5;
+    }
+    
+    &-text {
+      @include flex-center;
+      line-height: 1.2;
+      letter-spacing: $letter-spacing-5;
+      gap: 5px;
+    }
+  }
+  
+  &__form {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0 20px;
+    row-gap: 40px;
+    
+    &-field {
+      display: flex;
+      flex-direction: column;
+      row-gap: 4px;
+    }
+    
+    &-forgot-password {
+      font-size: 16px;
+      line-height: 2;
+      display: inline-block;
+      align-self: flex-end;
+      cursor: pointer;
+      transition: $trans-default;
+      letter-spacing: $letter-spacing-3;
+      color: $c-text-secondary;
+      
+      @include hover {
+        color: $c-text-accent;
+      }
+    }
+    
+    &-button {
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  
+  main {
+    @include box-size($s-container-width);
+    position: relative;
+    max-width: $s-container-width;
+  }
+}

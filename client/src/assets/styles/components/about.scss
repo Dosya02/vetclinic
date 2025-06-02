@@ -4,7 +4,7 @@
   
   &__inner {
     @include box-size(100%, auto);
-    max-width: rem(800);
+    max-width: 800px;
   }
   
   &__image {
@@ -14,25 +14,25 @@
     bottom: 0;
     overflow: hidden;
     transform: translateX(40%);
-    border-top-left-radius: rem(80);
-    border-bottom-left-radius: rem(80);
-    padding-block: rem($s-section-padding-y);
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    padding-block: $s-section-padding-y;
   }
   
   &__info {
-    padding: rem(50);
-    border-radius: rem(40);
+    padding: 50px;
+    border-radius: 40px;
     background-color: $c-bg-secondary;
-    margin-block: rem(50);
+    margin-block: 50px;
     
     &-content {
-      padding: rem(20) rem(40);
-      border-radius: rem(30);
+      padding: 20px 40px;
+      border-radius: 30px;
       background-color: $c-bg-primary;
     }
     
     &-text {
-      font-size: rem(32);
+      font-size: 32px;
       font-weight: $font-weight-bold;
       letter-spacing: $letter-spacing-15;
       color: $c-text-secondary;
@@ -42,13 +42,13 @@
   &__features {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: rem(30);
+    gap: 30px;
   }
   
   &__feature {
     display: flex;
     align-items: center;
-    gap: rem(20);
+    gap: 20px;
     
     &:last-child {
       grid-column: span 2;
@@ -60,16 +60,16 @@
     }
     
     &-icon {
-      @include square(rem(50));
+      @include square(50px);
       fill: $c-text-secondary;
       stroke: $c-text-secondary;
     }
     
     &-text {
       @include box-size(100%, auto);
-      font-size: rem(24);
-      line-height: $line-height-120;
-      max-width: rem(284);
+      font-size: 24px;
+      line-height: 1.2;
+      max-width: 284px;
       color: $c-text-secondary;
     }
   }

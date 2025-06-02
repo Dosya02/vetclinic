@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AUTH_STEP } from '@constants';
+import { AuthStepType } from '@types';
 import {
   validateAgree,
   validateCode,
   validateEmail,
   validatePassword,
-} from '@utils/validators';
+} from '@validators';
 
 interface AuthState {
   email: string;
@@ -19,7 +21,7 @@ interface AuthState {
   code: string[];
   codeErrorMessage: string | null;
 
-  step: 'idle' | 'code' | 'email' | 'password' | 'done';
+  step: AuthStepType;
 }
 
 const initialState: AuthState = {
@@ -35,7 +37,7 @@ const initialState: AuthState = {
   code: Array(6).fill(''),
   codeErrorMessage: null,
 
-  step: 'idle',
+  step: AUTH_STEP.IDLE,
 };
 
 export const slice = createSlice({
@@ -85,19 +87,19 @@ export const slice = createSlice({
         0,
         6,
       ).map(char => /^\d$/.test(char)
-        ? char
-        : '');
+                    ? char
+                    : '');
       state.code = [...Array(6)].map((
         _,
         i,
       ) => newCode[i] ||
-        '');
+           '');
       state.codeErrorMessage = validateCode(
         state.code);
     },
     changeStep: (
       state,
-      action: PayloadAction<typeof state.step>,
+      action: PayloadAction<AuthStepType>,
     ) => {
       state.step = action.payload;
     },

@@ -39,6 +39,7 @@ export const Services: FC<Props> = ({ id }) => {
             className="c-home-services__button"
             text="Другие услуги"
             onClick={handleClick}
+            rounded
           />
         </div>
       </Container>

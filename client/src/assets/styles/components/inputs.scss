@@ -1,71 +1,64 @@
 .c-input {
   display: flex;
   flex-direction: column;
-  gap: rem(8);
+  row-gap: 8px;
   
-  &__wrapper {
+  &__row {
     position: relative;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    row-gap: rem(30);
   }
   
-  &__label {
-    &--appointment-with-label {
-      @include text-truncate;
-      font-family: $font-family-secondary;
-      font-size: rem(36);
-      font-weight: $font-weight-bold;
-      line-height: $line-height-120;
-      position: absolute;
-      top: 50%;
-      left: rem(30);
-      max-width: rem(275);
-      letter-spacing: $letter-spacing-5;
-      translate: 0 -50%;
-    }
-  }
-  
-  &__input {
-    @include box-size(100%, auto);
-    font-size: rem(24);
+  &__field {
+    font-size: 24px;
     font-weight: $font-weight-semibold;
-    line-height: $line-height-187-5;
-    padding: rem(17) rem(30);
+    line-height: 1.5;
+    width: 100%;
+    padding: 20px 30px;
     transition: $trans-default;
     letter-spacing: $letter-spacing-3;
     color: $c-text-secondary;
+    border: 2px solid transparent;
+    border-radius: 5px;
     background-color: $c-bg-secondary;
     
     &::placeholder {
       color: $c-text-secondary;
     }
     
-    &--auth {
-      border-radius: rem(5);
+    &:hover,
+    &:focus {
+      border-color: $c-text-primary;
     }
     
-    &--profile {
-      border-radius: rem(30);
+    &--rounded {
+      border-radius: 30px;
     }
     
-    &--appointment,
-    &--appointment-with-label {
-      font-weight: $font-weight-bold;
-      letter-spacing: $letter-spacing-5;
-      border: rem(2) solid $c-text-primary;
-      border-radius: rem(23);
-      background-color: $c-text-light-70;
-      
-      &:focus {
-        border-color: $c-text-secondary;
-      }
-    }
-    
-    &--appointment-with-label {
-      padding-left: rem(320);
+    &--label {
+      width: 100%;
+      padding-left: calc(45px + 30%);
       text-align: right;
+    }
+  }
+  
+  &__label {
+    @include text-truncate;
+    font-family: $font-family-secondary;
+    font-size: 24px;
+    font-weight: $font-weight-black;
+    line-height: 1.5;
+    position: absolute;
+    top: 50%;
+    left: 30px;
+    width: 30%;
+    transform: translateY(-50%);
+    letter-spacing: $letter-spacing-5;
+  }
+  
+  &__password {
+  }
+  
+  &__toggler {
+    &-icon {
     }
   }
 }

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { AuthPageLayout } from '@components';
 import { APP_ROUTES } from '@routes';
+import { LoginPageForm } from './Form';
 
 export const LoginPage: FC = () => (
   <AuthPageLayout
@@ -9,6 +10,6 @@ export const LoginPage: FC = () => (
     linkText="Регистрация"
     linkCaption="Ещё нет аккаунта?"
   >
-    Hello world!
+    <LoginPageForm/>
   </AuthPageLayout>
 );

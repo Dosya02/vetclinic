@@ -1,29 +1,56 @@
-import { Document, model, Schema } from "mongoose";
+import { Document, model, Schema, Types } from 'mongoose';
+import { USER_ROLES, UserRole } from 'constants/roles';
 
 export interface IUser extends Document {
-	email: string
-	verificationCode?: string
-	verificationCodeExpires?: Date
-	password?: string
-	isVerified: boolean
-	createdAt: Date
-	firstName?: string
-	lastName?: string
-	birthDate?: Date
-	avatar?: string
+  _id: Types.ObjectId;
+  email: string;
+  password: string;
+  role: UserRole;
+  verified: boolean;
+  agreed: boolean;
+  firstName?: string;
+  lastName?: string;
+  imageUrl?: string;
+  birthDate?: {
+    day: number;
+    month: number;
+    year: number;
+  };
+  createdAt: Date;
+  updatedAt: Date;
 }
 
-const userSchema = new Schema<IUser>({
-	email: { type: String, required: true, unique: true },
-	verificationCode: { type: String },
-	verificationCodeExpires: { type: Date },
-	password: { type: String },
-	isVerified: { type: Boolean, default: false },
-	createdAt: { type: Date, default: Date.now },
-	firstName: { type: String, required: false },
-	lastName: { type: String, required: false },
-	birthDate: { type: Date, required: false },
-	avatar: { type: String, required: false },
-});
+const userSchema = new Schema<IUser>(
+  {
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      trim: true,
+    },
+    password: { type: String, required: true },
+    role: {
+      type: String,
+      enum: Object.values(USER_ROLES),
+      default: USER_ROLES.CLIENT,
+      required: true,
+    },
+    verified: { type: Boolean, required: true, default: false },
+    agreed: { type: Boolean, required: true },
 
-export default model<IUser>("Users", userSchema);
+    firstName: { type: String },
+    lastName: { type: String },
+    imageUrl: { type: String },
+    birthDate: {
+      day: { type: Number },
+      month: { type: Number },
+      year: { type: Number },
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
+
+export const User = model<IUser>('User', userSchema);

@@ -15,52 +15,9 @@
   background-size: cover;
 }
 
-.o-auth-wrapper {
-  @include box-size;
-  @include flex-center;
-  min-height: 100vh;
-  padding: rem(15);
-  background-color: $c-bg-secondary;
-  
-  main {
-    @include box-size(rem($s-container-width));
-    position: relative;
-  }
-  
-  &__image {
-    position: relative;
-    
-    &::after {
-      @include box-size;
-      position: absolute;
-      top: 0;
-      left: 0;
-      content: "";
-      background-color: $c-black-25;
-    }
-  }
-  
-  &__content {
-    @include box-size(50%);
-    @include flex-center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    overflow: hidden;
-    padding: rem(60) rem(80);
-    background-color: $c-bg-primary;
-  }
-  
-  &__link {
-    position: absolute;
-    top: rem(20);
-    left: rem(20);
-  }
-}
-
 .o-container {
   width: 100%;
-  max-width: rem($s-container-width);
+  max-width: $s-container-width;
   margin-inline: auto;
-  padding-inline: rem($s-container-padding-x);
+  padding-inline: $s-container-padding-x;
 }

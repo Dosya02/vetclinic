@@ -5,10 +5,9 @@ interface Props {
   text: string;
   className?: string;
   type?: 'button' | 'submit';
-  onClick?: VoidFunction;
-  isDisabled?: boolean;
-  isReverse?: boolean;
-  border?: 'default' | 'rounded';
+  onClick?: () => void;
+  reverse?: boolean;
+  rounded?: boolean;
 }
 
 export const Button: FC<Props> = ({
@@ -16,19 +15,21 @@ export const Button: FC<Props> = ({
                                     className = '',
                                     type = 'button',
                                     onClick,
-                                    isDisabled = false,
-                                    isReverse = false,
-                                    border = 'rounded',
-                                  }) => (
-  <button
-    className={clsx(
-      'c-button',
-      border === 'rounded' && 'c-button--rounded',
-      isReverse && 'c-button--reverse',
-      className,
-    )}
-    type={type}
-    onClick={onClick}
-    disabled={isDisabled}
-  >{text}</button>
-);
+                                    reverse = false,
+                                    rounded = false,
+                                  }) => {
+  const buttonClass = clsx(
+    'c-button',
+    className,
+    rounded && 'c-button--rounded',
+    reverse && 'c-button--reverse',
+  );
+  
+  return (
+    <button
+      className={buttonClass}
+      type={type}
+      onClick={onClick}
+    >{text}</button>
+  );
+};

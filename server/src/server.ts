@@ -1,16 +1,13 @@
-import app from "./app";
-import env from "./utils/validateEnv";
-import mongoose from "mongoose";
+import { app } from 'app';
+import { env } from 'config/env';
+import { connectDB } from 'config/database';
 
-const port = env.PORT;
+async function start() {
+  await connectDB();
 
-mongoose.connect(env.MONGO_CONNECTION_STRING)
-	.then(() => {
-		console.log("Mongoose connected!");
+  app.listen(env.PORT, () => {
+    console.log(`Server is running at http://localhost:${env.PORT}`);
+  });
+}
 
-		app.listen(port, () => {
-			console.log("Server running on port: ", port);
-		});
-	})
-	.catch(console.error);
-
+start();

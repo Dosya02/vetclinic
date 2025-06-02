@@ -1,1 +1,0 @@
-export { validateToken, type AuthenticatedRequest } from "./auth.middleware";

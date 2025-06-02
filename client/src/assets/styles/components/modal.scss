@@ -1,12 +1,8 @@
 .c-modal {
   @include flex-center;
   @include hide;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  transition: var(--transition);
+  @include fixed-full;
+  transition: $trans-default;
   
   &.active {
     @include show;
@@ -26,16 +22,17 @@
     @include box-size(100%, auto);
     display: flex;
     flex-direction: column;
-    max-width: rem(1000);
-    padding: rem(120);
+    max-width: 1000px;
+    padding: 120px;
     background-color: $c-bg-primary;
-    gap: rem(60);
+    gap: 60px;
   }
   
   &__text {
-    font-size: rem(24);
+    font-size: 24px;
     font-weight: $font-weight-semibold;
-    line-height: $line-height-200;
+    line-height: 2;
+    text-align: center;
     letter-spacing: $letter-spacing-1;
   }
   
@@ -44,10 +41,50 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    gap: rem(40);
+    gap: 40px;
     
-    &-email {
-      @include box-size(100%, auto);
+    & > * {
+      width: 100%;
+    }
+    
+    &-button {
+      width: auto;
+    }
+  }
+}
+
+.c-modal-password {
+  &__content {
+    @include box-size(100%, auto);
+    display: flex;
+    flex-direction: column;
+    max-width: 1000px;
+    padding: 120px;
+    background-color: $c-bg-primary;
+    gap: 60px;
+  }
+  
+  &__text {
+    font-size: 24px;
+    font-weight: $font-weight-semibold;
+    line-height: 2;
+    text-align: center;
+    letter-spacing: $letter-spacing-1;
+  }
+  
+  &__form {
+    @include box-size(100%, auto);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 40px;
+    
+    & > * {
+      width: 100%;
+    }
+    
+    &-button {
+      width: auto;
     }
   }
 }

@@ -1,22 +1,21 @@
-import "dotenv/config";
-import express from "express";
-import cors from "cors";
-import env from "./utils/validateEnv";
-import authRoutes from "./routes/auth.routes";
+import express from 'express';
+import cors from 'cors';
+import { env } from 'config/env';
+import { API_PATHS } from 'constants/paths';
+import { errorHandler } from 'middlewares/error';
+import { authRouter } from 'routes/auth';
 
 const app = express();
 
 app.use(cors({
-	origin: env.CLIENT_URL,
-	credentials: true,
+  origin: env.CLIENT_URL,
+  credentials: true,
 }));
 
 app.use(express.json());
 
-app.use("/api/auth", authRoutes);
+app.use(API_PATHS.AUTH, authRouter);
 
-app.get("/", (req, res) => {
-	res.send("Hello, World!");
-});
+app.use(errorHandler);
 
-export default app;
+export { app };

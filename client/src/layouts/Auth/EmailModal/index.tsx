@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { Modal } from '@components';
-import { Form } from './Form';
+import { EmailModalForm } from './Form';
 
 interface Props {
   isActive: boolean;
@@ -9,10 +9,10 @@ interface Props {
 export const EmailModal: FC<Props> = ({ isActive }) => (
   <Modal active={isActive}>
     <div className="c-modal-email__content">
-      <p className="c-modal-email__text u-text-center">
+      <p className="c-modal-email__text">
         Для восстановления пароля введи вашу почту.
       </p>
-      <Form/>
+      <EmailModalForm/>
     </div>
   </Modal>
 );

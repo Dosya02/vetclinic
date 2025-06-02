@@ -1,25 +1,31 @@
-import nodemailer from "nodemailer";
-import env from "./validateEnv";
+import nodemailer from 'nodemailer';
+import { env } from 'config/env';
 
 const transporter = nodemailer.createTransport({
-	service: "Gmail",
-	auth: {
-		user: env.EMAIL_USER,
-		pass: env.EMAIL_PASS,
-	},
+  host: env.SMTP_HOST,
+  port: env.SMTP_PORT,
+  secure: env.SMTP_PORT === 465,
+  auth: {
+    user: env.SMTP_USER,
+    pass: env.SMTP_PASS,
+  },
 });
 
-interface MailOptions {
-	to: string;
-	subject: string;
-	text: string;
+interface SendEmailOptions {
+  to: string;
+  subject: string;
+  html: string;
 }
 
-export const sendEmail = async (options: MailOptions) => {
-	await transporter.sendMail({
-		from: env.EMAIL_USER,
-		to: options.to,
-		subject: options.subject,
-		text: options.text,
-	});
-};
+export async function sendEmail({
+  to,
+  subject,
+  html,
+}: SendEmailOptions): Promise<void> {
+  await transporter.sendMail({
+    from: env.EMAIL_FROM,
+    to,
+    subject,
+    html,
+  });
+}
