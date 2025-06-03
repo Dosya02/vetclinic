@@ -1,4 +1,4 @@
-import { AddressModel, PetModel } from "@models";
+import { AddressModel, PetModel } from '@models';
 
 /**
  * Базовая модель пользователя (UserModel)
@@ -10,19 +10,19 @@ import { AddressModel, PetModel } from "@models";
  * - lastname: Фамилия пользователя (опционально)
  * - imageUrl: Фото пользователя (опционально)
  * - role: Роль пользователя (client, vet, admin)
-*/
+ */
 export interface UserModel {
-	id: string;
-	email: string;
-	firstname?: string;
-	lastname?: string;
-	imageUrl?: string;
-	role: UserRole;
+  id: string;
+  email: string;
+  firstname?: string;
+  lastname?: string;
+  imageUrl?: string;
+  role: UserRole;
 }
 
 /**
  * Роль пользователя (UserRole)
- * 
+ *
  * Используется для разграничения типов пользователей:
  * - client — обычный пользователь, владелец питомцев
  * - vet — ветеринар, предоставляющий услуги
@@ -37,7 +37,7 @@ type UserRole = 'client' | 'vet' | 'admin';
  * Расширяет UserModel и всегда имеет роль 'admin'.
  */
 export interface AdminModel extends UserModel {
-	role: 'admin';
+  role: 'admin';
 }
 
 /**
@@ -51,9 +51,9 @@ export interface AdminModel extends UserModel {
  * - addresses: список адресов, привязанных к пользователю
  */
 export interface ClientModel extends UserModel {
-	role: 'client';
-	pets: PetModel[];
-	addresses: AddressModel[];
+  role: 'client';
+  pets: PetModel[];
+  addresses: AddressModel[];
 }
 
 /**
@@ -66,6 +66,8 @@ export interface ClientModel extends UserModel {
  * - services: Список идентификаторов предоставляемых услуг
  */
 export interface VetModel extends UserModel {
-	role: 'vet';
-	services: string[];
+  role: 'vet';
+  services: string[];
 }
+
+export type AnyUser = ClientModel | AdminModel | VetModel;

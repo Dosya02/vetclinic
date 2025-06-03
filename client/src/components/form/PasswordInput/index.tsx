@@ -23,7 +23,7 @@ export const PasswordInput: FC<Props> = ({
     <div className="c-input">
       <div className="c-input__password">
         <input
-          className="c-input__field"
+          className="c-input__field c-input__field--password"
           type={showPassword ? 'text' : 'password'}
           placeholder={placeholder}
           value={value}

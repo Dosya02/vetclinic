@@ -24,7 +24,6 @@
       color: $c-text-secondary;
     }
     
-    &:hover,
     &:focus {
       border-color: $c-text-primary;
     }
@@ -37,6 +36,18 @@
       width: 100%;
       padding-left: calc(45px + 30%);
       text-align: right;
+    }
+    
+    &--password {
+      padding-right: 96px;
+    }
+    
+    &--pin {
+      @include square(100px);
+      font-weight: $font-weight-bold;
+      padding: 10px;
+      text-align: center;
+      border-radius: 16px;
     }
   }
   
@@ -55,10 +66,19 @@
   }
   
   &__password {
+    position: relative;
   }
   
   &__toggler {
+    position: absolute;
+    top: 50%;
+    right: 30px;
+    transform: translateY(-50%);
+    
     &-icon {
+      @include square(36px);
+      fill: $c-text-secondary;
+      stroke: $c-text-secondary;
     }
   }
 }

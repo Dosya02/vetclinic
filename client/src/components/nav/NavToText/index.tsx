@@ -6,8 +6,9 @@ interface Props {
   to: string;
   text: string;
   className?: string;
+  onClick?: () => void;
 }
 
-export const NavToText: FC<Props> = ({ to, text, className = '' }) => (
-  <Link className={clsx(className)} to={to}>{text}</Link>
+export const NavToText: FC<Props> = ({ to, text, className = '', onClick }) => (
+  <Link className={clsx(className)} to={to} onClick={onClick}>{text}</Link>
 );

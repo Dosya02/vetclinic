@@ -1,16 +1,12 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
-import { Image, NavToText } from '@components';
-import { APP_ROUTES } from '@routes';
 import { AuthBgImg } from '@images';
-import { EmailModal } from './EmailModal';
-import { useModal } from '@hooks';
-import { PasswordModal } from './PasswordModal';
+import { Image, NavToText } from '@components';
+import { useResetAuthFields } from '@hooks';
+import { APP_ROUTES } from '@routes';
 
 export const AuthLayout: FC = () => {
-  const codeModal = useModal(true);
-  const emailModal = useModal(false);
-  const passwordModal = useModal(true);
+  const resetAuthFields = useResetAuthFields();
 
   return (
     <div className="c-auth">
@@ -21,12 +17,11 @@ export const AuthLayout: FC = () => {
             className="c-auth__inner-link"
             to={APP_ROUTES.HOME}
             text="← На главную"
+            onClick={resetAuthFields}
           />
           <Outlet/>
         </div>
       </main>
-      <EmailModal isActive={emailModal.isOpen}/>
-      <PasswordModal isActive={passwordModal.isOpen}/>
     </div>
   );
 };

@@ -1,38 +1,49 @@
-import { ChangeEvent, FC, FormEvent } from 'react';
+import { FC, FormEvent } from 'react';
+import { toast } from 'react-toastify';
 import { Button, Checkbox, Input } from '@components';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeAgree, changeEmail } from '@store/reducers';
+import { AUTH_STEP } from '@constants';
+import { useAgreeField, useEmailField } from '@hooks';
+import { useSendVerificationCodeMutation } from '@store/api';
+import { useAppDispatch } from '@store/hooks';
+import { changeAgree, changeEmail, changeStep } from '@store/reducers';
+import { getErrorMessage } from '@helpers';
+import { validateAgree, validateEmail } from '@validators';
 
 export const RegistrationPageForm: FC = () => {
-  const {
-    email,
-    emailErrorMessage,
-    agree,
-    agreeErrorMessage,
-  } = useAppSelector(state => state.authReducer);
-  
   const dispatch = useAppDispatch();
-  
-  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    dispatch(changeEmail(value));
-  };
-  
-  const handleAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.checked;
-    dispatch(changeAgree(value));
-  };
-  
-  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
+
+  const { email, emailErrorMessage, onEmailChange } = useEmailField();
+  const { agree, agreeErrorMessage, onAgreeChange } = useAgreeField();
+
+  const [sendVerificationCode, { isLoading }] = useSendVerificationCodeMutation();
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+
+    const isEmailValid = !validateEmail(email);
+    const isAgreeValid = !validateAgree(agree);
+
+    if (!isEmailValid || !isAgreeValid) {
+      dispatch(changeEmail(email));
+      dispatch(changeAgree(agree));
+      return;
+    }
+
+    try {
+      const response = await sendVerificationCode({ email }).unwrap();
+      toast.success(response.message);
+      dispatch(changeStep(AUTH_STEP.CODE));
+    } catch (err) {
+      toast.error(getErrorMessage(err));
+    }
   };
-  
+
   return (
     <form className="c-auth__form" onSubmit={handleSubmit}>
       <div className="c-auth__form-field">
         <Input
           value={email}
-          onChange={handleEmailChange}
+          onChange={onEmailChange}
           errorMessage={emailErrorMessage}
           placeholder="Введите почту"
         />
@@ -41,14 +52,15 @@ export const RegistrationPageForm: FC = () => {
         <Checkbox
           label="Я согласен с условиями предоставления услуг"
           checked={agree}
-          onChange={handleAgreeChange}
+          onChange={onAgreeChange}
           errorMessage={agreeErrorMessage}
         />
       </div>
       <Button
         className="c-auth__form-button"
-        text="Регистрация"
+        text={isLoading ? 'Отправка...' : 'Регистрация'}
         type="submit"
+        disabled={isLoading}
       />
     </form>
   );

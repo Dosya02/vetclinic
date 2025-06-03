@@ -19,6 +19,11 @@
     column-gap: 30px;
   }
   
+  &__avatar {
+    @include square(50px);
+    cursor: pointer;
+  }
+  
   &__auth {
     @include square(40px);
     transition: $trans-default;

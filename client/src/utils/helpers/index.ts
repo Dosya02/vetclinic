@@ -1,1 +1,2 @@
-export * from "./scrollToHashElement";
+export * from './error';
+export * from './scrollToHashElement';

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AUTH_STEP } from '@constants';
+import { AUTH_STEP, TOKEN_STORAGE_KEY } from '@constants';
+import { AnyUser } from '@models';
 import { AuthStepType } from '@types';
 import {
   validateAgree,
@@ -22,7 +23,12 @@ interface AuthState {
   codeErrorMessage: string | null;
 
   step: AuthStepType;
+
+  userInfo: AnyUser | null;
+  userToken: string | null;
 }
+
+const userToken = localStorage.getItem(TOKEN_STORAGE_KEY) ?? null;
 
 const initialState: AuthState = {
   email: '',
@@ -38,6 +44,9 @@ const initialState: AuthState = {
   codeErrorMessage: null,
 
   step: AUTH_STEP.IDLE,
+
+  userInfo: null,
+  userToken,
 };
 
 export const slice = createSlice({
@@ -115,6 +124,27 @@ export const slice = createSlice({
 
       state.code = Array(6).fill('');
       state.codeErrorMessage = null;
+
+      state.step = AUTH_STEP.IDLE;
+    },
+    setUser: (
+      state,
+      action: PayloadAction<AnyUser>,
+    ) => {
+      state.userInfo = action.payload;
+    },
+    setToken: (state, action: PayloadAction<string | null>) => {
+      state.userToken = action.payload;
+      if (action.payload) {
+        localStorage.setItem(TOKEN_STORAGE_KEY, action.payload);
+      } else {
+        localStorage.removeItem(TOKEN_STORAGE_KEY);
+      }
+    },
+    logout: (state) => {
+      state.userInfo = null;
+      state.userToken = null;
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
     },
   },
 });
@@ -127,5 +157,8 @@ export const {
   changeStep,
   setFullCode,
   resetFields,
+  setUser,
+  setToken,
+  logout,
 } = slice.actions;
 export default slice.reducer;

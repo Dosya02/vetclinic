@@ -2,10 +2,14 @@ export const API_BASE_URL = 'http://localhost:5000/api';
 
 export const API_ROUTES = {
   AUTH: {
+    ME: 'auth/me',
     LOGIN: 'auth/login',
     REGISTER: 'auth/register',
-    SEND_CODE: 'auth/send-code',
-    VERIFY_CODE: 'auth/verify-code',
+    RESET_PASSWORD: 'auth/reset-password',
+    SEND_VERIFICATION_CODE: 'auth/send-verification-code',
+    SEND_PASSWORD_RESET_CODE: 'auth/send-password-reset-code',
+    VERIFY_EMAIL_CODE: 'auth/verify-email-code',
+    VERIFY_PASSWORD_RESET_CODE: 'auth/verify-password-reset-code',
   },
 } as const;
 

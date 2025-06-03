@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
+import { User } from 'models/user';
 import { VerificationCode } from 'models/verificationCode';
 import { generateSixDigitCode } from 'utils/generateSixDigitCode';
 import { sendEmail } from 'utils/email';
@@ -13,6 +14,12 @@ export const sendCode = asyncHandler(async (
   if (!email) {
     res.status(400);
     throw new Error('Email обязателен');
+  }
+
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    res.status(409);
+    throw new Error('Пользователь с такой почтой уже существует');
   }
 
   // Удаляем старые коды для этого email (на всякий случай)

@@ -1,7 +1,6 @@
 import { FC, ReactNode } from 'react';
 import { NavToText } from '@components';
-import { useAppDispatch } from '@store/hooks';
-import { resetFields } from '@store/reducers';
+import { useResetAuthFields } from '@hooks';
 
 interface AuthPageLayoutProps {
   title: string;
@@ -12,16 +11,14 @@ interface AuthPageLayoutProps {
 }
 
 export const AuthPageLayout: FC<AuthPageLayoutProps> = ({
-                                                          title,
-                                                          linkTo,
-                                                          linkText,
-                                                          linkCaption,
-                                                          children,
-                                                        }) => {
-  const dispatch = useAppDispatch();
-  
-  const handleResetFields = () => dispatch(resetFields());
-  
+  title,
+  linkTo,
+  linkText,
+  linkCaption,
+  children,
+}) => {
+  const resetAuthFields = useResetAuthFields();
+
   return (
     <div className="c-auth__content">
       <h3 className="c-auth__content-title">
@@ -31,9 +28,7 @@ export const AuthPageLayout: FC<AuthPageLayoutProps> = ({
       <p className="c-auth__content-text">
         {linkCaption}
         {' '}
-        <span onClick={handleResetFields}>
-					<NavToText to={linkTo} text={linkText}/>
-				</span>
+        <NavToText to={linkTo} text={linkText} onClick={resetAuthFields}/>
       </p>
     </div>
   );

@@ -1,0 +1,12 @@
+.Toastify__toast {
+  font-family: $font-family-primary;
+  font-size: 18px;
+  font-weight: $font-weight-semibold;
+  line-height: 1.5;
+  min-width: 400px;
+  color: $c-text-primary;
+}
+
+.Toastify__toast-icon {
+  margin-right: 15px;
+}

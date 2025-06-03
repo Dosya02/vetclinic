@@ -8,28 +8,31 @@ interface Props {
   onClick?: () => void;
   reverse?: boolean;
   rounded?: boolean;
+  disabled?: boolean;
 }
 
 export const Button: FC<Props> = ({
-                                    text,
-                                    className = '',
-                                    type = 'button',
-                                    onClick,
-                                    reverse = false,
-                                    rounded = false,
-                                  }) => {
+  text,
+  className = '',
+  type = 'button',
+  onClick,
+  reverse = false,
+  rounded = false,
+  disabled = false,
+}) => {
   const buttonClass = clsx(
     'c-button',
     className,
     rounded && 'c-button--rounded',
     reverse && 'c-button--reverse',
   );
-  
+
   return (
     <button
       className={buttonClass}
       type={type}
       onClick={onClick}
+      disabled={disabled}
     >{text}</button>
   );
 };
