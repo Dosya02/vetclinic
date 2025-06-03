@@ -84,7 +84,7 @@ export const LoginPage: FC = () => {
       default:
         break;
     }
-  }, [step, navigate]);
+  }, [step, navigate, codeModal, emailModal, passwordModal]);
 
   return (
     <AuthPageLayout
@@ -93,7 +93,7 @@ export const LoginPage: FC = () => {
       linkText="Регистрация"
       linkCaption="Ещё нет аккаунта?"
     >
-      <LoginPageForm/>
+      <LoginPageForm />
       <CodeModal
         isActive={codeModal.isOpen}
         isLoading={codeModalLoading}

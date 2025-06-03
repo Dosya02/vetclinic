@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
 import { VerificationCode } from 'models/verificationCode';
+import { VERIFICATION_PURPOSES } from 'constants/verification';
 
-export const verifyCode = asyncHandler(async (
+export const verifyEmailCode = asyncHandler(async (
   req: Request,
   res: Response,
 ) => {
@@ -13,7 +14,11 @@ export const verifyCode = asyncHandler(async (
     throw new Error('Email и код обязательны');
   }
 
-  const record = await VerificationCode.findOne({ email, code });
+  const record = await VerificationCode.findOne({
+    email,
+    code,
+    purpose: VERIFICATION_PURPOSES.EMAIL_VERIFICATION,
+  });
 
   if (!record) {
     res.status(400);
@@ -23,5 +28,5 @@ export const verifyCode = asyncHandler(async (
   // Код подтверждён, удаляем запись
   await VerificationCode.deleteOne({ _id: record._id });
 
-  res.json({ message: 'Код подтверждён' });
+  res.status(200).json({ message: 'Код подтверждён', success: true });
 });
