@@ -3,14 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, Input, PasswordInput } from '@components';
 import { APP_ROUTES } from '@routes';
-import { authApi, useLoginMutation } from '@store/api';
+import { useLoginMutation } from '@store/api';
 import { useAppDispatch } from '@store/hooks';
 import {
   changeEmail,
   changePassword,
   changeStep,
+  logout,
   setToken,
-  setUser,
 } from '@store/reducers';
 import { validateEmail, validatePassword } from '@validators';
 import { getErrorMessage } from '@helpers';
@@ -48,14 +48,14 @@ export const LoginPageForm: FC = () => {
       return;
     }
 
+    dispatch(logout());
+
     try {
       const response = await login({ email, password }).unwrap();
       toast.success(response.message);
+
       dispatch(setToken(response.token));
-      const getMeResult = await dispatch(authApi.endpoints.getMe.initiate());
-      if ('data' in getMeResult) {
-        dispatch(setUser(getMeResult.data!));
-      }
+
       resetAuthFields();
       navigate(APP_ROUTES.HOME);
     } catch (err) {

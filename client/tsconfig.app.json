@@ -59,6 +59,9 @@
       "@pages": [
         "pages"
       ],
+      "@providers": [
+        "providers"
+      ],
       "@routes": [
         "routes"
       ],

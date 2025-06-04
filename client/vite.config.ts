@@ -43,6 +43,7 @@ export default defineConfig({
       ),
       '@models': resolve(__dirname, './src/models'),
       '@pages': resolve(__dirname, './src/pages'),
+      '@providers': resolve(__dirname, './src/providers'),
       '@routes': resolve(__dirname, './src/routes'),
       '@store': resolve(__dirname, './src/store'),
       '@helpers': resolve(
