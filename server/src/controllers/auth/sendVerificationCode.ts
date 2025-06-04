@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
+import { VERIFICATION_PURPOSES } from 'constants/verification';
 import { User } from 'models/user';
 import { VerificationCode } from 'models/verificationCode';
 import { generateSixDigitCode } from 'utils/generateSixDigitCode';
 import { sendEmail } from 'utils/email';
 
-export const sendCode = asyncHandler(async (
+export const sendVerificationCode = asyncHandler(async (
   req: Request,
   res: Response,
 ) => {
@@ -23,11 +24,18 @@ export const sendCode = asyncHandler(async (
   }
 
   // Удаляем старые коды для этого email (на всякий случай)
-  await VerificationCode.deleteMany({ email });
+  await VerificationCode.deleteMany({
+    email,
+    purpose: VERIFICATION_PURPOSES.EMAIL_VERIFICATION,
+  });
 
   const code = generateSixDigitCode();
 
-  await VerificationCode.create({ email, code });
+  await VerificationCode.create({
+    email,
+    code,
+    purpose: VERIFICATION_PURPOSES.EMAIL_VERIFICATION,
+  });
 
   await sendEmail({
     to: email,
@@ -35,5 +43,5 @@ export const sendCode = asyncHandler(async (
     html: `<p>Ваш код подтверждения: <strong>${code}</strong></p>`,
   });
 
-  res.json({ message: 'Код отправлен на почту' });
+  res.status(200).json({ message: 'Код отправлен на почту' });
 });

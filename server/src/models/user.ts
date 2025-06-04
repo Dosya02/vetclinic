@@ -7,7 +7,7 @@ export interface IUser extends Document {
   password: string;
   role: UserRole;
   verified: boolean;
-  agreed: boolean;
+  agree: boolean;
   firstName?: string;
   lastName?: string;
   imageUrl?: string;
@@ -37,7 +37,7 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     verified: { type: Boolean, required: true, default: false },
-    agreed: { type: Boolean, required: true },
+    agree: { type: Boolean, required: true },
 
     firstName: { type: String },
     lastName: { type: String },
