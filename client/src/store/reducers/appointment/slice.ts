@@ -12,9 +12,9 @@ const initialState: AppointmentState = {
 };
 
 export const slice = createSlice({
-                                   name: 'appointment',
-                                   initialState,
-                                   reducers: {},
-                                 });
+  name: 'appointment',
+  initialState,
+  reducers: {},
+});
 
 export default slice.reducer;

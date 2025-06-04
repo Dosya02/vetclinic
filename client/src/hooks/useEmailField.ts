@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeEmail } from '@store/reducers';
+import { changeEmail } from '@store/reducers/auth';
 
 export const useEmailField = () => {
   const dispatch = useAppDispatch();

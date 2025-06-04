@@ -1,2 +1,12 @@
-export { default as authReducer } from './slice.ts';
-export * from './slice.ts';
+export {
+	changeAgree,
+	changeCode,
+	changeEmail,
+	changePassword,
+	changeStep,
+	setFullCode,
+	setToken,
+	setUser,
+	resetFields,
+	logout,
+} from './slice';

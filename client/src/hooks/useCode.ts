@@ -1,6 +1,6 @@
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeCode, setFullCode } from '@store/reducers';
+import { changeCode, setFullCode } from '@store/reducers/auth';
 
 export const useCode = () => {
   const dispatch = useAppDispatch();
@@ -54,8 +54,8 @@ export const useCode = () => {
 
       for (let i = 0; i < inputs.length; i++) {
         if ((
-              inputs[i] as HTMLInputElement
-            ).value === '') {
+          inputs[i] as HTMLInputElement
+        ).value === '') {
           (
             inputs[i] as HTMLInputElement
           ).focus();

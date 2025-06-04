@@ -2,7 +2,7 @@ import { FC, FormEvent } from 'react';
 import { Button, Input } from '@components';
 import { useEmailField, useResetAuthFields } from '@hooks';
 import { validateEmail } from '@validators';
-import { changeEmail, changeStep } from '@store/reducers';
+import { changeEmail, changeStep } from '@store/reducers/auth';
 import { toast } from 'react-toastify';
 import { AUTH_STEP } from '@constants';
 import { getErrorMessage } from '@helpers';

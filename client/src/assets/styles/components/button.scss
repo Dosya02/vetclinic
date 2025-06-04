@@ -8,23 +8,35 @@
   color: $c-text-light;
   border-radius: 5px;
   background-color: $c-button-bg;
-  
+
   @include hover {
     color: $c-button-bg;
     background-color: $c-text-light;
   }
-  
+
   &--reverse {
     color: $c-button-bg;
     background-color: $c-text-light;
-    
+
     @include hover {
       color: $c-text-light;
       background-color: $c-button-bg;
     }
   }
-  
+
   &--rounded {
     border-radius: 75px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    background-color: $c-button-bg;
+    color: $c-text-light;
+
+    @include hover {
+      background-color: $c-button-bg;
+      color: $c-text-light;
+    }
   }
 }

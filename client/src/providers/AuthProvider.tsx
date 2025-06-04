@@ -2,7 +2,7 @@ import { FC, ReactNode, useEffect, useState } from 'react';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useGetMeQuery } from '@store/api';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { setUser } from '@store/reducers';
+import { setUser } from '@store/reducers/auth';
 import { useLogout } from '@hooks';
 import { Loader } from '@components';
 
@@ -49,7 +49,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   if (isUserLoading || (
     userToken && !userInfo && isFetching
   )) {
-    return <Loader/>;
+    return <Loader />;
   }
 
   return <>{children}</>;

@@ -1,11 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { api } from './api/api';
-import { appointmentReducer, authReducer } from './reducers';
+import authReducer from './reducers/auth/slice';
+import speciesReducer from './reducers/species/slice';
 
 const rootReducer = combineReducers({
   [api.reducerPath]: api.reducer,
-  appointmentReducer,
   authReducer,
+  speciesReducer,
 });
 
 export const store = configureStore({

@@ -5,3 +5,4 @@ export * from './useLogout.ts';
 export * from './useModal';
 export * from './usePasswordField';
 export * from './useResetAuthFields.ts';
+export * from './useSpeciesName.ts';

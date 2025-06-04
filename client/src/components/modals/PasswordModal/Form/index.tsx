@@ -5,7 +5,7 @@ import { Button, PasswordInput } from '@components';
 import { usePasswordField, useResetAuthFields } from '@hooks';
 import { APP_ROUTES } from '@routes';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { setToken } from '@store/reducers';
+import { setToken } from '@store/reducers/auth';
 import { getErrorMessage } from '@helpers';
 
 interface Props {

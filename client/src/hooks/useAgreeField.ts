@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeAgree } from '@store/reducers';
+import { changeAgree } from '@store/reducers/auth';
 
 export const useAgreeField = () => {
   const dispatch = useAppDispatch();

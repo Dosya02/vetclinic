@@ -1,68 +1,74 @@
-import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Button, Input, Modal } from '@components';
 import { toast } from 'react-toastify';
+import { useAppDispatch, useAppSelector } from '@store/hooks';
+import { clearCurrentSpeciesId, resetFields } from '@store/reducers/species';
+import { useSpeciesName } from '@hooks';
 import { getErrorMessage } from '@helpers';
 
 interface Props {
   isActive: boolean;
+  text: string;
   closeFn: () => void;
   onSubmit: (values: { name: string; id?: string }) => Promise<void>;
-  initialData?: { name: string; id?: string };
 }
 
 export const SpeciesModal: FC<Props> = ({
   isActive,
+  text,
   closeFn,
   onSubmit,
-  initialData,
 }) => {
-  const [name, setName] = useState<string>('');
-  const [errorMessage, setErrorMessage] = useState<string>('');
+  const dispatch = useAppDispatch();
+  const {
+    name,
+    nameErrorMessage,
+    onNameChange,
+    isValidName,
+  } = useSpeciesName();
+  const currentId = useAppSelector(state => state.speciesReducer.currentId);
 
-  useEffect(() => {
-    setName(initialData?.name ?? '');
-    setErrorMessage('');
-  }, [initialData, isActive]);
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setName(e.target.value);
-    setErrorMessage('');
-  };
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleCancel = () => {
     toast.info('Операция отменена');
+    dispatch(resetFields());
+    dispatch(clearCurrentSpeciesId());
     closeFn();
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!name.trim()) {
-      setErrorMessage('Введите название');
+    if (!isValidName()) {
+      toast.error('Введите название');
       return;
     }
 
     try {
-      await onSubmit({ name, id: initialData?.id });
+      setIsSubmitting(true);
+      await onSubmit({ name, id: currentId });
+      dispatch(resetFields());
+      dispatch(clearCurrentSpeciesId());
       closeFn();
     } catch (err) {
       toast.error(getErrorMessage(err));
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
     <Modal active={isActive}>
       <div className="c-modal__content">
-        <p className="c-modal__text">
-          {initialData?.id ? 'Редактировать вид' : 'Добавить вид'}
-        </p>
+        <p className="c-modal__text">{text}</p>
         <div className="c-modal__inner">
           <form className="c-modal__form" onSubmit={handleSubmit}>
             <div className="c-modal__form-input">
               <Input
                 value={name}
-                onChange={handleNameChange}
-                errorMessage={errorMessage}
+                onChange={onNameChange}
+                errorMessage={nameErrorMessage}
                 placeholder="Введите тип питомца"
               />
             </div>
@@ -73,12 +79,14 @@ export const SpeciesModal: FC<Props> = ({
                 rounded
                 reverse
                 onClick={handleCancel}
+                disabled={isSubmitting}
               />
               <Button
                 className="c-modal__button"
                 type="submit"
-                text="Сохранить"
+                text={isSubmitting ? 'Сохранение...' : 'Сохранить'}
                 rounded
+                disabled={isSubmitting}
               />
             </div>
           </form>

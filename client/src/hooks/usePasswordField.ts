@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changePassword } from '@store/reducers';
+import { changePassword } from '@store/reducers/auth';
 
 export const usePasswordField = () => {
   const dispatch = useAppDispatch();
