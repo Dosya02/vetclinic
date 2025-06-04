@@ -6,7 +6,7 @@ import { TeamSection } from './Team';
 import { Services } from './Services';
 import { Contacts } from './Contacts';
 
-export const HomePage: FC = () => (
+const HomePage: FC = () => (
   <>
     <HeroSection id={ANCHORS.INTRO.id}/>
     <AboutSection id={ANCHORS.ABOUT_US.id}/>
@@ -15,3 +15,5 @@ export const HomePage: FC = () => (
     <Contacts id={ANCHORS.CONTACTS.id}/>
   </>
 );
+
+export default HomePage;

@@ -11,6 +11,12 @@ export const APP_ROUTES = {
   PROFILE_PETS: '/profile/pets',
   PROFILE_PET_DETAILS: '/profile/pets/:id',
   PROFILE_APPOINTMENTS: '/profile/appointments',
+
+  ADMIN: '/admin',
+
+  VET: '/vet',
+
+  UNAUTHORIZED: '/unauthorized',
 } as const;
 
-export type APP_ROUTES = (typeof APP_ROUTES)[keyof typeof APP_ROUTES];
+export type APP_ROUTES = ( typeof APP_ROUTES )[keyof typeof APP_ROUTES];

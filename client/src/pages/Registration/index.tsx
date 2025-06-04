@@ -8,7 +8,7 @@ import { useRegisterMutation, useVerifyEmailCodeMutation } from '@store/api';
 import { useAppSelector } from '@store/hooks';
 import { RegistrationPageForm } from './Form';
 
-export const RegistrationPage: FC = () => {
+const RegistrationPage: FC = () => {
   const navigate = useNavigate();
 
   const { email, step } = useAppSelector(state => state.authReducer);
@@ -63,7 +63,7 @@ export const RegistrationPage: FC = () => {
       linkText="Войти"
       linkCaption="Уже есть аккаунт?"
     >
-      <RegistrationPageForm />
+      <RegistrationPageForm/>
       <CodeModal
         isActive={codeModal.isOpen}
         isLoading={codeModalLoading}
@@ -86,3 +86,5 @@ export const RegistrationPage: FC = () => {
     </AuthPageLayout>
   );
 };
+
+export default RegistrationPage;

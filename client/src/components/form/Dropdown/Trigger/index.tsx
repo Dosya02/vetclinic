@@ -1,8 +1,12 @@
 import { FC } from 'react';
 import clsx from 'clsx';
 import { Avatar, Icon } from '@components';
-import { DROPDOWN_VARIANT, ICONS } from '@constants';
-import { DropdownOption, DropdownVariantType } from '@types';
+import {
+  DROPDOWN_VARIANT,
+  DropdownOption,
+  DropdownVariantType,
+  ICONS,
+} from '@constants';
 
 interface Props {
   isActive: boolean;
@@ -14,13 +18,13 @@ interface Props {
 }
 
 export const DropdownTrigger: FC<Props> = ({
-                                             isActive,
-                                             selected,
-                                             variant,
-                                             onClick,
-                                             placeholder,
-                                             rounded,
-                                           }) => {
+  isActive,
+  selected,
+  variant,
+  onClick,
+  placeholder,
+  rounded,
+}) => {
   const triggerClass = clsx(
     'c-dropdown__trigger',
     `c-dropdown__trigger--${variant}`,
@@ -30,7 +34,7 @@ export const DropdownTrigger: FC<Props> = ({
   const contentClass = `c-dropdown__content c-dropdown__content--${variant}`;
   const contentTextClass = `c-dropdown__content-text c-dropdown__content-text--${variant}`;
   const contentLabelClass = `c-dropdown__content-label c-dropdown__content-label--${variant}`;
-  
+
   const renderDropdownContent = () => {
     switch (variant) {
       case DROPDOWN_VARIANT.IMAGE:
@@ -75,7 +79,7 @@ export const DropdownTrigger: FC<Props> = ({
         );
     }
   };
-  
+
   return (
     <button className={triggerClass} onClick={onClick}>
       <div className={contentClass}>

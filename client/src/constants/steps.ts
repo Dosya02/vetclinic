@@ -5,3 +5,5 @@ export const AUTH_STEP = {
   PASSWORD: 'password',
   DONE: 'done',
 } as const;
+
+export type AuthStepType = ValueOf<typeof AUTH_STEP>;

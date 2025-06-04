@@ -56,8 +56,8 @@
       "@models": [
         "models"
       ],
-      "@pages": [
-        "pages"
+      "@pages/*": [
+        "pages/*"
       ],
       "@providers": [
         "providers"

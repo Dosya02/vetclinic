@@ -1,9 +1,8 @@
 import { FC, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown, Icon } from '@components';
-import { DROPDOWN_VARIANT, ICONS } from '@constants';
+import { DROPDOWN_VARIANT, DropdownOption, ICONS } from '@constants';
 import { APP_ROUTES } from '@routes';
-import { DropdownOption } from '@types';
 import { useAppSelector } from '@store/hooks';
 import { HeaderActionsAvatar } from './Avatar';
 
@@ -44,7 +43,6 @@ export const HeaderActions: FC = () => {
          </Link>
        )
       }
-
     </div>
   );
 };

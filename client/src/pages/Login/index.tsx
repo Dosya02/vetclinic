@@ -17,7 +17,7 @@ import {
 import { useAppSelector } from '@store/hooks';
 import { LoginPageForm } from './Form';
 
-export const LoginPage: FC = () => {
+const LoginPage: FC = () => {
   const navigate = useNavigate();
 
   const { email, step } = useAppSelector(state => state.authReducer);
@@ -93,7 +93,7 @@ export const LoginPage: FC = () => {
       linkText="Регистрация"
       linkCaption="Ещё нет аккаунта?"
     >
-      <LoginPageForm />
+      <LoginPageForm/>
       <CodeModal
         isActive={codeModal.isOpen}
         isLoading={codeModalLoading}
@@ -123,3 +123,5 @@ export const LoginPage: FC = () => {
     </AuthPageLayout>
   );
 };
+
+export default LoginPage;

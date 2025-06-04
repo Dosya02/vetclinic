@@ -9,7 +9,6 @@ import {
   changeEmail,
   changePassword,
   changeStep,
-  logout,
   setToken,
 } from '@store/reducers';
 import { validateEmail, validatePassword } from '@validators';
@@ -47,8 +46,6 @@ export const LoginPageForm: FC = () => {
       dispatch(changePassword(password));
       return;
     }
-
-    dispatch(logout());
 
     try {
       const response = await login({ email, password }).unwrap();

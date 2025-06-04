@@ -1,7 +1,6 @@
 import { ChangeEvent, FC } from 'react';
 import { ErrorMessage } from '@components';
-import { INPUT_VARIANT } from '@constants';
-import { InputVariantType } from '@types';
+import { INPUT_VARIANT, InputVariantType } from '@constants';
 
 interface Props {
   value: string;

@@ -4,4 +4,5 @@ export * from './icons';
 export * from './input';
 export * from './nav';
 export * from './pets';
+export * from './roles';
 export * from './steps';

@@ -3,6 +3,7 @@
 @import "settings/fonts";
 @import "settings/variables";
 // 2. Tools
+@import "tools/animations";
 @import "tools/mixins";
 // 3. Generic
 @import "generic/reset";
@@ -27,6 +28,7 @@
 @import "components/header";
 @import "components/hero";
 @import "components/inputs";
+@import "components/loader";
 @import "components/logo";
 @import "components/modal";
 @import "components/nav";

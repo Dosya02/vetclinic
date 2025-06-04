@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AUTH_STEP, TOKEN_STORAGE_KEY } from '@constants';
+import { AUTH_STEP, AuthStepType, TOKEN_STORAGE_KEY } from '@constants';
 import { AnyUser } from '@models';
-import { AuthStepType } from '@types';
 import {
   validateAgree,
   validateCode,
@@ -12,18 +11,13 @@ import {
 interface AuthState {
   email: string;
   emailErrorMessage: string | null;
-
   password: string;
   passwordErrorMessage: string | null;
-
   agree: boolean;
   agreeErrorMessage: string | null;
-
   code: string[];
   codeErrorMessage: string | null;
-
   step: AuthStepType;
-
   userInfo: AnyUser | null;
   userToken: string | null;
 }
@@ -33,18 +27,13 @@ const userToken = localStorage.getItem(TOKEN_STORAGE_KEY) ?? null;
 const initialState: AuthState = {
   email: '',
   emailErrorMessage: null,
-
   password: '',
   passwordErrorMessage: null,
-
   agree: false,
   agreeErrorMessage: null,
-
   code: Array(6).fill(''),
   codeErrorMessage: null,
-
   step: AUTH_STEP.IDLE,
-
   userInfo: null,
   userToken,
 };

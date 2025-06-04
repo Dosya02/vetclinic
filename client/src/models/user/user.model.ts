@@ -1,3 +1,4 @@
+import { USER_ROLES, UserRole } from '@constants';
 import { AddressModel, PetModel } from '@models';
 
 /**
@@ -21,23 +22,13 @@ export interface UserModel {
 }
 
 /**
- * Роль пользователя (UserRole)
- *
- * Используется для разграничения типов пользователей:
- * - client — обычный пользователь, владелец питомцев
- * - vet — ветеринар, предоставляющий услуги
- * - admin — администратор системы
- */
-type UserRole = 'client' | 'vet' | 'admin';
-
-/**
  * Администратор (AdminModel)
  *
  * Пользователь с административными правами.
  * Расширяет UserModel и всегда имеет роль 'admin'.
  */
 export interface AdminModel extends UserModel {
-  role: 'admin';
+  role: typeof USER_ROLES.ADMIN;
 }
 
 /**
@@ -51,7 +42,7 @@ export interface AdminModel extends UserModel {
  * - addresses: список адресов, привязанных к пользователю
  */
 export interface ClientModel extends UserModel {
-  role: 'client';
+  role: typeof USER_ROLES.CLIENT;
   pets: PetModel[];
   addresses: AddressModel[];
 }
@@ -66,7 +57,7 @@ export interface ClientModel extends UserModel {
  * - services: Список идентификаторов предоставляемых услуг
  */
 export interface VetModel extends UserModel {
-  role: 'vet';
+  role: typeof USER_ROLES.VET;
   services: string[];
 }
 
