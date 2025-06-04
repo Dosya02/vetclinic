@@ -36,17 +36,17 @@ export const AppRoutes: React.FC = () => {
   return (
     <>
       <Router>
-        <ScrollToTop/>
+        <ScrollToTop />
         <Routes>
-          <Route element={<DefaultLayout/>}>
-            <Route element={<HomePage/>} path={APP_ROUTES.HOME}/>
-            <Route element={<ServicesPage/>} path={APP_ROUTES.SERVICES}/>
-            <Route element={<AppointmentPage/>} path={APP_ROUTES.APPOINTMENT}/>
+          <Route element={<DefaultLayout />}>
+            <Route element={<HomePage />} path={APP_ROUTES.HOME} />
+            <Route element={<ServicesPage />} path={APP_ROUTES.SERVICES} />
+            <Route element={<AppointmentPage />} path={APP_ROUTES.APPOINTMENT} />
           </Route>
-          <Route element={<AuthLayout/>}>
-            <Route element={<LoginPage/>} path={APP_ROUTES.LOGIN}/>
+          <Route element={<AuthLayout />}>
+            <Route element={<LoginPage />} path={APP_ROUTES.LOGIN} />
             <Route
-              element={<RegistrationPage/>}
+              element={<RegistrationPage />}
               path={APP_ROUTES.REGISTRATION}
             />
           </Route>

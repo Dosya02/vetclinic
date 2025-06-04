@@ -1,10 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import { Response } from 'express';
 
 export function errorHandler(
   err: Error,
-  req: Request,
   res: Response,
-  next: NextFunction,
 ) {
   const statusCode = res.statusCode && res.statusCode !== 200
                      ? res.statusCode

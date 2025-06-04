@@ -12,15 +12,14 @@ export const getCurrentUser = asyncHandler(async (
   }
 
   res.json({
-    user: {
-      id: req.user._id,
-      email: req.user.email,
-      role: req.user.role,
-      verified: req.user.verified,
-      firstName: req.user.firstName,
-      lastName: req.user.lastName,
-      imageUrl: req.user.imageUrl,
-      birthDate: req.user.birthDate,
-    },
+    id: req.user._id,
+    email: req.user.email,
+    role: req.user.role,
+    agree: req.user.agree,
+    verified: req.user.verified,
+    firstName: req.user.firstName,
+    lastName: req.user.lastName,
+    imageUrl: req.user.imageUrl,
+    birthDate: req.user.birthDate,
   });
 });

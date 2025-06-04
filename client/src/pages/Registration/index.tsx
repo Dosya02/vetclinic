@@ -54,7 +54,7 @@ export const RegistrationPage: FC = () => {
       default:
         break;
     }
-  }, [step, navigate]);
+  }, [step, navigate, codeModal, passwordModal]);
 
   return (
     <AuthPageLayout
@@ -63,7 +63,7 @@ export const RegistrationPage: FC = () => {
       linkText="Войти"
       linkCaption="Уже есть аккаунт?"
     >
-      <RegistrationPageForm/>
+      <RegistrationPageForm />
       <CodeModal
         isActive={codeModal.isOpen}
         isLoading={codeModalLoading}

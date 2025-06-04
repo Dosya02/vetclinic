@@ -27,5 +27,7 @@ export const verifyPasswordResetCode = asyncHandler(async (
 
   await VerificationCode.deleteOne({ _id: record._id });
 
-  res.status(200).json({ message: 'Код подтверждён' });
+  res.status(200).json({
+    message: 'Код подтверждён',
+  });
 });

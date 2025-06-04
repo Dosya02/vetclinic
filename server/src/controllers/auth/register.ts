@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import { VERIFICATION_PURPOSES } from 'constants/verification';
 import { User } from 'models/user';
 import { VerificationCode } from 'models/verificationCode';
 import { generateJwtToken } from 'utils/generateJwtToken';
 import { hashPassword } from 'utils/hashPassword';
+import { VERIFICATION_PURPOSES } from 'constants/verification';
 
 export const register = asyncHandler(async (
   req: Request,
@@ -17,7 +17,6 @@ export const register = asyncHandler(async (
     throw new Error('Email и пароль обязательны');
   }
 
-  // Проверяем, что код подтверждён (т.е. нет в базе VerificationCode)
   const codeStillExists = await VerificationCode.exists({
     email,
     purpose: VERIFICATION_PURPOSES.EMAIL_VERIFICATION,
@@ -43,9 +42,7 @@ export const register = asyncHandler(async (
     verified: true,
   });
 
-  const token = generateJwtToken({
-    userId: user._id.toString(),
-  });
+  const token = generateJwtToken({ userId: user._id.toString() });
 
   res.status(201).json({
     message: 'Регистрация прошла успешно',

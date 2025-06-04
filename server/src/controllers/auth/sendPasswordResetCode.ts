@@ -3,14 +3,19 @@ import asyncHandler from 'express-async-handler';
 import { VERIFICATION_PURPOSES } from 'constants/verification';
 import { User } from 'models/user';
 import { VerificationCode } from 'models/verificationCode';
-import { generateSixDigitCode } from 'utils/generateSixDigitCode';
 import { sendEmail } from 'utils/email';
+import { generateSixDigitCode } from 'utils/generateSixDigitCode';
 
 export const sendPasswordResetCode = asyncHandler(async (
   req: Request,
   res: Response,
 ) => {
   const { email } = req.body;
+
+  if (!email) {
+    res.status(400);
+    throw new Error('Email обязателен');
+  }
 
   const user = await User.findOne({ email });
   if (!user) {
@@ -37,5 +42,7 @@ export const sendPasswordResetCode = asyncHandler(async (
     html: `<p>Ваш код для сброса пароля: <strong>${code}</strong></p>`,
   });
 
-  res.status(200).json({ message: 'Код для сброса пароля отправлен на почту' });
+  res.status(200).json({
+    message: 'Код для сброса пароля отправлен на почту',
+  });
 });

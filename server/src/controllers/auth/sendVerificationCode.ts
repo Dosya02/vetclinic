@@ -1,10 +1,10 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import { VERIFICATION_PURPOSES } from 'constants/verification';
 import { User } from 'models/user';
 import { VerificationCode } from 'models/verificationCode';
 import { generateSixDigitCode } from 'utils/generateSixDigitCode';
 import { sendEmail } from 'utils/email';
+import { VERIFICATION_PURPOSES } from 'constants/verification';
 
 export const sendVerificationCode = asyncHandler(async (
   req: Request,
@@ -23,7 +23,6 @@ export const sendVerificationCode = asyncHandler(async (
     throw new Error('Пользователь с такой почтой уже существует');
   }
 
-  // Удаляем старые коды для этого email (на всякий случай)
   await VerificationCode.deleteMany({
     email,
     purpose: VERIFICATION_PURPOSES.EMAIL_VERIFICATION,
@@ -43,5 +42,7 @@ export const sendVerificationCode = asyncHandler(async (
     html: `<p>Ваш код подтверждения: <strong>${code}</strong></p>`,
   });
 
-  res.status(200).json({ message: 'Код отправлен на почту' });
+  res.status(200).json({
+    message: 'Код отправлен на почту',
+  });
 });

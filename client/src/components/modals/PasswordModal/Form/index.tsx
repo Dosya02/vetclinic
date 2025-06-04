@@ -5,8 +5,9 @@ import { Button, PasswordInput } from '@components';
 import { usePasswordField, useResetAuthFields } from '@hooks';
 import { APP_ROUTES } from '@routes';
 import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { setToken } from '@store/reducers';
+import { setToken, setUser } from '@store/reducers';
 import { getErrorMessage } from '@helpers';
+import { authApi } from '@store/api';
 
 interface Props {
   isLoading: boolean;
@@ -40,6 +41,10 @@ export const PasswordModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
       const response = await onSubmitFn({ email, password });
       toast.success(response.message);
       dispatch(setToken(response.token));
+      const getMeResult = await dispatch(authApi.endpoints.getMe.initiate());
+      if ('data' in getMeResult) {
+        dispatch(setUser(getMeResult.data!));
+      }
       resetAuthFields();
       navigate(APP_ROUTES.HOME);
     } catch (err) {

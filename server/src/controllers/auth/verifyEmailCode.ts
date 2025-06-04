@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import asyncHandler from 'express-async-handler';
-import { VERIFICATION_PURPOSES } from 'constants/verification';
 import { VerificationCode } from 'models/verificationCode';
+import { VERIFICATION_PURPOSES } from 'constants/verification';
 
 export const verifyEmailCode = asyncHandler(async (
   req: Request,
@@ -28,5 +28,7 @@ export const verifyEmailCode = asyncHandler(async (
   // Код подтверждён, удаляем запись
   await VerificationCode.deleteOne({ _id: record._id });
 
-  res.status(200).json({ message: 'Код подтверждён' });
+  res.status(200).json({
+    message: 'Код подтверждён',
+  });
 });

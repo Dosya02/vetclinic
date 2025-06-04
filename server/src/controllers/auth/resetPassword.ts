@@ -26,7 +26,6 @@ export const resetPassword = asyncHandler(async (
   user.password = await hashPassword(newPassword);
   await user.save();
 
-  // Удаляем код после использования
   await VerificationCode.deleteMany({
     email,
     purpose: VERIFICATION_PURPOSES.RESET_PASSWORD,
@@ -34,5 +33,8 @@ export const resetPassword = asyncHandler(async (
 
   const token = generateJwtToken({ userId: user._id.toString() });
 
-  res.status(200).json({ message: 'Пароль успешно обновлён', token });
+  res.status(200).json({
+    message: 'Пароль успешно обновлён',
+    token,
+  });
 });

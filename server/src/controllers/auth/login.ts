@@ -9,27 +9,24 @@ export const login = asyncHandler(async (
   res: Response,
 ) => {
   const { email, password } = req.body;
-  
+
   if (!email || !password) {
     res.status(400);
     throw new Error('Email и пароль обязательны');
   }
 
   const user = await User.findOne({ email });
+
   if (!user) {
     res.status(401);
     throw new Error('Неверные учетные данные');
   }
 
   const passwordMatch = await bcrypt.compare(password, user.password);
+
   if (!passwordMatch) {
     res.status(401);
     throw new Error('Неверные учетные данные');
-  }
-
-  if (!user.verified) {
-    res.status(403);
-    throw new Error('Email не подтверждён');
   }
 
   const token = generateJwtToken({ userId: user._id.toString() });
