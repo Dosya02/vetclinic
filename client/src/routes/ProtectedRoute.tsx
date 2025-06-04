@@ -11,8 +11,6 @@ interface Props {
 export const ProtectedRoute: FC<Props> = ({ allowedRoles }) => {
   const { userInfo } = useAppSelector((state) => state.authReducer);
 
-  console.log(userInfo);
-  
   if (!userInfo) {
     return <Navigate to={APP_ROUTES.LOGIN} replace/>;
   }
