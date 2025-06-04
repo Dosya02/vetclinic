@@ -65,3 +65,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@mixin grid-template-columns-middle($middle...) {
+  $middle-string: "";
+  
+  @each $val in $middle {
+    $middle-string: if($middle-string == "", "#{$val}", "#{$middle-string} #{$val}");
+  }
+  
+  // если пусто, подставим 1fr
+  @if $middle-string == "" {
+    $middle-string: 1fr;
+  }
+  
+  display: grid;
+  grid-template-columns: 60px #{$middle-string} 200px;
+}

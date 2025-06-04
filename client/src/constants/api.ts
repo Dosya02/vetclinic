@@ -11,6 +11,12 @@ export const API_ROUTES = {
     VERIFY_EMAIL_CODE: 'auth/verify-email-code',
     VERIFY_PASSWORD_RESET_CODE: 'auth/verify-password-reset-code',
   },
+  SPECIES: {
+    GET_ALL: 'species',
+    CREATE: 'species',
+    UPDATE: (id: string) => `species/${id}`,
+    DELETE: (id: string) => `species/${id}`,
+  },
 } as const;
 
 export const API_HEADERS = {
@@ -26,6 +32,5 @@ export const HTTP_METHOD = {
   GET: 'GET',
   POST: 'POST',
   PUT: 'PUT',
-  PATCH: 'PATCH',
   DELETE: 'DELETE',
 } as const;

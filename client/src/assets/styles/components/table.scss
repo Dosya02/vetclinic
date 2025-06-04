@@ -1,0 +1,57 @@
+.c-table {
+  width: 100%;
+  border-collapse: collapse;
+  
+  th, td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid $c-text-light;
+  }
+  
+  th {
+    background-color: $c-text-light-70;
+    
+    &:first-child,
+    &:last-child {
+      text-align: center;
+    }
+  }
+  
+  td {
+    display: flex;
+    align-items: center;
+    
+    &:first-child,
+    &:last-child {
+      justify-content: center;
+    }
+  }
+  
+  &__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+  }
+  
+  &__button {
+    padding: 6px 12px;
+    transition: $trans-default;
+    border-radius: 4px;
+    
+    &--edit {
+      color: $c-black;
+      background-color: $c-warning;
+    }
+    
+    &--delete {
+      color: $c-white;
+      background-color: $c-error;
+    }
+    
+    @include hover {
+      color: $c-text-light;
+      background-color: $c-button-bg;
+    }
+  }
+}

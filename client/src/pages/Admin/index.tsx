@@ -4,9 +4,9 @@ import { AdminSidebar } from './Sidebar';
 
 const AdminPage: FC = () => {
   return (
-    <div className="o-admin__wrapper">
+    <div className="c-admin">
       <AdminSidebar/>
-      <main className="o-admin__main">
+      <main className="c-admin__main">
         <Outlet/>
       </main>
     </div>

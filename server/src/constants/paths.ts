@@ -11,4 +11,13 @@ export const API_PATHS = {
     VERIFY_EMAIL_CODE: '/verify-email-code',
     VERIFY_PASSWORD_RESET_CODE: '/verify-password-reset-code',
   },
+
+  SPECIES: '/api/species',
+
+  SPECIES_ROUTES: {
+    GET_ALL: '/',
+    CREATE: '/',
+    UPDATE: '/:id',
+    DELETE: '/:id',
+  },
 } as const;

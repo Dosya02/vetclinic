@@ -25,3 +25,13 @@ export const NAV_ITEMS_VET = [
   { id: 'intro', label: 'Главная', href: APP_ROUTES.HOME },
   { id: 'vet-panel', label: 'Записи', href: APP_ROUTES.VET },
 ] as const;
+
+export const ADMIN_NAV_ITEMS = [
+  { label: 'Clients', href: APP_ROUTES.ADMIN_CLIENTS },
+  { label: 'Vets', href: APP_ROUTES.ADMIN_VETS },
+  { label: 'Admins', href: APP_ROUTES.ADMIN_ADMINS },
+  { label: 'Pets', href: APP_ROUTES.ADMIN_PETS },
+  { label: 'Species', href: APP_ROUTES.ADMIN_SPECIES },
+  { label: 'Breeds', href: APP_ROUTES.ADMIN_BREEDS },
+  { label: 'Vaccines', href: APP_ROUTES.ADMIN_VACCINES },
+] as const;

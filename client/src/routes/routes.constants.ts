@@ -2,7 +2,6 @@ const PROFILE_BASE = '/profile';
 const PROFILE_PETS_BASE = `${PROFILE_BASE}/pets`;
 
 const ADMIN_BASE = '/admin-panel';
-const ADMIN_PETS_BASE = `${ADMIN_BASE}/pets`;
 
 export const APP_ROUTES = {
   HOME: '/',
@@ -19,11 +18,13 @@ export const APP_ROUTES = {
   PROFILE_APPOINTMENTS: `${PROFILE_BASE}/appointments`,
 
   ADMIN: ADMIN_BASE,
-  ADMIN_USERS: `${ADMIN_BASE}/users`,
-  ADMIN_PETS: ADMIN_PETS_BASE,
-  ADMIN_PET_SPECIES: `${ADMIN_PETS_BASE}/species`,
-  ADMIN_PET_BREEDS: `${ADMIN_PETS_BASE}/breeds`,
-  ADMIN_VACCINES: `${ADMIN_PETS_BASE}/vaccines`,
+  ADMIN_CLIENTS: `${ADMIN_BASE}/clients`,
+  ADMIN_VETS: `${ADMIN_BASE}/vets`,
+  ADMIN_ADMINS: `${ADMIN_BASE}/admins`,
+  ADMIN_PETS: `${ADMIN_BASE}/pets`,
+  ADMIN_SPECIES: `${ADMIN_BASE}/species`,
+  ADMIN_BREEDS: `${ADMIN_BASE}/breeds`,
+  ADMIN_VACCINES: `${ADMIN_BASE}/vaccines`,
 
   VET: '/vet',
 
