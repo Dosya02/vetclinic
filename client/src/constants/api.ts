@@ -17,6 +17,12 @@ export const API_ROUTES = {
     UPDATE: (id: string) => `species/${id}`,
     DELETE: (id: string) => `species/${id}`,
   },
+  BREEDS: {
+    GET_ALL: 'breeds',
+    CREATE: 'breeds',
+    UPDATE: (id: string) => `breeds/${id}`,
+    DELETE: (id: string) => `breeds/${id}`,
+  },
 } as const;
 
 export const API_HEADERS = {

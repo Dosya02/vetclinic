@@ -1,6 +1,16 @@
+import { api } from './api';
 import { API_ROUTES, HTTP_METHOD } from '@constants';
 import { SpeciesModel } from '@models';
-import { api } from './api';
+
+const mapSpeciesResponse = (item: {
+  _id: string;
+  name: string
+}): SpeciesModel => (
+  {
+    id: item._id,
+    name: item.name,
+  }
+);
 
 export const speciesApi = api.injectEndpoints({
   endpoints: (builder) => (
@@ -15,18 +25,29 @@ export const speciesApi = api.injectEndpoints({
             method: HTTP_METHOD.GET,
           }
         ),
-        transformResponse: (response: any) => (
+        transformResponse: (response: {
+          message: string;
+          species: { _id: string; name: string }[];
+        }) => (
           {
             message: response.message,
-            species: response.species.map((item: any) => (
-              {
-                id: item._id,
-                name: item.name,
-              }
-            )),
+            species: response.species.map(mapSpeciesResponse),
           }
         ),
-        providesTags: ['Species'],
+        providesTags: (result) => {
+          if (!result) {
+            return [{ type: 'Species', id: 'LIST' }];
+          }
+
+          const itemTags = result.species.map((s) => (
+            {
+              type: 'Species' as const,
+              id: s.id,
+            }
+          ));
+
+          return [...itemTags, { type: 'Species', id: 'LIST' }];
+        },
       }),
       createSpecies: builder.mutation<
         { message: string; species: SpeciesModel },
@@ -39,7 +60,7 @@ export const speciesApi = api.injectEndpoints({
             body,
           }
         ),
-        invalidatesTags: ['Species'],
+        invalidatesTags: [{ type: 'Species', id: 'LIST' }],
       }),
       updateSpecies: builder.mutation<
         { message: string; species: SpeciesModel },
@@ -52,7 +73,7 @@ export const speciesApi = api.injectEndpoints({
             body: rest,
           }
         ),
-        invalidatesTags: ['Species'],
+        invalidatesTags: (_result, _error, { id }) => [{ type: 'Species', id }],
       }),
       deleteSpecies: builder.mutation<
         { message: string },
@@ -64,7 +85,10 @@ export const speciesApi = api.injectEndpoints({
             method: HTTP_METHOD.DELETE,
           }
         ),
-        invalidatesTags: ['Species'],
+        invalidatesTags: (_result, _error, { id }) => [
+          { type: 'Species', id },
+          { type: 'Species', id: 'LIST' },
+        ],
       }),
     }
   ),

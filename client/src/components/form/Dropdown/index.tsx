@@ -9,7 +9,7 @@ import { DropdownTrigger } from './Trigger';
 
 interface Props {
   options: DropdownOption[];
-  selected: DropdownOption | null;
+  selected?: DropdownOption;
   onSelect: (value: string) => void;
   placeholder?: string;
   variant?: DropdownVariantType;

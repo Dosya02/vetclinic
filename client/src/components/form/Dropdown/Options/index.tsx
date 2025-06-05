@@ -9,7 +9,7 @@ import {
 
 interface Props {
   isOpen: boolean;
-  selected: DropdownOption | null;
+  selected?: DropdownOption;
   variant: DropdownVariantType;
   options: DropdownOption[];
   handleSelect: (option: DropdownOption) => void;

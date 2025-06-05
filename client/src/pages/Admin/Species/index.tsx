@@ -1,4 +1,4 @@
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Loader, Table } from '@components';
 import { useActions, useModal } from '@hooks';
@@ -6,7 +6,6 @@ import { SpeciesModel } from '@models';
 import {
   useCreateSpeciesMutation,
   useDeleteSpeciesMutation,
-  useGetSpeciesQuery,
   useUpdateSpeciesMutation,
 } from '@store/api';
 import { useAppSelector } from '@store/hooks';
@@ -19,24 +18,16 @@ const AdminSpecies: FC = () => {
     clearCurrentSpeciesId,
     resetSpeciesFields,
     setCurrentSpeciesId,
-    setSpecies,
   } = useActions();
 
-  const species = useAppSelector(state => state.speciesReducer.species);
+  const { species, isLoading } = useAppSelector(state => state.speciesReducer);
 
-  const { data, isLoading } = useGetSpeciesQuery();
   const [createSpecies] = useCreateSpeciesMutation();
   const [updateSpecies] = useUpdateSpeciesMutation();
   const [deleteSpecies] = useDeleteSpeciesMutation();
 
   const createModal = useModal(false);
   const editModal = useModal(false);
-
-  useEffect(() => {
-    if (data?.species) {
-      setSpecies(data.species);
-    }
-  }, [data]);
 
   const handleAddSpecies = () => {
     resetSpeciesFields();

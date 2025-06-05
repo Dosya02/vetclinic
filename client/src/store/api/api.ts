@@ -13,7 +13,7 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ['Species'],
+  tagTypes: ['Species', 'Breeds'],
   endpoints: () => (
     {}
   ),

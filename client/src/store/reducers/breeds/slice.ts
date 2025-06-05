@@ -7,6 +7,8 @@ interface BreedsState {
   nameErrorMessage: string | null;
   speciesId: string;
   currentId?: string;
+  isLoading: boolean;
+  loadedOnce: boolean;
 }
 
 const initialState: BreedsState = {
@@ -15,6 +17,8 @@ const initialState: BreedsState = {
   nameErrorMessage: null,
   speciesId: '',
   currentId: undefined,
+  isLoading: false,
+  loadedOnce: false,
 };
 
 const slice = createSlice({
@@ -24,7 +28,7 @@ const slice = createSlice({
     changeBreedName: (state, action: PayloadAction<string>) => {
       state.name = action.payload;
     },
-    changeSpeciesId: (state, action: PayloadAction<string>) => {
+    changeBreedSpeciesId: (state, action: PayloadAction<string>) => {
       state.speciesId = action.payload;
     },
     clearCurrentBreedId: (state) => {
@@ -41,6 +45,12 @@ const slice = createSlice({
     },
     setBreeds: (state, action: PayloadAction<BreedModel[]>) => {
       state.breeds = action.payload;
+    },
+    setBreedsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
+    setBreedsLoadedOnce: (state, action: PayloadAction<boolean>) => {
+      state.loadedOnce = action.payload;
     },
   },
 });

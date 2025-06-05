@@ -59,3 +59,9 @@
     @include grid-template-columns-middle(1fr);
   }
 }
+
+.c-admin__breeds {
+  &-table tr {
+    @include grid-template-columns-middle(2fr 1fr);
+  }
+}

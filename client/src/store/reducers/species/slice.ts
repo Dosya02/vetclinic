@@ -6,6 +6,8 @@ interface SpeciesState {
   name: string;
   nameErrorMessage: string | null;
   currentId?: string;
+  isLoading: boolean;
+  loadedOnce: boolean;
 }
 
 const initialState: SpeciesState = {
@@ -13,6 +15,8 @@ const initialState: SpeciesState = {
   name: '',
   nameErrorMessage: null,
   currentId: undefined,
+  isLoading: false,
+  loadedOnce: false,
 };
 
 const slice = createSlice({
@@ -35,6 +39,12 @@ const slice = createSlice({
     },
     setSpecies: (state, action: PayloadAction<SpeciesModel[]>) => {
       state.species = action.payload;
+    },
+    setSpeciesLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
+    setSpeciesLoadedOnce: (state, action: PayloadAction<boolean>) => {
+      state.loadedOnce = action.payload;
     },
   },
 });

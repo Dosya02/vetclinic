@@ -10,7 +10,7 @@ import {
 
 interface Props {
   isActive: boolean;
-  selected: DropdownOption | null;
+  selected?: DropdownOption;
   variant: DropdownVariantType;
   onClick: () => void;
   placeholder: string;
@@ -81,7 +81,7 @@ export const DropdownTrigger: FC<Props> = ({
   };
 
   return (
-    <button className={triggerClass} onClick={onClick}>
+    <button className={triggerClass} onClick={onClick} type="button">
       <div className={contentClass}>
         {renderDropdownContent()}
       </div>
