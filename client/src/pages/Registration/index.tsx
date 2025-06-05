@@ -46,11 +46,6 @@ const RegistrationPage: FC = () => {
         codeModal.close();
         passwordModal.open();
         break;
-      case AUTH_STEP.DONE:
-        codeModal.close();
-        passwordModal.close();
-        navigate(APP_ROUTES.HOME);
-        break;
       default:
         break;
     }

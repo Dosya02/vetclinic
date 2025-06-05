@@ -75,12 +75,6 @@ const LoginPage: FC = () => {
         emailModal.close();
         passwordModal.open();
         break;
-      case AUTH_STEP.DONE:
-        codeModal.close();
-        emailModal.close();
-        passwordModal.close();
-        navigate(APP_ROUTES.HOME);
-        break;
       default:
         break;
     }

@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changePassword } from '@store/reducers/auth';
+import { useActions } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 
 export const usePasswordField = () => {
-  const dispatch = useAppDispatch();
+  const { changeAuthPassword } = useActions();
 
   const {
     password,
@@ -11,8 +11,7 @@ export const usePasswordField = () => {
   } = useAppSelector(state => state.authReducer);
 
   const onPasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: string = e.target.value;
-    dispatch(changePassword(value));
+    changeAuthPassword(e.target.value);
   };
 
   return { password, passwordErrorMessage, onPasswordChange };

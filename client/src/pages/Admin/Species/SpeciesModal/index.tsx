@@ -1,9 +1,8 @@
 import { FC, FormEvent, useState } from 'react';
-import { Button, Input, Modal } from '@components';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { clearCurrentSpeciesId, resetFields } from '@store/reducers/species';
-import { useSpeciesName } from '@hooks';
+import { Button, Input, Modal } from '@components';
+import { useActions, useSpeciesName } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 import { getErrorMessage } from '@helpers';
 
 interface Props {
@@ -19,7 +18,7 @@ export const SpeciesModal: FC<Props> = ({
   closeFn,
   onSubmit,
 }) => {
-  const dispatch = useAppDispatch();
+  const { clearCurrentSpeciesId, resetSpeciesFields } = useActions();
   const {
     name,
     nameErrorMessage,
@@ -32,8 +31,8 @@ export const SpeciesModal: FC<Props> = ({
 
   const handleCancel = () => {
     toast.info('Операция отменена');
-    dispatch(resetFields());
-    dispatch(clearCurrentSpeciesId());
+    resetSpeciesFields();
+    clearCurrentSpeciesId();
     closeFn();
   };
 
@@ -48,8 +47,8 @@ export const SpeciesModal: FC<Props> = ({
     try {
       setIsSubmitting(true);
       await onSubmit({ name, id: currentId });
-      dispatch(resetFields());
-      dispatch(clearCurrentSpeciesId());
+      resetSpeciesFields();
+      clearCurrentSpeciesId();
       closeFn();
     } catch (err) {
       toast.error(getErrorMessage(err));

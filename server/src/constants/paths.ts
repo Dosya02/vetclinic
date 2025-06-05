@@ -20,4 +20,13 @@ export const API_PATHS = {
     UPDATE: '/:id',
     DELETE: '/:id',
   },
+
+  BREEDS: '/api/breeds',
+
+  BREEDS_ROUTES: {
+    GET_ALL: '/',
+    CREATE: '/',
+    UPDATE: '/:id',
+    DELETE: '/:id',
+  },
 } as const;

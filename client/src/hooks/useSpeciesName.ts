@@ -1,18 +1,22 @@
-import { ChangeEvent } from "react";
-import { useAppDispatch, useAppSelector } from "@store/hooks"
-import { changeName } from "@store/reducers/species";
+import { ChangeEvent } from 'react';
+import { useActions } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 
 export const useSpeciesName = () => {
-	const dispatch = useAppDispatch();
-	const { name, nameErrorMessage } = useAppSelector(state => state.speciesReducer);
+  const { changeSpeciesName } = useActions();
 
-	const onNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
-		dispatch(changeName(e.target.value));
-	}
+  const {
+    name,
+    nameErrorMessage,
+  } = useAppSelector(state => state.speciesReducer);
 
-	const isValidName = (): boolean => {
-		return !!name.trim();
-	};
+  const onNameChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    changeSpeciesName(e.target.value);
+  };
 
-	return { name, nameErrorMessage, onNameChange, isValidName };
-}
+  const isValidName = (): boolean => {
+    return !!name.trim();
+  };
+
+  return { name, nameErrorMessage, onNameChange, isValidName };
+};

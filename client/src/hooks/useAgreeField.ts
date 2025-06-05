@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeAgree } from '@store/reducers/auth';
+import { useActions } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 
 export const useAgreeField = () => {
-  const dispatch = useAppDispatch();
+  const { changeAuthAgree } = useActions();
 
   const {
     agree,
@@ -11,8 +11,7 @@ export const useAgreeField = () => {
   } = useAppSelector(state => state.authReducer);
 
   const onAgreeChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: boolean = e.target.checked;
-    dispatch(changeAgree(value));
+    changeAuthAgree(e.target.checked);
   };
 
   return { agree, agreeErrorMessage, onAgreeChange };

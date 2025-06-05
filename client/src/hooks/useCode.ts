@@ -1,11 +1,14 @@
 import { ChangeEvent, ClipboardEvent, KeyboardEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeCode, setFullCode } from '@store/reducers/auth';
+import { useActions } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 
 export const useCode = () => {
-  const dispatch = useAppDispatch();
+  const { changeAuthCode, setAuthFullCode } = useActions();
 
-  const { code, codeErrorMessage } = useAppSelector(state => state.authReducer);
+  const {
+    code,
+    codeErrorMessage,
+  } = useAppSelector(state => state.authReducer);
 
   const onCodeChange = (
     e: ChangeEvent<HTMLInputElement>,
@@ -17,7 +20,7 @@ export const useCode = () => {
       return;
     }
 
-    dispatch(changeCode({ index, value }));
+    changeAuthCode({ index, value });
 
     if (value && e.target.nextElementSibling instanceof HTMLInputElement) {
       e.target.nextElementSibling.focus();
@@ -45,7 +48,7 @@ export const useCode = () => {
 
     const digits = pastedData.split('').slice(0, 6);
 
-    dispatch(setFullCode(digits));
+    setAuthFullCode(digits);
 
     e.preventDefault();
 
@@ -54,8 +57,8 @@ export const useCode = () => {
 
       for (let i = 0; i < inputs.length; i++) {
         if ((
-          inputs[i] as HTMLInputElement
-        ).value === '') {
+              inputs[i] as HTMLInputElement
+            ).value === '') {
           (
             inputs[i] as HTMLInputElement
           ).focus();

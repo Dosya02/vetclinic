@@ -1,8 +1,7 @@
-import { useAppDispatch } from '@store/hooks';
-import { resetFields } from '@store/reducers/auth';
+import { useActions } from '@hooks';
 
 export const useResetAuthFields = () => {
-  const dispatch = useAppDispatch();
+  const { resetAuthFields } = useActions();
 
-  return () => dispatch(resetFields());
+  return () => resetAuthFields();
 };

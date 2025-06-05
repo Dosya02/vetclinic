@@ -2,15 +2,13 @@ import { FC, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Checkbox, Input } from '@components';
 import { AUTH_STEP } from '@constants';
-import { useAgreeField, useEmailField } from '@hooks';
+import { useActions, useAgreeField, useEmailField } from '@hooks';
 import { useSendVerificationCodeMutation } from '@store/api';
-import { useAppDispatch } from '@store/hooks';
-import { changeAgree, changeEmail, changeStep } from '@store/reducers';
 import { getErrorMessage } from '@helpers';
 import { validateAgree, validateEmail } from '@validators';
 
 export const RegistrationPageForm: FC = () => {
-  const dispatch = useAppDispatch();
+  const { changeAuthAgree, changeAuthEmail, changeAuthStep } = useActions();
 
   const { email, emailErrorMessage, onEmailChange } = useEmailField();
   const { agree, agreeErrorMessage, onAgreeChange } = useAgreeField();
@@ -24,15 +22,15 @@ export const RegistrationPageForm: FC = () => {
     const isAgreeValid = !validateAgree(agree);
 
     if (!isEmailValid || !isAgreeValid) {
-      dispatch(changeEmail(email));
-      dispatch(changeAgree(agree));
+      changeAuthEmail(email);
+      changeAuthAgree(agree);
       return;
     }
 
     try {
       const response = await sendVerificationCode({ email }).unwrap();
       toast.success(response.message);
-      dispatch(changeStep(AUTH_STEP.CODE));
+      changeAuthStep(AUTH_STEP.CODE);
     } catch (err) {
       toast.error(getErrorMessage(err));
     }

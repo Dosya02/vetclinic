@@ -38,27 +38,11 @@ const initialState: AuthState = {
   userToken,
 };
 
-export const slice = createSlice({
+const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    changeEmail: (
-      state,
-      action: PayloadAction<string>,
-    ) => {
-      state.email = action.payload;
-      state.emailErrorMessage = validateEmail(
-        action.payload);
-    },
-    changePassword: (
-      state,
-      action: PayloadAction<string>,
-    ) => {
-      state.password = action.payload;
-      state.passwordErrorMessage
-        = validatePassword(action.payload);
-    },
-    changeAgree: (
+    changeAuthAgree: (
       state,
       action: PayloadAction<boolean>,
     ) => {
@@ -66,7 +50,7 @@ export const slice = createSlice({
       state.agreeErrorMessage = validateAgree(
         action.payload);
     },
-    changeCode: (state, action: PayloadAction<{
+    changeAuthCode: (state, action: PayloadAction<{
       index: number;
       value: string;
     }>) => {
@@ -77,7 +61,49 @@ export const slice = createSlice({
           state.code);
       }
     },
-    setFullCode: (
+    changeAuthEmail: (
+      state,
+      action: PayloadAction<string>,
+    ) => {
+      state.email = action.payload;
+      state.emailErrorMessage = validateEmail(
+        action.payload);
+    },
+    changeAuthPassword: (
+      state,
+      action: PayloadAction<string>,
+    ) => {
+      state.password = action.payload;
+      state.passwordErrorMessage
+        = validatePassword(action.payload);
+    },
+    changeAuthStep: (
+      state,
+      action: PayloadAction<AuthStepType>,
+    ) => {
+      state.step = action.payload;
+    },
+    logout: (state) => {
+      state.userInfo = null;
+      state.userToken = null;
+      localStorage.removeItem(TOKEN_STORAGE_KEY);
+    },
+    resetAuthFields: (state) => {
+      state.email = '';
+      state.emailErrorMessage = null;
+
+      state.password = '';
+      state.passwordErrorMessage = null;
+
+      state.agree = false;
+      state.agreeErrorMessage = null;
+
+      state.code = Array(6).fill('');
+      state.codeErrorMessage = null;
+
+      state.step = AUTH_STEP.IDLE;
+    },
+    setAuthFullCode: (
       state,
       action: PayloadAction<string[]>,
     ) => {
@@ -95,34 +121,7 @@ export const slice = createSlice({
       state.codeErrorMessage = validateCode(
         state.code);
     },
-    changeStep: (
-      state,
-      action: PayloadAction<AuthStepType>,
-    ) => {
-      state.step = action.payload;
-    },
-    resetFields: (state) => {
-      state.email = '';
-      state.emailErrorMessage = null;
-
-      state.password = '';
-      state.passwordErrorMessage = null;
-
-      state.agree = false;
-      state.agreeErrorMessage = null;
-
-      state.code = Array(6).fill('');
-      state.codeErrorMessage = null;
-
-      state.step = AUTH_STEP.IDLE;
-    },
-    setUser: (
-      state,
-      action: PayloadAction<AnyUser>,
-    ) => {
-      state.userInfo = action.payload;
-    },
-    setToken: (state, action: PayloadAction<string | null>) => {
+    setAuthToken: (state, action: PayloadAction<string | null>) => {
       state.userToken = action.payload;
       if (action.payload) {
         localStorage.setItem(TOKEN_STORAGE_KEY, action.payload);
@@ -130,24 +129,14 @@ export const slice = createSlice({
         localStorage.removeItem(TOKEN_STORAGE_KEY);
       }
     },
-    logout: (state) => {
-      state.userInfo = null;
-      state.userToken = null;
-      localStorage.removeItem(TOKEN_STORAGE_KEY);
+    setAuthUser: (
+      state,
+      action: PayloadAction<AnyUser>,
+    ) => {
+      state.userInfo = action.payload;
     },
   },
 });
 
-export const {
-  changeAgree,
-  changeCode,
-  changeEmail,
-  changePassword,
-  changeStep,
-  setFullCode,
-  resetFields,
-  setUser,
-  setToken,
-  logout,
-} = slice.actions;
+export const authActions = slice.actions;
 export default slice.reducer;

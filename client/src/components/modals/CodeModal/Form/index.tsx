@@ -2,9 +2,8 @@ import { FC } from 'react';
 import { toast } from 'react-toastify';
 import { Button, ErrorMessage, PinInput } from '@components';
 import { AUTH_STEP } from '@constants';
-import { useCode, useResetAuthFields } from '@hooks';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeStep, setFullCode } from '@store/reducers/auth';
+import { useActions, useCode, useResetAuthFields } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 import { getErrorMessage } from '@helpers';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export const CodeModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
-  const dispatch = useAppDispatch();
+  const { changeAuthStep, setAuthFullCode } = useActions();
   const resetAuthFields = useResetAuthFields();
 
   const { email } = useAppSelector(state => state.authReducer);
@@ -28,21 +27,21 @@ export const CodeModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
   } = useCode();
 
   const handleCancel = () => {
-    resetAuthFields();
     toast.info('Операция отменена');
+    resetAuthFields();
   };
 
   const handleSubmit = async (): Promise<void> => {
     const fullCode = code.join('');
     if (fullCode.length !== 6 || code.some(d => d === '')) {
-      dispatch(setFullCode(code));
+      setAuthFullCode(code);
       return;
     }
 
     try {
       const response = await onSubmitFn({ email, code: fullCode });
       toast.success(response.message);
-      dispatch(changeStep(AUTH_STEP.PASSWORD));
+      changeAuthStep(AUTH_STEP.PASSWORD);
     } catch (err) {
       toast.error(getErrorMessage(err));
     }
@@ -61,7 +60,7 @@ export const CodeModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
           />
         ))}
         <div className="c-modal__error">
-          {codeErrorMessage && <ErrorMessage message={codeErrorMessage} />}
+          {codeErrorMessage && <ErrorMessage message={codeErrorMessage}/>}
         </div>
       </div>
       <div className="c-modal__buttons">

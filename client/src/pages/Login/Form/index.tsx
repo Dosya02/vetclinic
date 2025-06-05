@@ -4,21 +4,24 @@ import { toast } from 'react-toastify';
 import { Button, Input, PasswordInput } from '@components';
 import { APP_ROUTES } from '@routes';
 import { useLoginMutation } from '@store/api';
-import { useAppDispatch } from '@store/hooks';
-import {
-  changeEmail,
-  changePassword,
-  changeStep,
-  setToken,
-} from '@store/reducers';
 import { validateEmail, validatePassword } from '@validators';
 import { getErrorMessage } from '@helpers';
-import { useEmailField, usePasswordField, useResetAuthFields } from '@hooks';
+import {
+  useActions,
+  useEmailField,
+  usePasswordField,
+  useResetAuthFields,
+} from '@hooks';
 import { AUTH_STEP } from '@constants';
 
 export const LoginPageForm: FC = () => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const {
+    changeAuthStep,
+    changeAuthEmail,
+    changeAuthPassword,
+    setAuthToken,
+  } = useActions();
   const resetAuthFields = useResetAuthFields();
 
   const { email, emailErrorMessage, onEmailChange } = useEmailField();
@@ -32,7 +35,7 @@ export const LoginPageForm: FC = () => {
 
   const handleResetPassword = () => {
     resetAuthFields();
-    dispatch(changeStep(AUTH_STEP.EMAIL));
+    changeAuthStep(AUTH_STEP.EMAIL);
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -42,8 +45,8 @@ export const LoginPageForm: FC = () => {
     const isPasswordValid = !validatePassword(password);
 
     if (!isEmailValid || !isPasswordValid) {
-      dispatch(changeEmail(email));
-      dispatch(changePassword(password));
+      changeAuthEmail(email);
+      changeAuthPassword(password);
       return;
     }
 
@@ -51,7 +54,7 @@ export const LoginPageForm: FC = () => {
       const response = await login({ email, password }).unwrap();
       toast.success(response.message);
 
-      dispatch(setToken(response.token));
+      setAuthToken(response.token);
 
       resetAuthFields();
       navigate(APP_ROUTES.HOME);

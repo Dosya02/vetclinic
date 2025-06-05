@@ -2,10 +2,9 @@ import { FC, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Button, PasswordInput } from '@components';
-import { usePasswordField, useResetAuthFields } from '@hooks';
+import { useActions, usePasswordField, useResetAuthFields } from '@hooks';
 import { APP_ROUTES } from '@routes';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { setToken } from '@store/reducers/auth';
+import { useAppSelector } from '@store/hooks';
 import { getErrorMessage } from '@helpers';
 
 interface Props {
@@ -18,7 +17,7 @@ interface Props {
 
 export const PasswordModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
+  const { setAuthToken } = useActions();
   const resetAuthFields = useResetAuthFields();
 
   const { email } = useAppSelector(state => state.authReducer);
@@ -29,8 +28,8 @@ export const PasswordModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
   } = usePasswordField();
 
   const handleCancel = () => {
-    resetAuthFields();
     toast.info('Операция отменена');
+    resetAuthFields();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -40,7 +39,7 @@ export const PasswordModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
       const response = await onSubmitFn({ email, password });
       toast.success(response.message);
 
-      dispatch(setToken(response.token));
+      setAuthToken(response.token);
 
       resetAuthFields();
       navigate(APP_ROUTES.HOME);

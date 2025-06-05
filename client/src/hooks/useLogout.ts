@@ -1,13 +1,11 @@
-import { authApi } from '@store/api';
-import { useAppDispatch } from '@store/hooks';
-import { logout as logoutAction } from '@store/reducers/auth';
+import { useActions } from '@hooks';
 
 export const useLogout = () => {
-  const dispatch = useAppDispatch();
+  const { logout: logoutAction, resetAuthApi } = useActions();
 
   const logout = () => {
-    dispatch(logoutAction());
-    dispatch(authApi.util.resetApiState());
+    logoutAction();
+    resetAuthApi();
   };
 
   return { logout };

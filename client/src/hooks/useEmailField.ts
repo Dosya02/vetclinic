@@ -1,9 +1,9 @@
 import { ChangeEvent } from 'react';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { changeEmail } from '@store/reducers/auth';
+import { useActions } from '@hooks';
+import { useAppSelector } from '@store/hooks';
 
 export const useEmailField = () => {
-  const dispatch = useAppDispatch();
+  const { changeAuthEmail } = useActions();
 
   const {
     email,
@@ -11,8 +11,7 @@ export const useEmailField = () => {
   } = useAppSelector(state => state.authReducer);
 
   const onEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value: string = e.target.value;
-    dispatch(changeEmail(value));
+    changeAuthEmail(e.target.value);
   };
 
   return { email, emailErrorMessage, onEmailChange };

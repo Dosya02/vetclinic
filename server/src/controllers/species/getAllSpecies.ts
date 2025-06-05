@@ -9,7 +9,7 @@ export const getAllSpecies = asyncHandler(async (
   const species = await Species.find().sort({ name: 1 });
 
   res.json({
-    message: 'Список видов питомцев успешно получен',
+    message: 'Список видов питомцев успешно получен.',
     species,
   });
 });

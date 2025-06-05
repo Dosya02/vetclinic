@@ -1,12 +1,10 @@
 import { FC, FormEvent } from 'react';
-import { Button, Input } from '@components';
-import { useEmailField, useResetAuthFields } from '@hooks';
-import { validateEmail } from '@validators';
-import { changeEmail, changeStep } from '@store/reducers/auth';
 import { toast } from 'react-toastify';
+import { Button, Input } from '@components';
 import { AUTH_STEP } from '@constants';
+import { useActions, useEmailField, useResetAuthFields } from '@hooks';
 import { getErrorMessage } from '@helpers';
-import { useAppDispatch } from '@store/hooks';
+import { validateEmail } from '@validators';
 
 interface Props {
   isLoading: boolean;
@@ -14,14 +12,14 @@ interface Props {
 }
 
 export const EmailModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
-  const dispatch = useAppDispatch();
+  const { changeAuthStep, changeAuthEmail } = useActions();
   const resetAuthFields = useResetAuthFields();
 
   const { email, emailErrorMessage, onEmailChange } = useEmailField();
 
   const handleCancel = () => {
-    resetAuthFields();
     toast.info('Операция отменена');
+    resetAuthFields();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
@@ -30,14 +28,14 @@ export const EmailModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
     const isEmailValid = !validateEmail(email);
 
     if (!isEmailValid) {
-      dispatch(changeEmail(email));
+      changeAuthEmail(email);
       return;
     }
 
     try {
       const response = await onSubmitFn({ email });
       toast.success(response.message);
-      dispatch(changeStep(AUTH_STEP.CODE));
+      changeAuthStep(AUTH_STEP.CODE);
     } catch (err) {
       toast.error(getErrorMessage(err));
     }

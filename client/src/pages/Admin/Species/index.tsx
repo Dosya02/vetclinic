@@ -1,7 +1,7 @@
 import { FC, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Loader, Table } from '@components';
-import { useModal } from '@hooks';
+import { useActions, useModal } from '@hooks';
 import { SpeciesModel } from '@models';
 import {
   useCreateSpeciesMutation,
@@ -9,19 +9,19 @@ import {
   useGetSpeciesQuery,
   useUpdateSpeciesMutation,
 } from '@store/api';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import {
-  changeName,
-  clearCurrentSpeciesId,
-  resetFields,
-  setCurrentSpeciesId,
-  setSpecies,
-} from '@store/reducers/species';
+import { useAppSelector } from '@store/hooks';
 import { getErrorMessage } from '@helpers';
 import { SpeciesModal } from './SpeciesModal';
 
 const AdminSpecies: FC = () => {
-  const dispatch = useAppDispatch();
+  const {
+    changeSpeciesName,
+    clearCurrentSpeciesId,
+    resetSpeciesFields,
+    setCurrentSpeciesId,
+    setSpecies,
+  } = useActions();
+
   const species = useAppSelector(state => state.speciesReducer.species);
 
   const { data, isLoading } = useGetSpeciesQuery();
@@ -34,19 +34,19 @@ const AdminSpecies: FC = () => {
 
   useEffect(() => {
     if (data?.species) {
-      dispatch(setSpecies(data.species));
+      setSpecies(data.species);
     }
-  }, [data, dispatch]);
+  }, [data]);
 
   const handleAddSpecies = () => {
-    dispatch(resetFields());
-    dispatch(clearCurrentSpeciesId());
+    resetSpeciesFields();
+    clearCurrentSpeciesId();
     createModal.open();
   };
 
   const handleEdit = (item: SpeciesModel) => {
-    dispatch(changeName(item.name));
-    dispatch(setCurrentSpeciesId(item.id));
+    changeSpeciesName(item.name);
+    setCurrentSpeciesId(item.id);
     editModal.open();
   };
 
@@ -66,14 +66,19 @@ const AdminSpecies: FC = () => {
     toast.success(response.message);
   };
 
-  const handleUpdateSubmit = async ({ id, name }: { id?: string; name: string }) => {
-    if (!id) return;
+  const handleUpdateSubmit = async ({ id, name }: {
+    id?: string;
+    name: string
+  }) => {
+    if (!id) {
+      return;
+    }
     const response = await updateSpecies({ id, name }).unwrap();
     toast.success(response.message);
   };
 
   if (isLoading) {
-    return <Loader />;
+    return <Loader/>;
   }
 
   return (
@@ -82,14 +87,14 @@ const AdminSpecies: FC = () => {
         <h2 className="c-admin__title">Виды питомцев</h2>
         <Button
           className="c-admin__create-button"
-          text="Add Species"
+          text="Добавить вид"
           onClick={handleAddSpecies}
         />
       </div>
       <Table
         className="c-admin__species-table"
         data={species}
-        columns={[{ key: 'name', label: 'Название вида питомца' }]}
+        columns={[{ key: 'name', label: 'Название' }]}
         noDataText="В базе нет ни одного вида питомца."
         onEdit={handleEdit}
         onDelete={handleDelete}

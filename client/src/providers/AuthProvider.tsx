@@ -1,9 +1,8 @@
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useGetMeQuery } from '@store/api';
-import { useAppDispatch, useAppSelector } from '@store/hooks';
-import { setUser } from '@store/reducers/auth';
-import { useLogout } from '@hooks';
+import { useAppSelector } from '@store/hooks';
+import { useActions, useLogout } from '@hooks';
 import { Loader } from '@components';
 
 interface Props {
@@ -11,8 +10,9 @@ interface Props {
 }
 
 export const AuthProvider: FC<Props> = ({ children }) => {
-  const dispatch = useAppDispatch();
+  const { setAuthUser } = useActions();
   const { logout } = useLogout();
+
   const { userToken, userInfo } = useAppSelector(state => state.authReducer);
   const [isUserLoading, setIsUserLoading] = useState<boolean>(false);
 
@@ -34,10 +34,10 @@ export const AuthProvider: FC<Props> = ({ children }) => {
 
   useEffect(() => {
     if (isSuccess && data) {
-      dispatch(setUser(data));
+      setAuthUser(data);
       setIsUserLoading(false);
     }
-  }, [isSuccess, data, dispatch]);
+  }, [isSuccess, data]);
 
   useEffect(() => {
     if (isError && error) {
@@ -49,7 +49,7 @@ export const AuthProvider: FC<Props> = ({ children }) => {
   if (isUserLoading || (
     userToken && !userInfo && isFetching
   )) {
-    return <Loader />;
+    return <Loader/>;
   }
 
   return <>{children}</>;

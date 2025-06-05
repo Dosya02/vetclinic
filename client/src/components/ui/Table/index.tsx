@@ -29,7 +29,9 @@ export const Table = <T extends object>({
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(data.length / itemsPerPage);
-  const startIdx = (currentPage - 1) * itemsPerPage;
+  const startIdx = (
+                     currentPage - 1
+                   ) * itemsPerPage;
   const paginatedData = data.slice(startIdx, startIdx + itemsPerPage);
 
   const goToPage = (page: number) => {
@@ -46,39 +48,39 @@ export const Table = <T extends object>({
     <div className={clsx('c-table-wrapper', className)}>
       <table className={clsx('c-table', className)}>
         <thead>
-          <tr>
-            <th>№</th>
-            {columns.map((col) => (
-              <th key={String(col.key)}>{col.label}</th>
-            ))}
-            <th>Actions</th>
-          </tr>
+        <tr>
+          <th>№</th>
+          {columns.map((col) => (
+            <th key={String(col.key)}>{col.label}</th>
+          ))}
+          <th>Действия</th>
+        </tr>
         </thead>
         <tbody>
-          {paginatedData.map((item, idx) => (
-            <tr key={idx}>
-              <td>{startIdx + idx + 1}</td>
-              {columns.map((col) => (
-                <td key={String(col.key)}>{String(item[col.key] ?? '-')}</td>
-              ))}
-              <td>
-                <div className="c-table__buttons">
-                  <button
-                    className="c-table__button c-table__button--edit"
-                    onClick={() => onEdit(item)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="c-table__button c-table__button--delete"
-                    onClick={() => onDelete(item)}
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
-          ))}
+        {paginatedData.map((item, idx) => (
+          <tr key={idx}>
+            <td>{startIdx + idx + 1}</td>
+            {columns.map((col) => (
+              <td key={String(col.key)}>{String(item[col.key] ?? '-')}</td>
+            ))}
+            <td>
+              <div className="c-table__buttons">
+                <button
+                  className="c-table__button c-table__button--edit"
+                  onClick={() => onEdit(item)}
+                >
+                  Edit
+                </button>
+                <button
+                  className="c-table__button c-table__button--delete"
+                  onClick={() => onDelete(item)}
+                >
+                  Delete
+                </button>
+              </div>
+            </td>
+          </tr>
+        ))}
         </tbody>
       </table>
 
