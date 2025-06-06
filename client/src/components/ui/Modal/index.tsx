@@ -1,27 +1,18 @@
-import { FC, ReactNode, useEffect } from 'react';
+import { FC, ReactNode } from 'react';
+import { useBodyScrollLock } from '@hooks';
 
 interface Props {
-	active: boolean;
-	children: ReactNode;
-	variant?: 'light' | 'dark';
-};
+  active: boolean;
+  children: ReactNode;
+  variant?: 'light' | 'dark';
+}
 
 export const Modal: FC<Props> = ({ active, children, variant = 'dark' }) => {
-	useEffect(() => {
-		if (active) {
-			document.body.style.overflow = 'hidden';
-		} else {
-			document.body.style.overflow = '';
-		}
+  useBodyScrollLock(active);
 
-		return () => {
-			document.body.style.overflow = '';
-		};
-	}, [active]);
-
-	return (
-		<div className={`c-modal ${active ? "active" : ""} ${variant}`}>
-			{children}
-		</div>
-	);
+  return (
+    <div className={`c-modal ${active ? 'active' : ''} ${variant}`}>
+      {children}
+    </div>
+  );
 };

@@ -1,0 +1,89 @@
+.c-profile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 90px;
+  
+  &__sidebar {
+    &-list {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    &-item {
+    }
+    
+    &-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 15px 20px;
+      column-gap: 20px;
+      
+      &.active {
+        background-color: $c-bg-secondary;
+      }
+    }
+    
+    &-link.active > &-line {
+      @include show;
+    }
+    
+    &-line {
+      @include hide;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      transition: all 0.2s ease;
+      border-radius: 5px;
+      background-color: $c-text-primary;
+    }
+    
+    &-icon {
+      height: 32px;
+      aspect-ratio: 1.5;
+      fill: $c-black;
+      stroke: $c-black;
+    }
+    
+    &-title {
+      font-size: 18px;
+      font-weight: $font-weight-bold;
+      line-height: 1;
+      letter-spacing: $letter-spacing-5;
+      color: $c-text-primary;
+    }
+  }
+}
+
+.c-profile__pets {
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 75px;
+  }
+  
+  &-add {
+    position: relative;
+    max-height: 450px;
+    cursor: pointer;
+    border: 1px solid $c-text-primary;
+    border-radius: 40px;
+    
+    &::before,
+    &::after {
+      @include abs-center;
+      content: "";
+      background-color: $c-text-primary;
+    }
+    
+    &::before {
+      @include box-size(100px, 1px);
+    }
+    
+    &::after {
+      @include box-size(1px, 100px);
+    }
+  }
+}

@@ -33,12 +33,17 @@
 @import "components/logo";
 @import "components/modal";
 @import "components/nav";
+@import "components/pet-card";
+@import "components/profile";
 @import "components/section";
 @import "components/services";
 @import "components/table";
 @import "components/team";
 @import "components/textarea";
 @import "components/toast";
+// modals
+@import "components/modals/add-pet-modal";
+
 // 7. Utilities
 @import "utilities/cursors";
 @import "utilities/shapes";

@@ -6,5 +6,6 @@ export * from './Image';
 export * from './Loader';
 export * from './Logo';
 export * from './Modal';
+export * from './PetCard';
 export * from './Section';
 export * from './Table';

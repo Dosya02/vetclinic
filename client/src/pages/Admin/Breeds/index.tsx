@@ -1,103 +1,146 @@
-import { FC, useMemo } from 'react';
+import { FC, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Button, Loader, Table } from '@components';
-import { useActions, useModal } from '@hooks';
-import { BreedModel } from '@models';
+import { DropdownOption } from '@constants';
+import { useBoolean, useInput } from '@hooks';
+import { BreedModel, SpeciesModel } from '@models';
 import {
   useCreateBreedMutation,
   useDeleteBreedMutation,
+  useGetBreedsQuery,
+  useGetSpeciesQuery,
   useUpdateBreedMutation,
 } from '@store/api';
-import { useAppSelector } from '@store/hooks';
-import { BreedsModal } from './BreedsModal';
-import { toast } from 'react-toastify';
 import { getErrorMessage } from '@helpers';
+import { BreedsModal } from './BreedsModal';
 
 const AdminBreeds: FC = () => {
-  const { breeds, isLoading } = useAppSelector(state => state.breedsReducer);
-  const species = useAppSelector(state => state.speciesReducer.species);
-
   const {
-    changeBreedName,
-    changeBreedSpeciesId,
-    clearCurrentBreedId,
-    resetBreedsFields,
-    setCurrentBreedId,
-  } = useActions();
+    data: breedsData,
+    isFetching: isBreedsFetching,
+    isError: isBreedsError,
+    refetch: refetchBreeds,
+  } = useGetBreedsQuery();
+  const {
+    data: speciesData,
+    isFetching: isSpeciesFetching,
+    isError: isSpeciesError,
+    refetch: refetchSpecies,
+  } = useGetSpeciesQuery();
 
   const [createBreed] = useCreateBreedMutation();
   const [updateBreed] = useUpdateBreedMutation();
   const [deleteBreed] = useDeleteBreedMutation();
 
-  const createModal = useModal(false);
-  const editModal = useModal(false);
+  const createModal = useBoolean(false);
+  const editModal = useBoolean(false);
 
-  const handleAddBreed = () => {
-    resetBreedsFields();
-    clearCurrentBreedId();
-    createModal.open();
+  const name = useInput('');
+  const selectedSpeciesId = useInput('');
+
+  const [currentId, setCurrentId] = useState<string | null>(null);
+
+  // Формируем опции для Dropdown из species
+  const speciesOptions: DropdownOption[] = speciesData?.species.map((sp: SpeciesModel) => (
+    {
+      value: sp.id,
+      label: sp.name,
+    }
+  )) ?? [];
+
+  const openCreateModal = () => {
+    name.set('');
+    selectedSpeciesId.set('');
+    setCurrentId(null);
+    createModal.setTrue();
   };
 
-  const handleEdit = (item: BreedModel) => {
-    changeBreedName(item.name);
-    changeBreedSpeciesId(item.speciesId);
-    setCurrentBreedId(item.id);
-    editModal.open();
+  const openEditModal = (item: BreedModel & { speciesName?: string }) => {
+    name.set(item.name);
+    if ('speciesId' in item) {
+      selectedSpeciesId.set(item.speciesId);
+    } else {
+      selectedSpeciesId.set('');
+    }
+    setCurrentId(item.id);
+    editModal.setTrue();
   };
 
   const handleDelete = async (item: BreedModel) => {
     if (window.confirm(`Удалить породу "${item.name}"?`)) {
       try {
-        const response = await deleteBreed({ id: item.id }).unwrap();
-        toast.success(response.message);
+        const { message } = await deleteBreed({ id: item.id }).unwrap();
+        toast.success(message);
       } catch (err) {
         toast.error(getErrorMessage(err));
       }
     }
   };
 
-  const handleCreateSubmit = async ({
-    name,
-    speciesId,
-  }: {
-    name: string;
-    speciesId: string;
-  }) => {
-    const response = await createBreed({ name, speciesId }).unwrap();
-    toast.success(response.message);
-  };
-
-  const handleUpdateSubmit = async ({
-    id,
-    name,
-    speciesId,
-  }: {
-    id?: string;
-    name: string;
-    speciesId: string;
-  }) => {
-    if (!id) {
-      return;
+  const handleCreateSubmit = async () => {
+    if (!name.value.trim()) {
+      return { message: 'Введите название породы' };
     }
-    const response = await updateBreed({ id, name, speciesId }).unwrap();
-    toast.success(response.message);
+
+    if (!selectedSpeciesId.value) {
+      return { message: 'Выберите вид питомца' };
+    }
+
+    return await createBreed({
+      name: name.value,
+      speciesId: selectedSpeciesId.value,
+    }).unwrap();
   };
 
-  const tableData = useMemo(() => {
-    return breeds.map(breed => {
-      const speciesName = species.find(s => s.id === breed.speciesId)?.name ||
-                          '—';
-      return {
-        ...breed,
-        speciesName,
-      };
-    });
-  }, [breeds, species]);
+  const handleUpdateSubmit = async () => {
+    if (!currentId) {
+      return { message: '' };
+    }
+    if (!name.value.trim()) {
+      toast.error('Введите название породы');
+      return { message: '' };
+    }
+    if (!selectedSpeciesId.value) {
+      toast.error('Выберите вид питомца');
+      return { message: '' };
+    }
+    try {
+      const response = await updateBreed({
+        id: currentId,
+        name: name.value,
+        speciesId: selectedSpeciesId.value,
+      }).unwrap();
+      return response;
+    } catch (err) {
+      toast.error(getErrorMessage(err));
+      return { message: '' };
+    }
+  };
 
-  console.log(tableData);
-
-  if (isLoading) {
+  if (isBreedsFetching || isSpeciesFetching) {
     return <Loader/>;
   }
+
+  if (isBreedsError || isSpeciesError) {
+    return (
+      <div>
+        Ошибка загрузки данных.
+        <Button onClick={() => {
+          refetchBreeds();
+          refetchSpecies();
+        }} text="Повторить"/>
+      </div>
+    );
+  }
+
+  // Таблица — выводим name и speciesName (speciesName возьмем из speciesData)
+  const tableData = breedsData?.breeds.map((breed: BreedModel) => {
+    const species = speciesData?.species.find(sp => sp.id === breed.speciesId);
+    return {
+      ...breed,
+      speciesName: species?.name || '—',
+    };
+  }) ?? [];
 
   return (
     <div className="c-admin__breeds">
@@ -106,7 +149,7 @@ const AdminBreeds: FC = () => {
         <Button
           className="c-admin__create-button"
           text="Добавить породу"
-          onClick={handleAddBreed}
+          onClick={openCreateModal}
         />
       </div>
       <Table
@@ -114,24 +157,34 @@ const AdminBreeds: FC = () => {
         data={tableData}
         columns={[
           { key: 'name', label: 'Название' },
-          { key: 'speciesName', label: 'Вид' },
+          { key: 'speciesName', label: 'Вид питомца' },
         ]}
-        noDataText="В базе нет ни одной породы."
-        onEdit={handleEdit}
+        noDataText="В базе нет ни одной породы питомца."
+        onEdit={openEditModal}
         onDelete={handleDelete}
-        itemsPerPage={5}
+        itemsPerPage={10}
       />
       <BreedsModal
-        isActive={createModal.isOpen}
+        isActive={createModal.value}
         text="Добавить породу"
+        name={name.value}
+        setName={name.set}
+        selectedSpeciesId={selectedSpeciesId.value}
+        setSelectedSpeciesId={selectedSpeciesId.set}
+        speciesOptions={speciesOptions}
         onSubmit={handleCreateSubmit}
-        closeFn={createModal.close}
+        closeFn={createModal.setFalse}
       />
       <BreedsModal
-        isActive={editModal.isOpen}
+        isActive={editModal.value}
         text="Редактировать породу"
+        name={name.value}
+        setName={name.set}
+        selectedSpeciesId={selectedSpeciesId.value}
+        setSelectedSpeciesId={selectedSpeciesId.set}
+        speciesOptions={speciesOptions}
         onSubmit={handleUpdateSubmit}
-        closeFn={editModal.close}
+        closeFn={editModal.setFalse}
       />
     </div>
   );

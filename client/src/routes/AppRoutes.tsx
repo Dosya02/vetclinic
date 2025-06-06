@@ -3,11 +3,14 @@ import { skipToken } from '@reduxjs/toolkit/query';
 import { BrowserRouter, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { Loader, ScrollToTop } from '@components';
-import { AdminRoutes, AuthRoutes, DefaultRoutes, PublicRoutes } from '@routes';
-import { useActions, useLoadBreeds, useLoadSpecies, useLogout } from '@hooks';
+import { useActions, useLogout } from '@hooks';
 import { useGetMeQuery } from '@store/api';
 import { useAppSelector } from '@store/hooks';
 import 'react-toastify/dist/ReactToastify.css';
+import { PublicRoutes } from './PublicRoutes.tsx';
+import { DefaultRoutes } from './DefaultRoutes.tsx';
+import { AuthRoutes } from './AuthRoutes.tsx';
+import { AdminRoutes } from './AdminRoutes.tsx';
 
 export const AppRoutes: FC = () => {
   const { setAuthUser } = useActions();
@@ -24,16 +27,12 @@ export const AppRoutes: FC = () => {
     isFetching: isUserFetching,
   } = useGetMeQuery(userToken ? undefined : skipToken);
 
-  const { isFetching: isSpeciesFetching } = useLoadSpecies();
-  const { isFetching: isBreedsFetching } = useLoadBreeds();
 
   const isLoading =
     isUserLoading ||
     (
       userToken && !userInfo && isUserFetching
-    ) ||
-    isSpeciesFetching ||
-    isBreedsFetching;
+    );
 
   useEffect(() => {
     if (userToken && !userInfo) {

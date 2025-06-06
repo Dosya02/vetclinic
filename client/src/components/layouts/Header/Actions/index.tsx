@@ -26,7 +26,7 @@ export const HeaderActions: FC = () => {
     <div className="c-header__actions">
       <Dropdown
         options={languages}
-        selected={language}
+        selected={language!}
         onSelect={handleChangeLanguage}
         variant={DROPDOWN_VARIANT.COMPACT}
       />

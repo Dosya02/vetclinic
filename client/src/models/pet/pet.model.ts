@@ -1,10 +1,8 @@
 import {
-	BreedModel,
-	SpeciesModel,
 	StructuredDateModel,
 	VaccinationRecordModel,
 	VisitModel,
-} from "@models";
+} from '@models';
 
 /**
  * Модель питомца (PetModel)
@@ -23,13 +21,13 @@ import {
  * - visits: История визитов к ветеринару
  */
 export interface PetModel {
-	id: string;
-	name: string;
-	species: SpeciesModel;
-	breed: BreedModel;
-	birthDate?: StructuredDateModel;
-	features?: string[];
-	imageUrl?: string;
-	vaccinations?: VaccinationRecordModel[];
-	visits?: VisitModel[];
+  id: string;
+  name: string;
+  speciesId: string;
+  breedId: string;
+  birthDate?: StructuredDateModel;
+  features?: string[];
+  imageUrl?: string;
+  vaccinations?: VaccinationRecordModel[];
+  visits?: VisitModel[];
 }

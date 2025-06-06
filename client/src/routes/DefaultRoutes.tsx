@@ -2,6 +2,7 @@ import { lazy, ReactNode } from 'react';
 import { Route } from 'react-router-dom';
 import { DefaultLayout } from '@layouts';
 import { APP_ROUTES } from '@routes';
+import { ProfileRoutes } from './ProfileRoutes';
 
 const HomePage = lazy(() => import('@pages/Home'));
 const ServicesPage = lazy(() => import('@pages/Services'));
@@ -15,5 +16,6 @@ export const DefaultRoutes: ReactNode = (
            path={APP_ROUTES.SERVICES}/>
     <Route element={<AppointmentPage/>}
            path={APP_ROUTES.APPOINTMENT}/>
+    {ProfileRoutes}
   </Route>
 );

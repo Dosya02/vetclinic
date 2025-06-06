@@ -1,107 +1,120 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Loader, Table } from '@components';
-import { useActions, useModal } from '@hooks';
+import { useBoolean, useInput } from '@hooks';
 import { SpeciesModel } from '@models';
 import {
   useCreateSpeciesMutation,
   useDeleteSpeciesMutation,
+  useGetSpeciesQuery,
   useUpdateSpeciesMutation,
 } from '@store/api';
-import { useAppSelector } from '@store/hooks';
 import { getErrorMessage } from '@helpers';
 import { SpeciesModal } from './SpeciesModal';
 
 const AdminSpecies: FC = () => {
-  const {
-    changeSpeciesName,
-    clearCurrentSpeciesId,
-    resetSpeciesFields,
-    setCurrentSpeciesId,
-  } = useActions();
-
-  const { species, isLoading } = useAppSelector(state => state.speciesReducer);
-
+  const { data, isFetching, isError, refetch } = useGetSpeciesQuery();
   const [createSpecies] = useCreateSpeciesMutation();
   const [updateSpecies] = useUpdateSpeciesMutation();
   const [deleteSpecies] = useDeleteSpeciesMutation();
 
-  const createModal = useModal(false);
-  const editModal = useModal(false);
+  const createModal = useBoolean(false);
+  const editModal = useBoolean(false);
+  const name = useInput('');
+  const [currentId, setCurrentId] = useState<string | null>(null);
 
-  const handleAddSpecies = () => {
-    resetSpeciesFields();
-    clearCurrentSpeciesId();
-    createModal.open();
+  const openCreateModal = () => {
+    name.set('');
+    setCurrentId(null);
+    createModal.setTrue();
   };
 
-  const handleEdit = (item: SpeciesModel) => {
-    changeSpeciesName(item.name);
-    setCurrentSpeciesId(item.id);
-    editModal.open();
+  const openEditModal = (item: SpeciesModel) => {
+    name.set(item.name);
+    setCurrentId(item.id);
+    editModal.setTrue();
   };
 
   const handleDelete = async (item: SpeciesModel) => {
     if (window.confirm(`Удалить вид "${item.name}"?`)) {
       try {
-        const response = await deleteSpecies({ id: item.id }).unwrap();
-        toast.success(response.message);
+        const { message } = await deleteSpecies({ id: item.id }).unwrap();
+        toast.success(message);
       } catch (err) {
         toast.error(getErrorMessage(err));
       }
     }
   };
 
-  const handleCreateSubmit = async ({ name }: { name: string }) => {
-    const response = await createSpecies({ name }).unwrap();
-    toast.success(response.message);
-  };
-
-  const handleUpdateSubmit = async ({ id, name }: {
-    id?: string;
-    name: string
-  }) => {
-    if (!id) {
-      return;
+  const handleCreateSubmit = async () => {
+    if (!name.value.trim()) {
+      return { message: 'Введите название' };
     }
-    const response = await updateSpecies({ id, name }).unwrap();
-    toast.success(response.message);
+
+    return await createSpecies({ name: name.value }).unwrap();
   };
 
-  if (isLoading) {
+  const handleUpdateSubmit = async () => {
+    if (!currentId) {
+      return { message: 'Такой записи не существует.' };
+    }
+
+    if (!name.value.trim()) {
+      return { message: 'Введите название.' };
+    }
+
+    return await updateSpecies({ id: currentId, name: name.value }).unwrap();
+  };
+
+  if (isFetching) {
     return <Loader/>;
+  }
+
+  if (isError) {
+    return (
+      <div>
+        Ошибка загрузки данных.
+        <Button text="Повторить" onClick={() => refetch()}/>
+      </div>
+    );
   }
 
   return (
     <div className="c-admin__species">
       <div className="c-admin__heading">
-        <h2 className="c-admin__title">Виды питомцев</h2>
+        <h2 className="c-admin__title">
+          Виды питомцев
+        </h2>
         <Button
           className="c-admin__create-button"
           text="Добавить вид"
-          onClick={handleAddSpecies}
+          onClick={openCreateModal}
         />
       </div>
       <Table
         className="c-admin__species-table"
-        data={species}
+        data={data?.species ?? []}
         columns={[{ key: 'name', label: 'Название' }]}
         noDataText="В базе нет ни одного вида питомца."
-        onEdit={handleEdit}
+        onEdit={openEditModal}
         onDelete={handleDelete}
         itemsPerPage={5}
       />
       <SpeciesModal
-        isActive={createModal.isOpen}
+        isActive={createModal.value}
         text="Добавить вид"
+        name={name.value}
+        setName={name.set}
         onSubmit={handleCreateSubmit}
-        closeFn={createModal.close}
+        closeFn={createModal.setFalse}
       />
       <SpeciesModal
-        isActive={editModal.isOpen}
+        isActive={editModal.value}
         text="Редактировать вид"
+        name={name.value}
+        setName={name.set}
         onSubmit={handleUpdateSubmit}
-        closeFn={editModal.close}
+        closeFn={editModal.setFalse}
       />
     </div>
   );

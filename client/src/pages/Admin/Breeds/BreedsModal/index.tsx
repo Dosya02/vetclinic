@@ -1,19 +1,19 @@
-import { FC, FormEvent, useMemo, useState } from 'react';
+import { FC, FormEvent } from 'react';
 import { toast } from 'react-toastify';
 import { Button, Dropdown, Input, Modal } from '@components';
-import { useActions, useBreedName } from '@hooks';
-import { useAppSelector } from '@store/hooks';
-import { getErrorMessage } from '@helpers';
+import { DropdownOption } from '@constants';
+import { useBoolean } from '@hooks';
 
 interface Props {
   isActive: boolean;
   text: string;
   closeFn: () => void;
-  onSubmit: (values: {
-    name: string;
-    speciesId: string;
-    id?: string
-  }) => Promise<void>;
+  onSubmit: () => Promise<{ message: string }>;
+  name: string;
+  setName: (value: string) => void;
+  speciesOptions: DropdownOption[];
+  selectedSpeciesId: string;
+  setSelectedSpeciesId: (value: string) => void;
 }
 
 export const BreedsModal: FC<Props> = ({
@@ -21,73 +21,48 @@ export const BreedsModal: FC<Props> = ({
   text,
   closeFn,
   onSubmit,
+  name,
+  setName,
+  speciesOptions,
+  selectedSpeciesId,
+  setSelectedSpeciesId,
 }) => {
-  const {
-    changeBreedSpeciesId,
-    clearCurrentBreedId,
-    resetBreedsFields,
-  } = useActions();
-
-  const {
-    name,
-    nameErrorMessage,
-    onNameChange,
-    isValidName,
-  } = useBreedName();
-
-  const { currentId, speciesId } = useAppSelector(state => state.breedsReducer);
-  const species = useAppSelector(state => state.speciesReducer.species);
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const isSubmitting = useBoolean(false);
 
   const handleCancel = () => {
     toast.info('Операция отменена');
-    resetBreedsFields();
-    clearCurrentBreedId();
-    setIsSubmitted(false);
     closeFn();
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitted(true);
 
-    if (!isValidName() || !speciesId) {
-      toast.error('Введите название и выберите вид');
+    if (!name.trim()) {
+      toast.error('Введите название породы');
+      return;
+    }
+    if (!selectedSpeciesId) {
+      toast.error('Выберите вид питомца');
       return;
     }
 
     try {
-      setIsSubmitting(true);
-      await onSubmit({ name, speciesId, id: currentId });
-      resetBreedsFields();
-      clearCurrentBreedId();
-      setIsSubmitted(false);
+      isSubmitting.setTrue();
+      const response = await onSubmit();
+      toast.success(response.message);
+      setName('');
+      setSelectedSpeciesId('');
       closeFn();
-    } catch (err) {
-      toast.error(getErrorMessage(err));
+    } catch {
+      toast.error('Ошибка при сохранении');
     } finally {
-      setIsSubmitting(false);
+      isSubmitting.setFalse();
     }
   };
 
-  const options = useMemo(() => {
-    return species.map(s => (
-      {
-        value: s.id,
-        label: s.name,
-      }
-    ));
-  }, [species]);
-
-  const selectedOption = useMemo(() => {
-    return options.find(opt => opt.value === speciesId) || null;
-  }, [options, speciesId]);
-
-  const handleSelectSpecies = (value: string): void => {
-    changeBreedSpeciesId(value);
-  };
+  const selectedOption = speciesOptions.find(
+    opt => opt.value === selectedSpeciesId,
+  );
 
   return (
     <Modal active={isActive}>
@@ -98,34 +73,38 @@ export const BreedsModal: FC<Props> = ({
             <div className="c-modal__form-input">
               <Input
                 value={name}
-                onChange={onNameChange}
-                errorMessage={isSubmitted && !isValidName()
-                              ? nameErrorMessage
-                              : ''}
-                placeholder="Введите тип питомца"
-              />
-              <Dropdown
-                options={options}
-                selected={selectedOption ?? undefined}
-                onSelect={handleSelectSpecies}
-                placeholder="Выберите вид"
+                onChange={(e) => setName(e.target.value)}
+                errorMessage=""
+                placeholder="Введите название породы"
               />
             </div>
-            <div className="c-modal__buttons">
+
+            <div className="c-modal__form-input" style={{ marginTop: '1rem' }}>
+              <Dropdown
+                options={speciesOptions}
+                selected={selectedOption}
+                onSelect={setSelectedSpeciesId}
+                placeholder="Выберите вид питомца"
+                rounded
+              />
+            </div>
+
+            <div className="c-modal__buttons" style={{ marginTop: '1rem' }}>
               <Button
                 className="c-modal__button"
                 text="Отмена"
                 rounded
                 reverse
                 onClick={handleCancel}
-                disabled={isSubmitting}
+                disabled={isSubmitting.value}
+                type="button"
               />
               <Button
                 className="c-modal__button"
                 type="submit"
-                text={isSubmitting ? 'Сохранение...' : 'Сохранить'}
+                text={isSubmitting.value ? 'Сохранение...' : 'Сохранить'}
                 rounded
-                disabled={isSubmitting}
+                disabled={isSubmitting.value}
               />
             </div>
           </form>

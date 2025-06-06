@@ -19,11 +19,6 @@
     column-gap: 30px;
   }
   
-  &__avatar {
-    @include square(50px);
-    cursor: pointer;
-  }
-  
   &__auth {
     @include square(40px);
     transition: $trans-default;
@@ -35,6 +30,64 @@
     
     &-icon {
       @include box-size;
+    }
+  }
+}
+
+.c-header-avatar {
+  position: relative;
+  
+  &__avatar {
+    @include square(50px);
+    cursor: pointer;
+  }
+  
+  &__menu {
+    @include hide;
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    overflow: hidden;
+    min-width: max-content;
+    transition: $trans-default;
+    border-radius: 10px;
+    background-color: $c-text-light;
+    
+    &.active {
+      @include show;
+    }
+    
+    &-link {
+      font-weight: $font-weight-semibold;
+      line-height: 1.5;
+      display: flex;
+      align-items: center;
+      padding: 15px 40px 15px 20px;
+      cursor: pointer;
+      transition: $trans-default;
+      letter-spacing: $letter-spacing-5;
+      gap: 20px;
+      
+      &--user {
+        color: $c-text-secondary;
+        fill: $c-text-secondary;
+        stroke: $c-text-secondary;
+      }
+      
+      &--exit {
+        color: $c-error;
+        fill: $c-error;
+        stroke: $c-error;
+      }
+      
+      @include hover {
+        color: $c-text-accent;
+        background-color: $c-bg-primary;
+      }
+    }
+    
+    &-icon {
+      @include square(40px);
     }
   }
 }
