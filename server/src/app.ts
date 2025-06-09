@@ -3,7 +3,7 @@ import fileUpload from 'express-fileupload'
 import cors from 'cors'
 import { env } from './config/env'
 import { API_PATHS } from './constants/paths'
-import { errorHandler } from 'middlewares/error'
+import { errorHandler } from './middlewares/error'
 import {
   appointmentsRouter,
   authRouter,
