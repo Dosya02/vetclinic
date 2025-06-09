@@ -1,21 +1,25 @@
-import { FC } from 'react';
-import { PetAvatarImg } from '@images';
-import { Image } from '@components';
-import { PetModel } from '@models';
+import type { FC } from 'react'
+import { PetAvatarImg } from '@assets/images'
+import { Image } from '@components/ui'
+import styles from './styles.module.css'
 
-interface Props {
-  pet: PetModel;
+interface PetCardProps {
+	title: string
+	imageUrl?: string
 }
 
-export const PetCard: FC<Props> = ({ pet }) => (
-  <article className="c-pet-card">
-    <Image
-      className="c-pet-card__image"
-      src={pet.imageUrl ?? PetAvatarImg}
-      alt="pet image"
-    />
-    <h6 className="c-pet-card__title">
-      {pet.name}
-    </h6>
-  </article>
-);
+export const PetCard: FC<PetCardProps> = ({
+	title,
+	imageUrl,
+}) => (
+	<article className={styles.card}>
+		<Image
+			className={styles.image}
+			src={imageUrl ?? PetAvatarImg}
+			alt="pet image"
+		/>
+		<h6 className={styles.title}>
+			{title}
+		</h6>
+	</article>
+)

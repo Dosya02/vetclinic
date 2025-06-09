@@ -1,25 +1,33 @@
-import { ChangeEvent, FC } from 'react';
+import type { ChangeEvent, FC } from 'react'
+import styles from './styles.module.css'
 
-interface Props {
-  value: string;
-  onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
-  placeholder?: string;
-  isDisabled?: boolean;
+interface TextareaProps {
+	value: string
+	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void
+	label?: string
+	showLabel?: boolean
+	placeholder?: string
+	isDisabled?: boolean
 }
 
-export const Textarea: FC<Props> = ({
-                                      value,
-                                      onChange,
-                                      placeholder = '',
-                                      isDisabled = false,
-                                    }) => (
-  <div className="c-textarea">
-    <textarea
-      className="c-textarea__textarea"
-      value={value}
-      onChange={onChange}
-      placeholder={placeholder}
-      disabled={isDisabled}
-    />
-  </div>
-);
+export const Textarea: FC<TextareaProps> = ({
+	value,
+	onChange,
+	label = '',
+	showLabel = false,
+	placeholder = '',
+	isDisabled = false,
+}) => (
+	<div className={styles.wrapper}>
+		{showLabel &&
+			<span className={styles.label}>{label}</span>
+		}
+		<textarea
+			className={styles.textarea}
+			value={value}
+			onChange={onChange}
+			placeholder={placeholder}
+			disabled={isDisabled}
+		/>
+	</div>
+)

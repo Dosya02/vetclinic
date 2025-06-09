@@ -1,9 +1,10 @@
-import { FC, ReactNode } from 'react';
+import type { FC, ReactNode } from 'react'
+import styles from './styles.module.css'
 
-interface Props {
-	children: ReactNode;
-};
+interface ContainerProps {
+	children: ReactNode
+}
 
-export const Container: FC<Props> = ({ children }) => (
-	<div className="o-container">{children}</div>
-);
+export const Container: FC<ContainerProps> = ({ children }) => (
+	<div className={styles.container}>{children}</div>
+)

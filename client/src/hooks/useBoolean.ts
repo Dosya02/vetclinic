@@ -1,11 +1,15 @@
-import { useCallback, useState } from 'react';
+import { useState, type ChangeEvent } from 'react'
 
-export const useBoolean = (initialValue = false) => {
-  const [value, setValue] = useState<boolean>(initialValue);
+export const useBoolean = (initialValue: boolean = false) => {
+	const [value, setValue] = useState<boolean>(initialValue)
 
-  const setTrue = useCallback(() => setValue(true), []);
-  const setFalse = useCallback(() => setValue(false), []);
-  const toggle = useCallback(() => setValue((prev) => !prev), []);
+	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+		setValue(e.target.checked)
+	}
 
-  return { value, setTrue, setFalse, toggle };
-};
+	const setTrue = () => setValue(true)
+	const setFalse = () => setValue(false)
+	const toggle = () => setValue((prev) => !prev)
+
+	return { value, onChange, setTrue, setFalse, toggle }
+}

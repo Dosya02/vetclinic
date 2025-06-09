@@ -1,0 +1,35 @@
+.footer {
+	background-color: var(--bg-footer);
+	padding-block: 20px;
+}
+
+.inner {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.copyright {
+	line-height: 2;
+	letter-spacing: 0.05em;
+}
+
+@media screen and (max-width: 767.98px) {
+	.footer {
+		padding-block: 15px;
+	}
+
+	.copyright {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.footer {
+		padding-block: 10px;
+	}
+
+	.copyright {
+		font-size: 14px;
+	}
+}

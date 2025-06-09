@@ -1,36 +1,39 @@
-import { FC } from 'react';
-import { Icon } from '@components';
-import { ANCHORS, ICONS } from '@constants';
-import { scrollToHashElement } from '@helpers';
-import { useLocation, useNavigate } from 'react-router-dom';
+import type { FC } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import clsx from 'clsx'
+import { Icon } from '@components/ui'
+import { ANCHORS, ICONS, LOGO_TYPES, type LogoType } from '@constants'
+import { scrollToHashElement } from '@utils/helpers'
+import styles from './styles.module.css'
 
-interface Props {
-  variant?: 'light' | 'dark';
+interface LogoProps {
+	type?: LogoType
 }
 
-export const Logo: FC<Props> = ({ variant = 'light' }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
-  
-  const handleClick = () => scrollToHashElement(
-    ANCHORS.INTRO.id,
-    navigate,
-    location,
-  );
-  
-  return (
-    <div className="c-logo u-cursor-pointer" onClick={handleClick}>
-      <Icon
-        className="c-logo__icon"
-        name={variant === 'light' ? ICONS.LOGO_LIGHT : ICONS.LOGO_DARK}
-      />
-      <h6 className={`
-			c-logo__title
-			${variant === 'dark' ? 'c-logo__title--dark' : 'c-logo__title--light'}
-		`}>
-        Добрый <br/>
-        <span>Доктор Айболит</span>
-      </h6>
-    </div>
-  );
-};
+export const Logo: FC<LogoProps> = ({ type = LOGO_TYPES.LIGHT }) => {
+	const navigate = useNavigate()
+	const location = useLocation()
+
+	const handleClick = () => scrollToHashElement(
+		ANCHORS.INTRO.id,
+		navigate,
+		location,
+	)
+
+	return (
+		<div className={styles.logo} onClick={handleClick}>
+			<Icon
+				className={styles.icon}
+				name={type === LOGO_TYPES.LIGHT ? ICONS.LOGO_LIGHT : ICONS.LOGO_DARK}
+			/>
+			<h6 className={clsx(
+				styles.title,
+				type === LOGO_TYPES.LIGHT ? styles.light : styles.dark,
+			)}>
+				Добрый
+				<br />
+				<span>Доктор Айболит</span>
+			</h6>
+		</div>
+	)
+}

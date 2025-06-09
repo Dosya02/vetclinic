@@ -1,9 +1,9 @@
-import { Document, model, Schema, Types } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose'
 
 export interface IBreed extends Document {
-  _id: Types.ObjectId;
-  name: string;
-  speciesId: Types.ObjectId;
+  _id: Types.ObjectId
+  name: string
+  speciesId: Types.ObjectId
 }
 
 const breedSchema = new Schema<IBreed>(
@@ -22,8 +22,8 @@ const breedSchema = new Schema<IBreed>(
   {
     timestamps: true,
   },
-);
+)
 
-breedSchema.index({ name: 1, speciesId: 1 }, { unique: true });
+breedSchema.index({ name: 1, speciesId: 1 }, { unique: true })
 
-export const Breed = model<IBreed>('Breed', breedSchema);
+export const Breed = model<IBreed>('Breed', breedSchema)

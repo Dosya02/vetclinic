@@ -1,12 +1,12 @@
-import { useActions } from '@hooks';
+import { useActions } from '@hooks'
 
 export const useLogout = () => {
-  const { logout: logoutAction, resetAuthApi } = useActions();
+	const { logout: logoutAction, resetAuthApi } = useActions()
 
-  const logout = () => {
-    logoutAction();
-    resetAuthApi();
-  };
+	const logout = () => {
+		logoutAction()
+		resetAuthApi()
+	}
 
-  return { logout };
-};
+	return { logout }
+}

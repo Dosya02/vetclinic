@@ -1,52 +1,62 @@
-import { ChangeEvent, FC, useState } from 'react';
-import { ErrorMessage, Icon } from '@components';
-import { ICONS } from '@constants';
+import type { ChangeEvent, FC } from 'react'
+import clsx from 'clsx'
+import { Icon } from '@components/ui'
+import { ICONS } from '@constants'
+import { useBoolean } from '@hooks'
+import styles from './styles.module.css'
 
-interface Props {
-  placeholder: string;
-  value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string | null;
+interface PasswordInputProps {
+	value: string
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void
+	className?: string
+	label?: string
+	showLabel?: boolean
+	placeholder?: string
+	rounded?: boolean
 }
 
-export const PasswordInput: FC<Props> = ({
-  placeholder,
-  value,
-  onChange,
-  errorMessage,
+export const PasswordInput: FC<PasswordInputProps> = ({
+	value,
+	onChange,
+	className = '',
+	label = '',
+	showLabel = false,
+	placeholder = '',
+	rounded = false,
 }) => {
-  const [showPassword, setShowPassword] = useState(false);
+	const { value: showPassword, toggle } = useBoolean(false)
 
-  const toggleVisibility = () => setShowPassword(prev => !prev);
-
-  return (
-    <div className="c-input">
-      <div className="c-input__password">
-        <input
-          className="c-input__field c-input__field--password"
-          type={showPassword ? 'text' : 'password'}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-        />
-        <button
-          className="c-input__toggler"
-          type="button"
-          onClick={toggleVisibility}
-        >
-          {showPassword
-           ? <Icon
-             className="c-input__toggler-icon"
-             name={ICONS.SHOW_PASSWORD}
-           />
-           : <Icon
-             className="c-input__toggler-icon"
-             name={ICONS.HIDE_PASSWORD}
-           />
-          }
-        </button>
-      </div>
-      {errorMessage && <ErrorMessage message={errorMessage}/>}
-    </div>
-  );
-};
+	return (
+		<div className={styles.wrapper}>
+			<label className={clsx(
+				styles.label,
+				showLabel && styles.show,
+			)}>
+				{label}
+			</label>
+			<div className={styles.content}>
+				<input
+					className={clsx(
+						styles.input,
+						className,
+						rounded && styles.rounded,
+					)}
+					type={showPassword ? 'text' : 'password'}
+					placeholder={placeholder}
+					value={value}
+					onChange={onChange}
+				/>
+				<button
+					className={styles.toggler}
+					type="button"
+					onClick={toggle}
+				>
+					{showPassword
+						? <Icon className={styles.icon} name={ICONS.SHOW_PASSWORD} />
+						: <Icon className={styles.icon} name={ICONS.HIDE_PASSWORD} />
+					}
+				</button>
+			</div>
+		</div>
+	)
+}

@@ -1,7 +1,7 @@
-import { cleanEnv, num, port, str } from 'envalid';
-import dotenv from 'dotenv';
+import { cleanEnv, num, port, str } from 'envalid'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
 export const env = cleanEnv(process.env, {
   PORT: port({ default: 5000 }),
@@ -16,4 +16,4 @@ export const env = cleanEnv(process.env, {
   SMTP_USER: str(),
   SMTP_PASS: str(),
   EMAIL_FROM: str(),
-});
+})

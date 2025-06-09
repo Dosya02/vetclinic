@@ -1,23 +1,22 @@
-import { Document, model, Schema, Types } from 'mongoose';
-import { USER_ROLES, UserRole } from 'constants/roles';
+import { Document, model, Schema, Types } from 'mongoose'
+import { USER_ROLES, UserRole } from 'constants/roles'
 
 export interface IUser extends Document {
-  _id: Types.ObjectId;
-  email: string;
-  password: string;
-  role: UserRole;
-  verified: boolean;
-  agree: boolean;
-  firstName?: string;
-  lastName?: string;
-  imageUrl?: string;
-  birthDate?: {
-    day: number;
-    month: number;
-    year: number;
-  };
-  createdAt: Date;
-  updatedAt: Date;
+  _id: Types.ObjectId
+  email: string
+  password: string
+  role: UserRole
+  verified: boolean
+  agree: boolean
+  firstName?: string
+  lastName?: string
+  imageUrl?: string
+  imagePublicId?: string
+  positions?: string[]
+  pets?: Types.ObjectId[]
+  birthDate?: Date
+  createdAt: Date
+  updatedAt: Date
 }
 
 const userSchema = new Schema<IUser>(
@@ -51,15 +50,14 @@ const userSchema = new Schema<IUser>(
     firstName: { type: String },
     lastName: { type: String },
     imageUrl: { type: String },
-    birthDate: {
-      day: { type: Number },
-      month: { type: Number },
-      year: { type: Number },
-    },
+    imagePublicId: { type: String },
+    positions: [{ type: String }],
+    pets: [{ type: Schema.Types.ObjectId, ref: 'Pet' }],
+    birthDate: { type: Date },
   },
   {
     timestamps: true,
   },
-);
+)
 
-export const User = model<IUser>('User', userSchema);
+export const User = model<IUser>('User', userSchema)

@@ -1,0 +1,70 @@
+.about {
+	position: relative;
+	overflow: hidden;
+}
+
+.inner {
+	position: relative;
+}
+
+.content {
+	width: 100%;
+	max-width: 800px;
+}
+
+.title {
+	font-size: 40px;
+	font-weight: 700;
+	line-height: 1.375;
+	letter-spacing: 0.15em;
+}
+
+.image {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: auto;
+	height: 100%;
+	border-top-left-radius: 80px;
+	border-bottom-left-radius: 80px;
+	transform: translateX(80%);
+}
+
+@media screen and (max-width: 1279.98px) {
+	.inner {
+		display: flex;
+		justify-content: center;
+	}
+
+	.content {
+		max-width: 1000px;
+	}
+
+	.title {
+		text-align: center;
+	}
+
+	.image {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 1023.98px) {
+	.title {
+		font-size: 32px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	.title {
+		font-size: 28px;
+		letter-spacing: 0.05em;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.title {
+		font-size: 24px;
+		letter-spacing: 0;
+	}
+}

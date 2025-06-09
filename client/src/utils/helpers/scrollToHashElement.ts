@@ -1,17 +1,17 @@
-import { Location, NavigateFunction } from 'react-router-dom';
-import { APP_ROUTES } from '@routes';
+import type { Location, NavigateFunction } from 'react-router-dom'
+import { ROUTES } from '@constants'
 
 export function scrollToHashElement(
-  id: string,
-  navigate: NavigateFunction,
-  location: Location,
+	id: string,
+	navigate: NavigateFunction,
+	location: Location,
 ) {
-  if (location.pathname !== APP_ROUTES.HOME) {
-    navigate(APP_ROUTES.HOME, { state: { scrollToId: id } });
-  } else {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  }
+	if (location.pathname !== ROUTES.HOME) {
+		navigate(ROUTES.HOME, { state: { scrollToId: id } })
+	} else {
+		const element = document.getElementById(id)
+		if (element) {
+			element.scrollIntoView({ behavior: 'smooth' })
+		}
+	}
 }

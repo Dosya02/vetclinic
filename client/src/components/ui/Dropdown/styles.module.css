@@ -1,0 +1,36 @@
+.dropdown {
+	position: relative;
+}
+
+.trigger {
+	cursor: pointer;
+}
+
+.menu {
+	position: absolute;
+	top: calc(100% + 10px);
+	min-width: max-content;
+	height: 300%;
+	opacity: 0;
+	visibility: hidden;
+	transition: var(--transition-default);
+	z-index: 10;
+}
+
+.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.directionLeft {
+	left: 0;
+}
+
+.directionRight {
+	right: 0;
+}
+
+.directionBoth {
+	left: 0;
+	right: 0;
+}

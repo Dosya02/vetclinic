@@ -1,86 +1,76 @@
-import { ChangeEvent, ClipboardEvent, KeyboardEvent } from 'react';
-import { useActions } from '@hooks';
-import { useAppSelector } from '@store/hooks';
+import { useRef, type ChangeEvent, type ClipboardEvent, type KeyboardEvent } from 'react'
+import { useActions, useAppSelector } from '@hooks'
 
 export const useCode = () => {
-  const { changeAuthCode, setAuthFullCode } = useActions();
+	const { changeAuthCode, setAuthFullCode } = useActions()
 
-  const {
-    code,
-    codeErrorMessage,
-  } = useAppSelector(state => state.authReducer);
+	const code = useAppSelector(state => state.authReducer.code)
 
-  const onCodeChange = (
-    e: ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => {
-    const value: string = e.target.value;
+	const inputRefs = useRef<(HTMLInputElement | null)[]>([])
 
-    if (!/^\d?$/.test(value)) {
-      return;
-    }
+	const onCodeChange = (
+		e: ChangeEvent<HTMLInputElement>,
+		index: number,
+	) => {
+		const value: string = e.target.value
 
-    changeAuthCode({ index, value });
+		if (!/^\d?$/.test(value)) {
+			return
+		}
 
-    if (value && e.target.nextElementSibling instanceof HTMLInputElement) {
-      e.target.nextElementSibling.focus();
-    }
-  };
+		changeAuthCode({ index, value })
 
-  const onCodeKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === 'Backspace' && !code[index] && index > 0) {
-      const prev = e.currentTarget.previousElementSibling as HTMLInputElement;
-      if (prev) {
-        prev.focus();
-      }
-    }
-  };
+		if (value && inputRefs.current[index + 1]) {
+			inputRefs.current[index + 1]?.focus()
+		}
+	}
 
-  const onCodePaste = (e: ClipboardEvent<HTMLInputElement>) => {
-    const pastedData = e.clipboardData
-      .getData('Text')
-      .replace(/\D/g, '')
-      .slice(0, 6);
+	const onCodeKeyDown = (e: KeyboardEvent<HTMLInputElement>, index: number) => {
+		if (e.key === 'Backspace' && !code[index] && index > 0) {
+			const prev = inputRefs.current[index - 1]
+			if (prev) {
+				prev.focus()
+			}
+		}
+	}
 
-    if (!pastedData) {
-      return;
-    }
+	const onCodePaste = (e: ClipboardEvent<HTMLInputElement>) => {
+		const pastedData = e.clipboardData
+			.getData('Text')
+			.replace(/\D/g, '')
+			.slice(0, 6)
 
-    const digits = pastedData.split('').slice(0, 6);
+		if (!pastedData) {
+			return
+		}
 
-    setAuthFullCode(digits);
+		const digits = pastedData.split('').slice(0, 6)
 
-    e.preventDefault();
+		setAuthFullCode(digits)
 
-    setTimeout(() => {
-      const inputs = document.querySelectorAll('input.c-input--pin');
+		e.preventDefault()
 
-      for (let i = 0; i < inputs.length; i++) {
-        if ((
-              inputs[i] as HTMLInputElement
-            ).value === '') {
-          (
-            inputs[i] as HTMLInputElement
-          ).focus();
-          return;
-        }
-      }
+		setTimeout(() => {
+			for (let i = 0; i < inputRefs.current.length; i++) {
+				if (inputRefs.current[i]?.value === '') {
+					inputRefs.current[i]?.focus()
+					return
+				}
+			}
 
-      const lastIndex = digits.length - 1;
+			const lastIndex = digits.length - 1
 
-      if (inputs[lastIndex]) {
-        (
-          inputs[lastIndex] as HTMLInputElement
-        ).focus();
-      }
-    }, 0);
-  };
+			if (inputRefs.current[lastIndex]) {
+				inputRefs.current[lastIndex]?.focus()
+			}
+		}, 0)
+	}
 
-  return {
-    code,
-    codeErrorMessage,
-    onCodeChange,
-    onCodeKeyDown,
-    onCodePaste,
-  };
-};
+	return {
+		code,
+		inputRefs,
+		onCodeChange,
+		onCodeKeyDown,
+		onCodePaste,
+	}
+}

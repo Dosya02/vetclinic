@@ -1,27 +1,29 @@
-import { FC, ReactNode } from 'react';
-import clsx from 'clsx';
+import type { FC, ReactNode } from 'react'
+import clsx from 'clsx'
+import type { AnchorType } from '@constants'
+import styles from './styles.module.css'
 
-interface Props {
-  children: ReactNode;
-  className?: string;
-  id?: string;
-  alternate?: boolean;
-};
+interface SectionProps {
+	id?: AnchorType['id']
+	alternate?: boolean
+	className?: string
+	children: ReactNode
+}
 
-export const Section: FC<Props> = ({
-                                     children,
-                                     className = '',
-                                     id,
-                                     alternate = false,
-                                   }) => (
-  <section
-    id={id}
-    className={clsx(
-      'c-section',
-      alternate && 'c-section--alternate',
-      className,
-    )}
-  >
-    {children}
-  </section>
-);
+export const Section: FC<SectionProps> = ({
+	id,
+	alternate,
+	className,
+	children
+}) => (
+	<section
+		className={clsx(
+			styles.section,
+			className,
+			alternate && styles.alternate,
+		)}
+		id={id}
+	>
+		{children}
+	</section>
+)

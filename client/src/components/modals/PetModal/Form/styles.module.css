@@ -1,0 +1,85 @@
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: 60px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+}
+
+.field:first-child,
+.field:nth-child(2),
+.field:nth-child(5),
+.field:nth-child(6),
+.field:nth-child(7) {
+	grid-column: span 2;
+}
+
+.button {
+	grid-column: span 2;
+	justify-self: end;
+}
+
+.label {
+	font-size: 24px;
+	font-weight: 900;
+	font-family: var(--font-family-secondary);
+	line-height: 1;
+	letter-spacing: 0.05em;
+}
+
+.radio {
+	display: flex;
+	align-items: center;
+	gap: 180px;
+}
+
+@media screen and (max-width: 1023.98px) {
+	.form {
+		gap: 40px;
+	}
+
+	.radio {
+		gap: 100px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	.form {
+		grid-template-columns: 1fr;
+		gap: 30px;
+	}
+
+	.field:first-child,
+	.field:nth-child(2),
+	.field:nth-child(5),
+	.field:nth-child(6),
+	.field:nth-child(7) {
+		grid-column: span 1;
+	}
+
+	.button {
+		grid-column: span 1;
+	}
+
+	.radio {
+		gap: 40px;
+	}
+
+	.label {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.radio {
+		gap: 20px;
+	}
+
+	.label {
+		font-size: 16px;
+	}
+}

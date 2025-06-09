@@ -1,0 +1,47 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 20px;
+}
+
+.label {
+	font-size: 24px;
+	font-weight: 900;
+	font-family: var(--font-family-secondary);
+	line-height: 1;
+	letter-spacing: 0.05em;
+}
+
+.dropdowns {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 60px;
+}
+
+.dropdowns>* {
+	width: 100%;
+}
+
+@media screen and (max-width: 1023.98px) {
+	.dropdowns {
+		gap: 20px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	.dropdowns {
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	.label {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.label {
+		font-size: 16px;
+	}
+}

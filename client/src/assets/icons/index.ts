@@ -1,1 +1,1 @@
-export { default as Icons } from "./sprite.svg";
+export { default as Icons } from "./sprite.svg"

@@ -1,0 +1,21 @@
+.form {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: center;
+	gap: 30px;
+}
+
+.field {
+	grid-column: span 2;
+	width: 100%;
+}
+
+.field:nth-child(2),
+.field:nth-child(3) {
+	grid-column: span 1;
+}
+
+.button {
+	grid-column: span 2;
+	margin-top: 30px;
+}

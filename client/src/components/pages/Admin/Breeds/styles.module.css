@@ -1,0 +1,25 @@
+.wrapper {
+	width: 100%;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 60px;
+}
+
+.title {
+	font-size: 40px;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+.table {
+	width: 100%;
+}
+
+.table tr {
+	display: grid;
+	grid-template-columns: 60px 2fr 1fr 200px;
+}

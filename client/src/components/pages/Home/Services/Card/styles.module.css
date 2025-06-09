@@ -1,0 +1,61 @@
+.card {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 30px 20px;
+	text-align: center;
+}
+
+.icon {
+	width: 200px;
+	aspect-ratio: 1;
+}
+
+.content {
+	margin-top: 15px;
+}
+
+.title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 48px;
+	max-width: 300px;
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.07em;
+	margin: 0 auto 25px;
+}
+
+.text {
+	font-size: 14px;
+	line-height: 1.5;
+	letter-spacing: 0.1em;
+}
+
+@media screen and (max-width: 767.98px) {
+	.icon {
+		width: 150px;
+	}
+
+	.title {
+		font-size: 20px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.icon {
+		width: 100px;
+	}
+
+	.title {
+		margin-bottom: 10px;
+	}
+
+	.text {
+		font-size: 12px;
+		letter-spacing: 0.05em;
+	}
+}

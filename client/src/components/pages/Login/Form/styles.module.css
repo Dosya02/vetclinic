@@ -1,0 +1,43 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
+	margin: 100px 0 20px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.forgotPassword {
+	cursor: pointer;
+	align-self: flex-end;
+	color: var(--text-link);
+	font-size: 16px;
+	line-height: 1.5;
+	letter-spacing: 0.03em;
+	transition: var(--transition-default);
+}
+
+.forgotPassword:hover {
+	color: var(--text-hover);
+}
+
+@media screen and (max-width: 1023.98px) {
+	.form {
+		gap: 40px;
+		margin-top: 60px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.form {
+		margin-top: 40px;
+	}
+
+	.forgotPassword {
+		font-size: 14px;
+	}
+}

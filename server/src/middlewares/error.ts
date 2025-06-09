@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express'
 
 export function errorHandler(
   err: Error,
@@ -7,10 +7,10 @@ export function errorHandler(
   next: NextFunction,
 ) {
   const statusCode = res.statusCode && res.statusCode !== 200
-                     ? res.statusCode
-                     : 500;
+    ? res.statusCode
+    : 500
 
   res.status(statusCode).json({
     message: err.message,
-  });
+  })
 }

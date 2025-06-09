@@ -12,6 +12,13 @@ export const API_PATHS = {
     VERIFY_PASSWORD_RESET_CODE: '/verify-password-reset-code',
   },
 
+  USER: '/api/users',
+
+  USER_ROUTES: {
+    GET_ALL: '/',
+    VETS: '/vets',
+  },
+
   SPECIES: '/api/species',
 
   SPECIES_ROUTES: {
@@ -29,4 +36,22 @@ export const API_PATHS = {
     UPDATE: '/:id',
     DELETE: '/:id',
   },
-} as const;
+
+  PETS: '/api/pets',
+
+  PETS_ROUTES: {
+    GET_ALL: '/',
+    CREATE: '/',
+    UPDATE: '/:id',
+    DELETE: '/:id',
+  },
+
+  SERVICES: '/api/services',
+
+  SERVICES_ROUTES: {
+    GET_ALL: '/',
+    CREATE: '/',
+    UPDATE: '/:id',
+    DELETE: '/:id',
+  },
+} as const

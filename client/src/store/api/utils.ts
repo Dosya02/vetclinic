@@ -1,5 +1,5 @@
-import { authApi } from './auth';
+import { authApi } from './auth'
 
 export const apiUtilsActions = {
-  resetAuthApi: () => authApi.util.resetApiState(),
-};
+	resetAuthApi: () => authApi.util.resetApiState(),
+}

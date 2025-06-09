@@ -1,29 +1,26 @@
-import { ChangeEvent, FC } from 'react';
-import { ErrorMessage } from '@components';
+import type { ChangeEvent, FC } from 'react'
+import styles from './styles.module.css'
 
-interface Props {
-  label: string;
-  checked: boolean;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  errorMessage: string | null;
+interface CheckboxProps {
+	text: string
+	checked: boolean
+	onChange: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-export const Checkbox: FC<Props> = ({
-                                      label,
-                                      checked,
-                                      onChange,
-                                      errorMessage,
-                                    }) => (
-  <div className="c-checkbox">
-    <label className="c-checkbox__label">
-      <input
-        className="c-checkbox__input"
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-      />
-      <span className="c-checkbox__text">{label}</span>
-    </label>
-    {errorMessage && <ErrorMessage message={errorMessage}/>}
-  </div>
-);
+export const Checkbox: FC<CheckboxProps> = ({
+	text,
+	checked,
+	onChange,
+}) => (
+	<label className={styles.checkbox}>
+		<input
+			className={styles.input}
+			type="checkbox"
+			checked={checked}
+			onChange={onChange}
+		/>
+		<span className={styles.text}>
+			{text}
+		</span>
+	</label>
+)

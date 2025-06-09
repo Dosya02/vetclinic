@@ -1,0 +1,153 @@
+.content {
+	width: 100%;
+	max-width: 1170px;
+	background-color: var(--bg-primary);
+	margin-block: 100px;
+	padding: 200px 160px 260px;
+}
+
+.title {
+	font-size: 40px;
+	font-family: var(--font-family-secondary);
+	line-height: 1;
+	letter-spacing: 0.05em;
+	margin-bottom: 100px;
+	text-align: center;
+}
+
+.cards {
+	display: flex;
+	align-items: stretch;
+	justify-content: space-between;
+}
+
+.card {
+	cursor: pointer;
+	width: 100%;
+	max-width: 360px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid currentColor;
+	border-radius: 30px;
+	color: var(--text-primary);
+	padding: 30px 30px 60px;
+	text-align: center;
+	transition: var(--transition-default);
+}
+
+.card:hover {
+	color: var(--text-hover);
+	box-shadow: 0 10px 10px var(--black-10);
+	transform: translateY(-10px);
+}
+
+.icon {
+	width: 145px;
+	aspect-ratio: 1;
+	fill: currentColor;
+	stroke: currentColor;
+}
+
+.caption {
+	flex: 1;
+	font-size: 32px;
+	font-weight: 400;
+	font-family: var(--font-family-secondary);
+	line-height: 1;
+	letter-spacing: 0.05em;
+	margin: 30px 0 60px;
+}
+
+.text {
+	font-size: 20px;
+	font-weight: 400;
+	font-family: var(--font-family-secondary);
+	line-height: 1;
+	letter-spacing: 0.05em;
+}
+
+@media screen and (max-width: 1199.98px) {
+	.content {
+		padding: 200px 120px 260px;
+	}
+}
+
+@media screen and (max-width: 1023.98px) {
+	.content {
+		padding: 100px 80px 160px;
+	}
+
+	.title {
+		font-size: 32px;
+		margin-bottom: 60px;
+	}
+
+	.card {
+		max-width: 260px;
+		padding: 20px 20px 40px;
+	}
+
+	.icon {
+		width: 100px;
+	}
+
+	.caption {
+		font-size: 24px;
+		margin: 20px 0 40px;
+	}
+
+	.text {
+		font-size: 16px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	.content {
+		margin-block: 0;
+		padding: 80px 60px;
+	}
+
+	.title {
+		font-size: 32px;
+		margin-bottom: 60px;
+	}
+
+	.cards {
+		flex-direction: column;
+		gap: 40px 0;
+	}
+
+	.card {
+		max-width: 100%;
+		padding: 30px 30px 40px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.content {
+		padding: 40px 20px 70px;
+	}
+
+	.title {
+		font-size: 24px;
+		margin-bottom: 40px;
+	}
+
+	.cards {
+		row-gap: 30px;
+	}
+
+	.card {
+		padding: 20px 20px 30px;
+	}
+
+	.caption {
+		font-size: 20px;
+		margin: 20px 0;
+	}
+
+	.text {
+		font-size: 14px;
+	}
+}

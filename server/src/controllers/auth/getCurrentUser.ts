@@ -1,14 +1,14 @@
-import { Response } from 'express';
-import asyncHandler from 'express-async-handler';
-import { AuthRequest } from 'types/authRequest';
+import { Response } from 'express'
+import asyncHandler from 'express-async-handler'
+import { AuthRequest } from 'types/authRequest'
 
 export const getCurrentUser = asyncHandler(async (
   req: AuthRequest,
   res: Response,
 ) => {
   if (!req.user) {
-    res.status(401);
-    throw new Error('Не авторизован');
+    res.status(401)
+    throw new Error('Не авторизован')
   }
 
   res.json({
@@ -21,5 +21,5 @@ export const getCurrentUser = asyncHandler(async (
     lastName: req.user.lastName,
     imageUrl: req.user.imageUrl,
     birthDate: req.user.birthDate,
-  });
-});
+  })
+})

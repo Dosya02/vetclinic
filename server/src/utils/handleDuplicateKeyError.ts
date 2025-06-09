@@ -1,4 +1,4 @@
-import { Response } from 'express';
+import { Response } from 'express'
 
 export function handleDuplicateKeyError(
   res: Response,
@@ -6,8 +6,8 @@ export function handleDuplicateKeyError(
   message: string = 'Дубликат данных. Запись с такими значениями уже существует.',
 ): void {
   if (error.code === 11000) {
-    res.status(409);
-    throw new Error(message);
+    res.status(409)
+    throw new Error(message)
   }
-  throw error;
+  throw error
 }

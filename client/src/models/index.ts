@@ -1,12 +1,9 @@
-// Pet models
-export * from './pet/breed.model';
-export * from './pet/pet.model';
-export * from './pet/species.model';
-export * from './pet/vaccinationRecord.model';
-export * from './pet/vaccine.model';
-export * from './pet/visit.model';
-// Shared models
-export * from './shared/address.model';
-export * from './shared/date.model';
-// User models
-export * from './user/user.model';
+export * from './breed'
+export * from './date'
+export * from './pet'
+export * from './service'
+export * from './species'
+export * from './user'
+export * from './vaccinationRecord'
+export * from './vaccine'
+export * from './visit'

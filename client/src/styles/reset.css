@@ -1,0 +1,111 @@
+* {
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+:focus,
+:active {
+	outline: none;
+}
+
+a {
+	color: inherit;
+}
+
+a:focus,
+a:active {
+	outline: none;
+}
+
+a,
+a:hover,
+a:visited {
+	text-decoration: none;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: inherit;
+	font-weight: 400;
+}
+
+nav,
+footer,
+header,
+aside {
+	display: block;
+}
+
+input,
+button,
+select,
+textarea {
+	font: inherit;
+	color: inherit;
+	border: none;
+	outline: none;
+	background: none;
+}
+
+input::-ms-clear {
+	display: none;
+}
+
+button {
+	cursor: pointer;
+	background-color: transparent;
+}
+
+button::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+img,
+svg,
+picture,
+canvas,
+video {
+	display: block;
+	max-width: 100%;
+}
+
+svg * {
+	transition-property: fill, stroke;
+}
+
+table {
+	border-spacing: 0;
+	border-collapse: collapse;
+}
+
+html,
+body {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+}

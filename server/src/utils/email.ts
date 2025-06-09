@@ -1,5 +1,5 @@
-import nodemailer from 'nodemailer';
-import { env } from 'config/env';
+import nodemailer from 'nodemailer'
+import { env } from 'config/env'
 
 const transporter = nodemailer.createTransport({
   host: env.SMTP_HOST,
@@ -9,12 +9,12 @@ const transporter = nodemailer.createTransport({
     user: env.SMTP_USER,
     pass: env.SMTP_PASS,
   },
-});
+})
 
 interface SendEmailOptions {
-  to: string;
-  subject: string;
-  html: string;
+  to: string
+  subject: string
+  html: string
 }
 
 export async function sendEmail({
@@ -27,5 +27,5 @@ export async function sendEmail({
     to,
     subject,
     html,
-  });
+  })
 }

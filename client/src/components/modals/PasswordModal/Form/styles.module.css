@@ -1,0 +1,21 @@
+.form {
+	width: 100%;
+}
+
+.buttons {
+	display: flex;
+	justify-content: space-evenly;
+	margin-top: 60px;
+}
+
+@media screen and (max-width: 767.98px) {
+	.cancel {
+		display: none;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.buttons {
+		margin-top: 40px;
+	}
+}

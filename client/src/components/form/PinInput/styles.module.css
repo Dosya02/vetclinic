@@ -1,0 +1,31 @@
+.input {
+	width: 80px;
+	aspect-ratio: 1;
+	background-color: var(--bg-secondary);
+	border: 1px solid transparent;
+	border-radius: 16px;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1;
+	padding: 10px;
+	transition: var(--transition-default);
+	text-align: center;
+}
+
+.input:focus {
+	border-color: var(--text-primary);
+}
+
+@media screen and (max-width: 767.98px) {
+	.input {
+		width: 60px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.input {
+		width: 40px;
+		height: 40px;
+		border-radius: 5px;
+	}
+}

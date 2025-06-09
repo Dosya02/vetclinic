@@ -1,0 +1,11 @@
+.actions {
+	display: flex;
+	align-items: center;
+	column-gap: 30px;
+}
+
+@media screen and (max-width: 479.98px) {
+	.actions {
+		display: none;
+	}
+}

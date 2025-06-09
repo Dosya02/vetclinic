@@ -1,0 +1,32 @@
+.content {
+	min-width: 800px;
+	background-color: var(--bg-primary);
+	margin-block: 100px;
+	padding: 80px;
+}
+
+.text {
+	font-size: 24px;
+	font-weight: 600;
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	row-gap: 40px;
+}
+
+.field {
+	width: 100%;
+}
+
+.buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 30px;
+}

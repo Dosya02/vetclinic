@@ -1,0 +1,26 @@
+.trigger {
+	background-color: var(--text-light);
+	border-radius: 15px;
+	color: var(--text-secondary);
+	font-size: 20px;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0.05em;
+	padding: 8px 20px;
+}
+
+.list {
+	background-color: var(--text-light);
+	border-radius: 15px;
+	overflow: hidden;
+}
+
+.item {
+	cursor: pointer;
+	padding: 8px 20px;
+	transition: var(--transition-default);
+}
+
+.item:hover {
+	background-color: var(--bg-primary);
+}

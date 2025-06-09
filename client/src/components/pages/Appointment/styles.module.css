@@ -1,0 +1,23 @@
+.wrapper {
+	display: flex;
+	justify-content: center;
+}
+
+.inner {
+	width: 100%;
+	max-width: 1030px;
+	background-color: var(--text-light-70);
+	border: 1px solid var(--text-light);
+	border-radius: 55px;
+	margin: 60px 0 90px;
+	padding: 80px 100px 60px;
+}
+
+.title {
+	font-size: 48px;
+	font-weight: 900;
+	font-family: var(--font-family-secondary);
+	letter-spacing: 0.05em;
+	margin-bottom: 80px;
+	text-align: center;
+}

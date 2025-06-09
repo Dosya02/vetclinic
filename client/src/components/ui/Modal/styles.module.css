@@ -1,0 +1,26 @@
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--black-50);
+	opacity: 0;
+	visibility: hidden;
+	overflow-y: auto;
+	transition: var(--transition-default);
+	z-index: 1000;
+}
+
+.active {
+	opacity: 1;
+	visibility: visible;
+}
+
+.wrapper {
+	width: 100%;
+	min-height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

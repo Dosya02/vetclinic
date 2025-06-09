@@ -1,0 +1,29 @@
+.list {
+	display: flex;
+	align-items: center;
+	gap: 30px;
+}
+
+.item {
+	cursor: pointer;
+}
+
+.text {
+	display: inline-block;
+	color: var(--text-light);
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 1;
+	letter-spacing: 0.05em;
+	transition: var(--transition-default);
+}
+
+.text:hover {
+	opacity: 0.7;
+}
+
+@media screen and (max-width: 1023.98px) {
+	.nav {
+		display: none;
+	}
+}

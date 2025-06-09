@@ -1,7 +1,8 @@
-import { FC } from 'react';
+import type { FC } from 'react'
+import styles from './styles.module.css'
 
 export const Loader: FC = () => (
-  <div className="c-loader">
-    <div className="c-loader__spinner"/>
-  </div>
-);
+	<div className={styles.loader}>
+		<div className={styles.spinner} />
+	</div>
+)

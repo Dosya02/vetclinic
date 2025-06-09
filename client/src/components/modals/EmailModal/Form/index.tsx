@@ -1,73 +1,77 @@
-import { FC, FormEvent } from 'react';
-import { toast } from 'react-toastify';
-import { Button, Input } from '@components';
-import { AUTH_STEP } from '@constants';
-import { useActions, useEmailField, useResetAuthFields } from '@hooks';
-import { getErrorMessage } from '@helpers';
-import { validateEmail } from '@validators';
+import type { FC, FormEvent } from 'react'
+import { toast } from 'react-toastify'
+import { Input } from '@components/form'
+import { Button } from '@components/ui'
+import { STEPS } from '@constants'
+import { useActions, useEmail } from '@hooks'
+import { getErrorMessage } from '@utils/helpers'
+import { validateEmail } from '@utils/validators'
+import styles from './styles.module.css'
 
-interface Props {
-  isLoading: boolean;
-  onSubmitFn: (data: { email: string }) => Promise<{ message: string }>;
+interface EmailModalFormProps {
+	isLoading: boolean
+	onSubmitFn: (data: { email: string }) => Promise<{ message: string }>
 }
 
-export const EmailModalForm: FC<Props> = ({ isLoading, onSubmitFn }) => {
-  const { changeAuthStep, changeAuthEmail } = useActions();
-  const resetAuthFields = useResetAuthFields();
+export const EmailModalForm: FC<EmailModalFormProps> = ({
+	isLoading,
+	onSubmitFn,
+}) => {
+	const { changeAuthStep, resetAuthFields, changeAuthEmail } = useActions()
 
-  const { email, emailErrorMessage, onEmailChange } = useEmailField();
+	const { email, onEmailChange } = useEmail()
 
-  const handleCancel = () => {
-    toast.info('Операция отменена');
-    resetAuthFields();
-  };
+	const handleCancel = () => {
+		toast.info('Операция отменена')
+		resetAuthFields()
+	}
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
-    e.preventDefault();
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
+		e.preventDefault()
 
-    const isEmailValid = !validateEmail(email);
+		const isEmailValid = !validateEmail(email)
 
-    if (!isEmailValid) {
-      changeAuthEmail(email);
-      return;
-    }
+		if (!isEmailValid) {
+			changeAuthEmail(email)
+			return
+		}
 
-    try {
-      const response = await onSubmitFn({ email });
-      toast.success(response.message);
-      changeAuthStep(AUTH_STEP.CODE);
-    } catch (err) {
-      toast.error(getErrorMessage(err));
-    }
-  };
+		try {
+			const response = await onSubmitFn({ email })
+			toast.success(response.message)
+			changeAuthStep(STEPS.CODE)
+		} catch (err) {
+			toast.error(getErrorMessage(err))
+		}
+	}
 
-  return (
-    <form className="c-modal__form" onSubmit={handleSubmit}>
-      <div className="c-modal__form-input">
-        <Input
-          value={email}
-          onChange={onEmailChange}
-          errorMessage={emailErrorMessage}
-          placeholder="Введите почту"
-        />
-      </div>
-      <div className="c-modal__buttons">
-        <Button
-          className="c-modal__button"
-          type="button"
-          text="Отмена"
-          rounded
-          reverse
-          onClick={handleCancel}
-        />
-        <Button
-          className="c-modal__button"
-          text={isLoading ? 'Отправка...' : 'Подтвердить'}
-          type="submit"
-          rounded
-          disabled={isLoading}
-        />
-      </div>
-    </form>
-  );
-};
+
+	return (
+		<form className={styles.form} onSubmit={handleSubmit}>
+			<div className={styles.field}>
+				<Input
+					className={styles.input}
+					placeholder="Введите почту"
+					value={email}
+					onChange={onEmailChange}
+				/>
+			</div>
+			<div className={styles.buttons}>
+				<Button
+					className={`${styles.button} ${styles.cancel}`}
+					text="Отмена"
+					alternate
+					wide
+					onClick={handleCancel}
+					disabled={isLoading}
+				/>
+				<Button
+					className={`${styles.button} ${styles.send}`}
+					text={isLoading ? 'Отправка...' : 'Отправить'}
+					type="submit"
+					disabled={isLoading}
+				/>
+			</div>
+		</form>
+	)
+}

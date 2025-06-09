@@ -1,0 +1,35 @@
+.sidebar {
+	align-self: start;
+	height: 100%;
+	background-color: var(--text-primary);
+}
+
+.logo {
+	margin-bottom: 40px;
+	padding: 30px 60px 30px 30px;
+}
+
+.list {
+	display: flex;
+	flex-direction: column;
+}
+
+.link {
+	display: block;
+	color: var(--bg-secondary);
+	font-size: 20px;
+	font-weight: 700;
+	line-height: 1.5;
+	letter-spacing: 0.05em;
+	padding: 15px 30px;
+}
+
+.active {
+	color: var(--text-primary);
+	background-color: var(--bg-secondary);
+}
+
+.link:hover {
+	color: var(--text-primary);
+	background-color: var(--bg-secondary);
+}

@@ -1,27 +1,40 @@
-import { FC } from 'react';
-import { Modal } from '@components';
-import { EmailModalForm } from './Form';
+import { useRef, type FC } from 'react'
+import { Modal } from '@components/ui'
+import { EmailModalForm } from './Form'
+import styles from './styles.module.css'
 
-interface Props {
-  isActive: boolean;
-  text: string;
-  isLoading: boolean;
-  onSubmitFn: (data: { email: string }) => Promise<{ message: string }>;
+interface EmailModalProps {
+	isOpen: boolean
+	text: string
+	isLoading: boolean
+	closeFn: () => void
+	onSubmitFn: (data: { email: string }) => Promise<{ message: string }>
 }
 
-export const EmailModal: FC<Props> = ({
-  isActive,
-  text,
-  isLoading,
-  onSubmitFn,
-}) => (
-  <Modal active={isActive}>
-    <div className="c-modal__content">
-      <p className="c-modal__text">{text}</p>
-      <EmailModalForm
-        isLoading={isLoading}
-        onSubmitFn={onSubmitFn}
-      />
-    </div>
-  </Modal>
-);
+export const EmailModal: FC<EmailModalProps> = ({
+	isOpen,
+	text,
+	isLoading,
+	closeFn,
+	onSubmitFn,
+}) => {
+	const ref = useRef<HTMLDivElement | null>(null)
+
+	return (
+		<Modal
+			isOpen={isOpen}
+			closeFn={closeFn}
+			ref={ref}
+		>
+			<div className={styles.content}>
+				<p className={styles.text}>
+					{text}
+				</p>
+				<EmailModalForm
+					isLoading={isLoading}
+					onSubmitFn={onSubmitFn}
+				/>
+			</div>
+		</Modal>
+	)
+}

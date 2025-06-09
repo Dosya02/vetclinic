@@ -1,0 +1,23 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 60px;
+	margin: 100px 0 20px;
+}
+
+@media screen and (max-width: 1023.98px) {
+	.form {
+		gap: 40px;
+		margin-top: 60px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.form {
+		margin-top: 40px;
+	}
+
+	.forgotPassword {
+		font-size: 14px;
+	}
+}

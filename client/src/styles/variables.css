@@ -1,0 +1,61 @@
+:root {
+	--font-family-primary: "Comfortaa", sans-serif;
+	--font-family-secondary: "Bounded", sans-serif;
+
+	--container-width: 1200px;
+	--container-padding-x: 15px;
+
+	--section-padding-y: 120px;
+
+	--transition-default: 0.2s linear;
+
+	--info: #2F86EB;
+	--success: #28A745;
+	--warning: #FFC107;
+	--error: #DC3545;
+
+	--bg-primary: #F8FAFC;
+	--bg-secondary: #E7ECF3;
+	--bg-header: #527F99;
+	--bg-footer: #638BA3;
+
+	--button-bg: #5A8AA2;
+	--button-bg-alt: #E7ECF3;
+	--button-bg-hover: #4A7990;
+
+	--button-text: #DCE3EB;
+	--button-text-alt: #5A8AA2;
+	--button-text-hover: #F8FAFC;
+
+	--text-primary: #0E2F51;
+	--text-secondary: #7191B5;
+	--text-light: #DCE3EB;
+	--text-light-70: rgba(220, 227, 235, 0.7);
+	--text-link: #6B91AC;
+	--text-hover: #2C7AC8;
+
+	--white: #FFFFFF;
+	--black: #000000;
+	--black-10: rgba(0, 0, 0, 0.10);
+	--black-25: rgba(0, 0, 0, 0.25);
+	--black-35: rgba(0, 0, 0, 0.35);
+	--black-50: rgba(0, 0, 0, 0.50);
+}
+
+@media screen and (max-width: 1279.98px) {
+	:root {
+		--section-padding-y: 100px;
+	}
+}
+
+@media screen and (max-width: 1023.98px) {
+	:root {
+		--section-padding-y: 80px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	:root {
+		--section-padding-y: 60px;
+	}
+}

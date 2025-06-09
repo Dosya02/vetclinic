@@ -1,10 +1,10 @@
-import { useMemo } from 'react';
-import { bindActionCreators } from '@reduxjs/toolkit';
-import { useAppDispatch } from '@store/hooks';
-import { rootActions } from '@store/reducers';
+import { useMemo } from 'react'
+import { bindActionCreators } from '@reduxjs/toolkit'
+import { useAppDispatch } from '@hooks'
+import { rootActions } from '@store/rootActions'
 
 export const useActions = () => {
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch()
 
-  return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch]);
-};
+	return useMemo(() => bindActionCreators(rootActions, dispatch), [dispatch])
+}

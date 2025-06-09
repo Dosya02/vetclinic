@@ -1,8 +1,8 @@
-import { Document, model, Schema, Types } from 'mongoose';
+import { Document, model, Schema, Types } from 'mongoose'
 
 export interface ISpecies extends Document {
-  _id: Types.ObjectId;
-  name: string;
+  _id: Types.ObjectId
+  name: string
 }
 
 const speciesSchema = new Schema<ISpecies>(
@@ -17,6 +17,6 @@ const speciesSchema = new Schema<ISpecies>(
   {
     timestamps: true,
   },
-);
+)
 
-export const Species = model<ISpecies>('Species', speciesSchema);
+export const Species = model<ISpecies>('Species', speciesSchema)

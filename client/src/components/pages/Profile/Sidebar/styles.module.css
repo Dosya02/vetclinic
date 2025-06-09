@@ -1,0 +1,49 @@
+.list {
+	display: flex;
+	flex-direction: column;
+}
+
+.link {
+	position: relative;
+	display: flex;
+	align-items: center;
+	padding: 15px 20px;
+	column-gap: 20px;
+}
+
+.active {
+	background-color: var(--bg-secondary);
+}
+
+.line {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 3px;
+	height: 100%;
+	transition: var(--transition-default);
+	border-radius: 5px;
+	background-color: var(--text-primary);
+	opacity: 0;
+	visibility: hidden;
+}
+
+.active>.line {
+	opacity: 1;
+	visibility: visible;
+}
+
+.icon {
+	height: 32px;
+	aspect-ratio: 1.5;
+	fill: var(--black);
+	stroke: var(--black);
+}
+
+.title {
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 1;
+	letter-spacing: 0.05em;
+	color: var(--text-primary);
+}
