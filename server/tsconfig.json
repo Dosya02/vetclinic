@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "baseUrl": "./src",
     "paths": {
-      "config/*": ["config/*"]
+      "config/*": ["config/*"],
       "constants/*": ["constants/*"]
     }
   }
