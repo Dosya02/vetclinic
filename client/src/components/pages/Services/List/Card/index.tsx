@@ -1,6 +1,5 @@
 import type { FC } from 'react'
 import { Image } from '@components/ui'
-import type { IconsType } from '@constants'
 import styles from './styles.module.css'
 import clsx from 'clsx'
 
