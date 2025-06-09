@@ -18,7 +18,7 @@ export const NAV_ITEMS_CLIENT = [
 
 export const NAV_ITEMS_ADMIN = [
 	{ id: 'intro', label: 'Главная', href: ROUTES.HOME },
-	{ id: 'admin-panel', label: 'Админ Панель', href: ROUTES.ADMIN },
+	{ id: 'admin-panel', label: 'Админ панель', href: ROUTES.ADMIN },
 ] as const
 
 export const NAV_ITEMS_VET = [

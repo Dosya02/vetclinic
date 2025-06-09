@@ -34,6 +34,11 @@
 	word-break: break-word;
 	font-size: 20px;
 	letter-spacing: 0.2em;
+	text-transform: lowercase;
+}
+
+.text::first-letter {
+	text-transform: uppercase;
 }
 
 @media screen and (max-width: 1023.98px) {

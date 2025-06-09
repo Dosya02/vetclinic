@@ -12,6 +12,7 @@ import { useGetMeQuery } from '@store/api'
 import { AppointmentModalProvider } from '@context'
 import { AppointmentModalWrapper } from '@components/modals'
 import 'react-toastify/dist/ReactToastify.css'
+import '@i18n'
 
 const HomePage = lazy(() => import('@components/pages/Home'))
 const ServicesPage = lazy(() => import('@components/pages/Services'))

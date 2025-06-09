@@ -1,17 +1,19 @@
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { UserAvatarImg } from '@assets/images'
 import { Button, Image } from '@components/ui'
-import type { VetModel } from '@models'
+import type { UserModel } from '@models'
+import { useRedirectOrOpenAppointment } from '@hooks'
 import 'swiper/swiper-bundle.css'
 import styles from './styles.module.css'
-import { useRedirectOrOpenAppointment } from '@hooks'
 
 interface TeamCardProps {
-	member: VetModel
+	member: UserModel
 }
 
 export const TeamCard: FC<TeamCardProps> = ({ member }) => {
-	const { firstname, lastname, positions, imageUrl } = member
+	const { t } = useTranslation()
+	const { firstName, lastName, positions, imageUrl } = member
 	const handleClick = useRedirectOrOpenAppointment()
 
 	return (
@@ -21,16 +23,16 @@ export const TeamCard: FC<TeamCardProps> = ({ member }) => {
 			</div>
 			<div className={styles.content}>
 				<h3 className={styles.title}>
-					{firstname}
+					{firstName}
 					{' '}
-					{lastname}
+					{lastName}
 				</h3>
 				<p className={styles.text}>
-					{positions.join(', ')}
+					{positions?.join(', ')}
 				</p>
 			</div>
 			<Button
-				text="Записаться"
+				text={t('make-an-appointment')}
 				onClick={handleClick}
 			/>
 		</article>

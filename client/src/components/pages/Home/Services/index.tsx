@@ -4,36 +4,40 @@ import { Button, Container, Section } from '@components/ui'
 import { ANCHORS, ICONS, ROUTES } from '@constants'
 import { ServicesCard } from './Card'
 import styles from './styles.module.css'
+import { useTranslation } from 'react-i18next'
 
-const services = [
-	{
-		name: 'Вакцинация',
-		icon: ICONS.SYRINGE,
-		description: 'Вакцины играют решающую роль в защите ваших домашних животных от ряда предотвратимых заболеваний.',
-	},
-	{
-		name: 'Домашняя консультация',
-		icon: ICONS.PET_BAG,
-		description: 'Наши опытные ветеринары привносят свои знания и заботу в ваш дом, гарантируя, что ваш питомец получит первоклассную медицинскую помощь в знакомой обстановке.',
-	},
-	{
-		name: 'Стоматологическая помощь',
-		icon: ICONS.TOOTH,
-		description: 'Специализируясь на профилактике стоматологических проблем, мы производим чистку и лечения существующих заболеваний.',
-	},
-]
+
 
 export const Services: FC = () => {
+	const { t } = useTranslation()
 	const navigate = useNavigate()
 
 	const handleClick = () => navigate(ROUTES.SERVICES)
+
+	const services = [
+		{
+			name: t('home-services-card-title-1'),
+			icon: ICONS.SYRINGE,
+			description: t('home-services-card-text-1'),
+		},
+		{
+			name: t('home-services-card-title-2'),
+			icon: ICONS.PET_BAG,
+			description: t('home-services-card-text-2'),
+		},
+		{
+			name: t('home-services-card-title-3'),
+			icon: ICONS.TOOTH,
+			description: t('home-services-card-text-3'),
+		},
+	]
 
 	return (
 		<Section className={styles.services} id={ANCHORS.SERVICES.id}>
 			<Container>
 				<div className={styles.inner}>
 					<h2 className={styles.title}>
-						Услуги по уходу за домашними животными
+						{t('home-services-title')}
 					</h2>
 					<ul className={styles.list}>
 						{services.map((service, index) => (
@@ -43,7 +47,7 @@ export const Services: FC = () => {
 						))}
 					</ul>
 					<Button
-						text="Другие услуги"
+						text={t('home-services-button')}
 						onClick={handleClick}
 					/>
 				</div>

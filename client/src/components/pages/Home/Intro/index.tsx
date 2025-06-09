@@ -1,12 +1,14 @@
 import type { FC } from 'react'
+import { useTranslation } from 'react-i18next'
 import { HomeIntroImg } from '@assets/images'
 import { Button, Container } from '@components/ui'
 import { ANCHORS } from '@constants'
-import styles from './styles.module.css'
 import { useRedirectOrOpenAppointment } from '@hooks'
+import styles from './styles.module.css'
 
 export const Intro: FC = () => {
 	const handleClick = useRedirectOrOpenAppointment()
+	const { t } = useTranslation();
 
 	return (
 		<section
@@ -17,10 +19,10 @@ export const Intro: FC = () => {
 			<Container>
 				<div className={styles.inner}>
 					<h1 className={styles.title}>
-						Вашему любимцу всегда окажут помощь
+						{t('home-intro')}
 					</h1>
 					<Button
-						text="Записаться"
+						text={t('make-an-appointment')}
 						onClick={handleClick}
 					/>
 				</div>

@@ -15,7 +15,7 @@ export default defineConfig({
       '@constants': resolve(__dirname, './src/constants'),
       '@context': resolve(__dirname, './src/context'),
       '@hooks': resolve(__dirname, './src/hooks'),
-      '@localization': resolve(__dirname, './src/localization'),
+      '@i18n': resolve(__dirname, './src/i18n'),
       '@models': resolve(__dirname, './src/models'),
       '@store': resolve(__dirname, './src/store'),
       '@styles': resolve(__dirname, './src/styles'),
