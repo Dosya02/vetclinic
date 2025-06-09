@@ -6,8 +6,12 @@ export interface UserModel {
 	firstName?: string
 	lastName?: string
 	imageUrl?: string
-	birthDate?: Date
+	birthDate?: string
 	role: UserRole
+	address?: string
+	positions?: string[]
+	appointments?: string[]
+	pets?: string[]
 }
 
 export interface ClientModel extends UserModel {
@@ -20,7 +24,6 @@ export interface AdminModel extends UserModel {
 
 export interface VetModel extends UserModel {
 	role: typeof USER_ROLES.VET
-	positions: string[]
 }
 
 export type AnyUser = ClientModel | AdminModel | VetModel

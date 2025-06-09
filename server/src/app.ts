@@ -5,6 +5,7 @@ import { env } from 'config/env'
 import { API_PATHS } from 'constants/paths'
 import { errorHandler } from 'middlewares/error'
 import {
+  appointmentsRouter,
   authRouter,
   breedsRouter,
   petsRouter,
@@ -33,6 +34,7 @@ app.use(API_PATHS.SPECIES, speciesRouter)
 app.use(API_PATHS.BREEDS, breedsRouter)
 app.use(API_PATHS.PETS, petsRouter)
 app.use(API_PATHS.SERVICES, servicesRouter)
+app.use(API_PATHS.APPOINTMENTS, appointmentsRouter)
 
 app.use(errorHandler)
 

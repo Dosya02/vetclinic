@@ -40,6 +40,7 @@ export const petsApi = api.injectEndpoints({
 			}),
 			transformResponse: (response: {
 				message: string
+				// eslint-disable-next-line @typescript-eslint/no-explicit-any
 				pets: any[]
 			}) => ({
 				message: response.message,

@@ -1,4 +1,11 @@
 import { useState, useEffect, type FC } from 'react'
+import DatePicker from 'react-datepicker'
+import { registerLocale } from 'react-datepicker'
+import { ru } from 'date-fns/locale/ru'
+import 'react-datepicker/dist/react-datepicker.css'
+import styles from './styles.module.css'
+
+registerLocale('ru', ru)
 
 interface AppointmentPickerProps {
 	busySlots: string[]
@@ -7,13 +14,12 @@ interface AppointmentPickerProps {
 
 export const AppointmentPicker: FC<AppointmentPickerProps> = ({
 	busySlots,
-	onTimeSelect,
+	onSelect,
 }) => {
-	const [selectedDate, setSelectedDate] = useState<string>('')
+	const [selectedDate, setSelectedDate] = useState<Date | null>(null)
 	const [availableTimes, setAvailableTimes] = useState<string[]>([])
 	const [selectedTime, setSelectedTime] = useState<string>('')
 
-	// Генерация интервала с 8:00 до 18:00 (по часам)
 	const generateTimes = (): string[] => {
 		const times = []
 		for (let hour = 8; hour < 18; hour++) {
@@ -22,55 +28,93 @@ export const AppointmentPicker: FC<AppointmentPickerProps> = ({
 		return times
 	}
 
-	// Фильтруем доступные часы на выбранный день
 	useEffect(() => {
 		if (!selectedDate) {
 			setAvailableTimes([])
 			setSelectedTime('')
+			onSelect('')
 			return
 		}
 
+		const dateStr = selectedDate.toISOString().split('T')[0]
+
 		const times = generateTimes()
 		const busyTimesOnDate = busySlots
-			.filter(slot => slot.startsWith(selectedDate)) // берем слоты на выбранную дату
-			.map(slot => slot.slice(11, 16)) // вытаскиваем время, например "10:00"
+			.filter(slot => slot.startsWith(dateStr))
+			.map(slot => slot.slice(11, 16))
 
 		const freeTimes = times.filter(time => !busyTimesOnDate.includes(time))
 		setAvailableTimes(freeTimes)
-		setSelectedTime('')
-	}, [selectedDate, busySlots])
 
-	// Обработчик выбора времени
+		if (!selectedTime && freeTimes.length > 0) {
+			const firstTime = freeTimes[0]
+			setSelectedTime(firstTime)
+			onSelect(`${dateStr}T${firstTime}:00`)
+		}
+
+		if (freeTimes.length === 0) {
+			setSelectedTime('')
+			onSelect('')
+		}
+	}, [selectedDate, busySlots, onSelect, selectedTime])
+
 	const handleTimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		if (!selectedDate) return
 		setSelectedTime(e.target.value)
-		onTimeSelect(`${selectedDate}T${e.target.value}:00`)
+		const dateStr = selectedDate.toISOString().split('T')[0]
+		onSelect(`${dateStr}T${e.target.value}:00`)
+	}
+
+	const isWeekday = (date: Date) => {
+		const day = date.getDay()
+		return day !== 0 && day !== 6
 	}
 
 	return (
-		<div>
-			<label>
-				Выберите дату (пн-пт):
-				<input
-					type="date"
-					value={selectedDate}
-					onChange={e => setSelectedDate(e.target.value)}
-					min={new Date().toISOString().split('T')[0]} // нельзя выбрать дату в прошлом
+		<div className={styles.wrapper}>
+			<div className={styles.field}>
+				<span className={styles.label}>
+					Дата
+				</span>
+				<DatePicker
+					className={styles.input}
+					selected={selectedDate}
+					onChange={date => setSelectedDate(date)}
+					filterDate={isWeekday}
+					locale="ru"
+					dateFormat="dd.MM.yyyy"
+					minDate={new Date()}
+					placeholderText="Выберите дату"
 				/>
-			</label>
-
-			{availableTimes.length > 0 ? (
-				<label>
-					Выберите время:
-					<select value={selectedTime} onChange={handleTimeChange}>
-						<option value="" disabled>Выберите время</option>
-						{availableTimes.map(time => (
-							<option key={time} value={time}>{time}</option>
-						))}
-					</select>
-				</label>
-			) : selectedDate ? (
-				<p>Нет доступных слотов на выбранный день.</p>
-			) : null}
+			</div>
+			<div className={styles.field}>
+				<span className={styles.label}>
+					Время
+				</span>
+				<select
+					className={styles.input}
+					value={selectedTime}
+					onChange={handleTimeChange}
+					disabled={!selectedDate || availableTimes.length === 0}
+				>
+					<option className={styles.option} value="" disabled>
+						{!selectedDate
+							? 'Сначала выберите дату'
+							: availableTimes.length === 0
+								? 'Нет доступных времён'
+								: 'Выберите время'}
+					</option>
+					{availableTimes.map(time => (
+						<option
+							className={styles.option}
+							value={time}
+							key={time}
+						>
+							{time}
+						</option>
+					))}
+				</select>
+			</div>
 		</div>
 	)
 }

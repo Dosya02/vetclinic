@@ -20,7 +20,7 @@ const ProfilePets: FC = () => {
 	const petInfoModal = useBoolean(false)
 
 	const [deletePet] = useDeletePetMutation()
-	const { data, error, isLoading } = useGetPetsQuery()
+	const { data } = useGetPetsQuery()
 	const speciesQuery = useGetSpeciesQuery()
 	const breedsQuery = useGetBreedsQuery()
 
@@ -62,21 +62,6 @@ const ProfilePets: FC = () => {
 	return (
 		<div className={styles.pets}>
 			<ul className={styles.list}>
-				{isLoading &&
-					<li className={styles.item}>
-						Загрузка питомцев...
-					</li>
-				}
-				{error &&
-					<li className={styles.item}>
-						Ошибка загрузки питомцев
-					</li>
-				}
-				{data?.pets.length === 0 &&
-					<li className={styles.item}>
-						Питомцы не найдены
-					</li>
-				}
 				{data?.pets.map((pet) => (
 					<li
 						key={pet.id}

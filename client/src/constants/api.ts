@@ -15,6 +15,10 @@ export const API_ROUTES = {
 		GET_ALL: 'users',
 		VETS: 'users/vets',
 	},
+	APPOINTMENTS: {
+		GET_ALL: 'appointments',
+		CREATE: 'appointments',
+	},
 	SPECIES: {
 		GET_ALL: 'species',
 		CREATE: 'species',

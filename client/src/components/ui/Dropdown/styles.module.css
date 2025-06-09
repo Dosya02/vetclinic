@@ -10,7 +10,9 @@
 	position: absolute;
 	top: calc(100% + 10px);
 	min-width: max-content;
-	height: 300%;
+	max-height: 500%;
+	box-shadow: 0 8px 4px 4px var(--black-10);
+	overflow-y: auto;
 	opacity: 0;
 	visibility: hidden;
 	transition: var(--transition-default);

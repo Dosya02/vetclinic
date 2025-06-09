@@ -1,42 +1,32 @@
 import { useState, type FC, type FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { AppointmentPicker, DropdownWithLabel, Input, Textarea } from '@components/form'
+import {
+	AppointmentPicker,
+	DropdownWithImage,
+	DropdownWithLabel,
+	Input,
+	Textarea,
+} from '@components/form'
 import { Button } from '@components/ui'
 import { ROUTES, USER_ROLES } from '@constants'
-import { useDropdown, useInput } from '@hooks'
+import { useAppSelector, useDropdown, useInput } from '@hooks'
 import {
 	useCreateAppointmentMutation,
 	useGetAllAppointmentsQuery,
 	useGetAllUsersQuery,
+	useGetPetsQuery,
 	useGetServicesQuery,
-	useGetSpeciesQuery,
 } from '@store/api'
 import { getErrorMessage } from '@utils/helpers'
 import styles from './styles.module.css'
 
-export const GuestForm: FC = () => {
+export const UserForm: FC = () => {
 	const navigate = useNavigate()
-	const fullName = useInput('')
-	const petName = useInput('')
 	const address = useInput('')
 	const comment = useInput('')
 
-	const speciesQuery = useGetSpeciesQuery()
-	const speciesOptions = speciesQuery.data?.species.map((s) => ({
-		id: s.id,
-		name: s.name,
-	})) ?? []
-	const speciesDropdown = useDropdown('', speciesOptions)
-
-	const servicesQuery = useGetServicesQuery()
-	const servicesOptions = servicesQuery.data?.services.map((s) => ({
-		id: s.id,
-		name: s.name,
-	})) ?? []
-	const servicesDropdown = useDropdown('', servicesOptions)
-
-	const isAddress = servicesDropdown.selectedOption?.name === 'Врач на дом'
+	const userInfo = useAppSelector(state => state.authReducer.userInfo)
 
 	const users = useGetAllUsersQuery()
 	const vetsOptions = users.data?.users?.filter(
@@ -46,6 +36,24 @@ export const GuestForm: FC = () => {
 		})) ?? []
 	const vetsDropdown = useDropdown('', vetsOptions)
 	const vetId = vetsDropdown.selectedOption?.id
+
+	const pets = useGetPetsQuery()
+	const petsOptions = pets.data?.pets.filter(
+		(pet) => pet.ownerId === userInfo?.id).map((p) => ({
+			id: p.id,
+			name: p.name,
+			imageUrl: p.imageUrl,
+		})) ?? []
+	const petsDropdown = useDropdown('', petsOptions)
+
+	const servicesQuery = useGetServicesQuery()
+	const servicesOptions = servicesQuery.data?.services.map((s) => ({
+		id: s.id,
+		name: s.name,
+	})) ?? []
+	const servicesDropdown = useDropdown('', servicesOptions)
+
+	const isAddress = servicesDropdown.selectedOption?.name === 'Врач на дом'
 
 	const appointmentsQuery = useGetAllAppointmentsQuery()
 	const allAppointments = appointmentsQuery.data?.appointments ?? []
@@ -64,9 +72,8 @@ export const GuestForm: FC = () => {
 		e.preventDefault()
 
 		if (
-			!fullName.value.trim() ||
-			!petName.value.trim() ||
-			!speciesDropdown.selectedOption?.id ||
+			!userInfo?.id ||
+			!petsDropdown.selectedOption?.id ||
 			!servicesDropdown.selectedOption?.id ||
 			!vetId ||
 			!selectedDateTime
@@ -76,9 +83,8 @@ export const GuestForm: FC = () => {
 		}
 
 		const formData = new FormData()
-		formData.append('fullname', fullName.value)
-		formData.append('petName', petName.value)
-		formData.append('speciesId', speciesDropdown.selectedOption.id)
+		formData.append('userId', userInfo.id)
+		formData.append('petId', petsDropdown.selectedOption.id)
 		formData.append('serviceId', servicesDropdown.selectedOption.id)
 		if (isAddress) formData.append('address', address.value)
 		formData.append('vetId', vetId)
@@ -90,11 +96,9 @@ export const GuestForm: FC = () => {
 
 			toast.success(response.message)
 
-			fullName.setValue('')
-			petName.setValue('')
 			address.setValue('')
 			comment.setValue('')
-			speciesDropdown.reset()
+			petsDropdown.reset()
 			servicesDropdown.reset()
 			vetsDropdown.reset()
 			setSelectedDateTime('')
@@ -108,30 +112,12 @@ export const GuestForm: FC = () => {
 	return (
 		<form className={styles.form} onSubmit={handleSubmit}>
 			<div className={styles.field}>
-				<Input
-					value={fullName.value}
-					onChange={fullName.onChange}
-					placeholder="Введите ФИО"
-					label="ФИО"
-					showLabel
-				/>
-			</div>
-			<div className={styles.field}>
-				<Input
-					value={petName.value}
-					onChange={petName.onChange}
-					placeholder="Введите имя питомца"
-					label="Имя питомца"
-					showLabel
-				/>
-			</div>
-			<div className={styles.field}>
-				<DropdownWithLabel
-					label="Вид"
-					options={speciesOptions}
-					onChange={speciesDropdown.onChange}
-					selectedOption={speciesDropdown.selectedOption}
-					placeholder="Выберите вид питомца"
+				<DropdownWithImage
+					label="Питомец"
+					options={petsOptions}
+					onChange={petsDropdown.onChange}
+					selectedOption={petsDropdown.selectedOption}
+					placeholder="Выберите питомца"
 				/>
 			</div>
 			<div className={styles.field}>

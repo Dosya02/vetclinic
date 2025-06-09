@@ -9,9 +9,9 @@ import { ProtectedRoute, ScrollToTop } from '@components/utils'
 import { ROUTES, USER_ROLES } from '@constants'
 import { useActions, useAppSelector, useLogout } from '@hooks'
 import { useGetMeQuery } from '@store/api'
-import 'react-toastify/dist/ReactToastify.css'
 import { AppointmentModalProvider } from '@context'
 import { AppointmentModalWrapper } from '@components/modals'
+import 'react-toastify/dist/ReactToastify.css'
 
 const HomePage = lazy(() => import('@components/pages/Home'))
 const ServicesPage = lazy(() => import('@components/pages/Services'))
@@ -25,6 +25,8 @@ const ProfileAppointments = lazy(() => import('@components/pages/Profile/Appoint
 const LoginPage = lazy(() => import('@components/pages/Login'))
 const RegistrationPage = lazy(() => import('@components/pages/Registration'))
 const UnauthorizedPage = lazy(() => import('@components/pages/Unauthorized'))
+
+const VetAppointmentsPage = lazy(() => import('@components/pages/VetAppointments'))
 
 const AdminPage = lazy(() => import('@components/pages/Admin'))
 const AdminSpeciesPage = lazy(() => import('@components/pages/Admin/Species'))
@@ -107,6 +109,9 @@ export const App: FC = () => {
                       path={ROUTES.PROFILE_APPOINTMENTS}
                     />
                   </Route>
+                </Route>
+                <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.VET]} />}>
+                  <Route element={<VetAppointmentsPage />} path={ROUTES.VET_APPOINTMENTS} />
                 </Route>
               </Route>
               <Route element={<AuthLayout />}>

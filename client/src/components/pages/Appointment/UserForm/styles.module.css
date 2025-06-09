@@ -1,7 +1,7 @@
 .form {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	justify-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	gap: 30px;
 }
 
@@ -20,17 +20,9 @@
 	margin-top: 30px;
 }
 
+
 @media screen and (max-width: 767.98px) {
 	.form {
-		grid-template-columns: 1fr;
 		gap: 20px;
-	}
-
-	.field {
-		grid-column: span 1;
-	}
-
-	.button {
-		grid-column: span 1;
 	}
 }

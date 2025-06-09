@@ -1,3 +1,4 @@
+export * from './appointment'
 export * from './breed'
 export * from './date'
 export * from './pet'

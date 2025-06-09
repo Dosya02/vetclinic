@@ -19,6 +19,13 @@ export const API_PATHS = {
     VETS: '/vets',
   },
 
+  APPOINTMENTS: '/api/appointments',
+
+  APPOINTMENTS_ROUTES: {
+    GET_ALL: '/',
+    CREATE: '/',
+  },
+
   SPECIES: '/api/species',
 
   SPECIES_ROUTES: {

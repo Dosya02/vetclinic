@@ -12,9 +12,11 @@ export interface IUser extends Document {
   lastName?: string
   imageUrl?: string
   imagePublicId?: string
+  address?: string
   positions?: string[]
   pets?: Types.ObjectId[]
   birthDate?: Date
+  appointments?: Types.ObjectId[]
   createdAt: Date
   updatedAt: Date
 }
@@ -51,9 +53,11 @@ const userSchema = new Schema<IUser>(
     lastName: { type: String },
     imageUrl: { type: String },
     imagePublicId: { type: String },
+    address: { type: String },
     positions: [{ type: String }],
     pets: [{ type: Schema.Types.ObjectId, ref: 'Pet' }],
     birthDate: { type: Date },
+    appointments: [{ type: Schema.Types.ObjectId, ref: 'Appointment' }],
   },
   {
     timestamps: true,

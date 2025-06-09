@@ -1,6 +1,9 @@
 .wrapper {
 	display: flex;
 	justify-content: center;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
 }
 
 .inner {
@@ -20,4 +23,37 @@
 	letter-spacing: 0.05em;
 	margin-bottom: 80px;
 	text-align: center;
+}
+
+@media screen and (max-width: 1023.98px) {
+	.inner {
+		padding: 60px;
+	}
+
+	.title {
+		font-size: 40px;
+		margin-bottom: 70px;
+	}
+}
+
+@media screen and (max-width: 767.98px) {
+	.inner {
+		padding: 60px 30px;
+	}
+
+	.title {
+		font-size: 32px;
+		margin-bottom: 40px;
+	}
+}
+
+@media screen and (max-width: 479.98px) {
+	.inner {
+		padding: 40px 15px;
+	}
+
+	.title {
+		font-size: 24px;
+		margin-bottom: 30px;
+	}
 }

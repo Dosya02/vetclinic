@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import { AppointmentBgImg } from '@assets/images'
 import { useAppSelector } from '@hooks'
 import { GuestForm } from './GuestForm'
+import { UserForm } from './UserForm'
 import styles from './styles.module.css'
 
 const AppointmentPage: FC = () => {
@@ -16,7 +17,7 @@ const AppointmentPage: FC = () => {
 				<h2 className={styles.title}>
 					Записаться на прием
 				</h2>
-				{userInfo ? <p>user form</p> : <GuestForm />}
+				{userInfo ? <UserForm /> : <GuestForm />}
 			</div>
 		</section>
 	)

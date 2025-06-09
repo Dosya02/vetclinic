@@ -17,13 +17,10 @@ export const ROUTES = {
 	PROFILE_APPOINTMENTS: `${PROFILE_BASE}/appointments`,
 
 	VET_APPOINTMENTS: '/appointments',
-	VET_CALENDAR: '/vet-calendar',
 
 	ADMIN: ADMIN_BASE,
-	ADMIN_PETS: `${ADMIN_BASE}/pets`,
 	ADMIN_SPECIES: `${ADMIN_BASE}/species`,
 	ADMIN_BREEDS: `${ADMIN_BASE}/breeds`,
-	ADMIN_VACCINES: `${ADMIN_BASE}/vaccines`,
 	ADMIN_SERVICES: `${ADMIN_BASE}/services`,
 	ADMIN_VETS: `${ADMIN_BASE}/vets`,
 

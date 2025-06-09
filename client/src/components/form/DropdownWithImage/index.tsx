@@ -1,11 +1,11 @@
 import type { FC } from 'react'
 import clsx from 'clsx'
-import { Dropdown, Icon } from '@components/ui'
+import { Avatar, Dropdown, Icon } from '@components/ui'
 import { ICONS, type DropdownOptionType } from '@constants'
 import { useBoolean } from '@hooks'
 import styles from './styles.module.css'
 
-interface DropdownWithLabelProps {
+interface DropdownWithImageProps {
 	label: string
 	options: DropdownOptionType[]
 	onChange: (id: string) => void
@@ -13,7 +13,7 @@ interface DropdownWithLabelProps {
 	placeholder?: string
 }
 
-export const DropdownWithLabel: FC<DropdownWithLabelProps> = ({
+export const DropdownWithImage: FC<DropdownWithImageProps> = ({
 	label,
 	options,
 	onChange,
@@ -37,6 +37,7 @@ export const DropdownWithLabel: FC<DropdownWithLabelProps> = ({
 				direction="both"
 				trigger={
 					<div className={styles.trigger}>
+						<Avatar className={styles.avatar} imageUrl={selectedOption?.image} type="pet" />
 						<span>{selectedOption ? selectedOption.name : placeholder}</span>
 						<Icon className={styles.icon} name={ICONS.ARROW_DOWN} />
 					</div>
@@ -52,7 +53,8 @@ export const DropdownWithLabel: FC<DropdownWithLabelProps> = ({
 							)}
 							onClick={() => handleClick(option.id)}
 						>
-							{option.name}
+							<Avatar className={styles.avatar} imageUrl={selectedOption?.image} type="pet" />
+							<span>{option.name}</span>
 						</div>
 					))}
 				</div>

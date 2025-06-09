@@ -24,14 +24,11 @@ export const NAV_ITEMS_ADMIN = [
 export const NAV_ITEMS_VET = [
 	{ id: 'intro', label: 'Главная', href: ROUTES.HOME },
 	{ id: 'vet-appointments', label: 'Записи', href: ROUTES.VET_APPOINTMENTS },
-	{ id: 'vet-calendar', label: 'Календарь', href: ROUTES.VET_CALENDAR },
 ] as const
 
 export const ADMIN_NAV_ITEMS = [
-	{ label: 'Питомцы', href: ROUTES.ADMIN_PETS },
 	{ label: 'Виды', href: ROUTES.ADMIN_SPECIES },
 	{ label: 'Породы', href: ROUTES.ADMIN_BREEDS },
-	{ label: 'Вакцины', href: ROUTES.ADMIN_VACCINES },
 	{ label: 'Услуги', href: ROUTES.ADMIN_SERVICES },
 	{ label: 'Врачи', href: ROUTES.ADMIN_VETS },
 ] as const
