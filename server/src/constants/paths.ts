@@ -61,4 +61,4 @@ export const API_PATHS = {
     UPDATE: '/:id',
     DELETE: '/:id',
   },
-} as const
+} as const;
