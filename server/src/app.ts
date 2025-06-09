@@ -12,7 +12,7 @@ import {
   servicesRouter,
   speciesRouter,
   userRouter,
-} from 'routes'
+} from '.routes'
 
 const app = express()
 
