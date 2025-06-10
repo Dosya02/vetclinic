@@ -23,5 +23,14 @@
 	"contacts-item-text-1-end": "Байтурсынов көшесі, 125",
 	"contacts-item-title-2": "Қабылдау:",
 	"contacts-item-text-2-start": "+7 705 806 24 83",
-	"contacts-item-text-2-end": "+7 705 678 50 44"
+	"contacts-item-text-2-end": "+7 705 678 50 44",
+	"nav": {
+		"intro": "Басты бет",
+		"about-us": "Біз туралы",
+		"team": "Дәрігерлер",
+		"services": "Қызметтер",
+		"contacts": "Байланыс",
+		"admin-panel": "Админ панелі",
+		"vet-appointments": "Қабылдаулар"
+	}
 }

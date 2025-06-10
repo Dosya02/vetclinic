@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import {
 	NAV_ITEMS_ADMIN,
 	NAV_ITEMS_CLIENT,
@@ -11,9 +12,9 @@ import { scrollToHashElement } from '@utils/helpers'
 import styles from './styles.module.css'
 
 export const HeaderNav: FC = () => {
+	const { t } = useTranslation()
 	const navigate = useNavigate()
 	const location = useLocation()
-
 	const { userInfo } = useAppSelector(state => state.authReducer)
 
 	const role = userInfo?.role || USER_ROLES.CLIENT
@@ -31,7 +32,6 @@ export const HeaderNav: FC = () => {
 			navigate(item.href)
 			return
 		}
-
 		scrollToHashElement(item.id, navigate, location)
 	}
 
@@ -45,7 +45,7 @@ export const HeaderNav: FC = () => {
 						onClick={() => handleClick(item)}
 					>
 						<span className={styles.text}>
-							{item.label}
+							{t(item.label)}
 						</span>
 					</li>
 				))}

@@ -23,5 +23,14 @@
 	"contacts-item-text-1-end": "Байтурсынова 125",
 	"contacts-item-title-2": "Ресепшн:",
 	"contacts-item-text-2-start": "+7 705 806 24 83",
-	"contacts-item-text-2-end": "+7 705 678 50 44"
+	"contacts-item-text-2-end": "+7 705 678 50 44",
+	"nav": {
+		"intro": "Главная",
+		"about-us": "О Нас",
+		"team": "Врачи",
+		"services": "Услуги",
+		"contacts": "Контакты",
+		"admin-panel": "Админ панель",
+		"vet-appointments": "Записи"
+	}
 }

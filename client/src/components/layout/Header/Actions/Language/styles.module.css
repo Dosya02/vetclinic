@@ -24,3 +24,15 @@
 .item:hover {
 	background-color: var(--bg-primary);
 }
+
+@media screen and (max-width: 479.98px) {
+	.trigger {
+		font-size: 16px;
+		padding: 6px 16px;
+	}
+
+	.item {
+		font-size: 16px;
+		padding: 6px 16px;
+	}
+}

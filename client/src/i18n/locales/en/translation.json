@@ -23,5 +23,14 @@
 	"contacts-item-text-1-end": "Almaty",
 	"contacts-item-title-2": "Reception:",
 	"contacts-item-text-2-start": "+7 705 806 24 83",
-	"contacts-item-text-2-end": "+7 705 678 50 44"
+	"contacts-item-text-2-end": "+7 705 678 50 44",
+	"nav": {
+		"intro": "Home",
+		"about-us": "About Us",
+		"team": "Team",
+		"services": "Services",
+		"contacts": "Contacts",
+		"admin-panel": "Admin Panel",
+		"vet-appointments": "Appointments"
+	}
 }

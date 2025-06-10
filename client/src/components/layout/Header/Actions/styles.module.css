@@ -6,6 +6,6 @@
 
 @media screen and (max-width: 479.98px) {
 	.actions {
-		display: none;
+		column-gap: 15px;
 	}
 }

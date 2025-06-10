@@ -10,6 +10,7 @@ import {
 import { useAppSelector } from '@hooks'
 import { scrollToHashElement } from '@utils/helpers'
 import styles from './styles.module.css'
+import { useTranslation } from 'react-i18next'
 
 interface HeaderMenuProps {
 	isActive: boolean
@@ -22,11 +23,10 @@ export const HeaderMenu: FC<HeaderMenuProps> = ({
 	closeFn,
 	excludeRefs = [],
 }) => {
+	const { t } = useTranslation()
 	const menuRef = useRef<HTMLDivElement | null>(null)
-
 	const navigate = useNavigate()
 	const location = useLocation()
-
 	const { userInfo } = useAppSelector(state => state.authReducer)
 
 	const role = userInfo?.role || USER_ROLES.CLIENT
@@ -42,10 +42,12 @@ export const HeaderMenu: FC<HeaderMenuProps> = ({
 	const handleClick = (item: { id: string; label: string; href?: string }) => {
 		if ((isAdmin || isVet) && item.href) {
 			navigate(item.href)
+			closeFn()
 			return
 		}
 
 		scrollToHashElement(item.id, navigate, location)
+		closeFn()
 	}
 
 	useEffect(() => {
@@ -57,7 +59,6 @@ export const HeaderMenu: FC<HeaderMenuProps> = ({
 			const target = event.target as Node
 
 			if (menuRef.current?.contains(target)) return
-
 			if (excludeRefs.some(ref => ref.current?.contains(target))) return
 
 			closeFn()
@@ -71,13 +72,7 @@ export const HeaderMenu: FC<HeaderMenuProps> = ({
 	}, [isActive, closeFn, excludeRefs])
 
 	return (
-		<div
-			className={clsx(
-				styles.menu,
-				isActive && styles.active
-			)}
-			ref={menuRef}
-		>
+		<div className={clsx(styles.menu, isActive && styles.active)} ref={menuRef}>
 			<nav className={styles.nav}>
 				<ul className={styles.list}>
 					{navItems.map((item) => (
@@ -87,7 +82,7 @@ export const HeaderMenu: FC<HeaderMenuProps> = ({
 							onClick={() => handleClick(item)}
 						>
 							<span className={styles.text}>
-								{item.label}
+								{t(item.label)}
 							</span>
 						</li>
 					))}

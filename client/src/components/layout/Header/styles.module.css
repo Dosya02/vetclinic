@@ -12,6 +12,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	gap: 20px;
 }
 
 .left {
@@ -19,8 +20,6 @@
 	align-items: center;
 	column-gap: 30px;
 }
-
-
 
 @media screen and (max-width: 767.98px) {
 	.header {
@@ -34,7 +33,6 @@
 	}
 
 	.left {
-		width: 100%;
-		justify-content: space-between;
+		column-gap: 15px;
 	}
 }

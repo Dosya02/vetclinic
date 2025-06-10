@@ -64,3 +64,13 @@
 	width: 40px;
 	aspect-ratio: 1;
 }
+
+@media screen and (max-width: 479.98px) {
+	.avatar {
+		width: 30px;
+	}
+
+	.loginIcon {
+		width: 30px;
+	}
+}

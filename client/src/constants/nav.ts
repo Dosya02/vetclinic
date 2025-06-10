@@ -9,21 +9,21 @@ export const ANCHORS = {
 } as const
 
 export const NAV_ITEMS_CLIENT = [
-	{ id: 'intro', label: 'Главная' },
-	{ id: 'about-us', label: 'О Нас' },
-	{ id: 'team', label: 'Врачи' },
-	{ id: 'services', label: 'Услуги' },
-	{ id: 'contacts', label: 'Контакты' },
+	{ id: 'intro', label: 'nav.intro' },
+	{ id: 'about-us', label: 'nav.about-us' },
+	{ id: 'team', label: 'nav.team' },
+	{ id: 'services', label: 'nav.services' },
+	{ id: 'contacts', label: 'nav.contacts' },
 ] as const
 
 export const NAV_ITEMS_ADMIN = [
-	{ id: 'intro', label: 'Главная', href: ROUTES.HOME },
-	{ id: 'admin-panel', label: 'Админ панель', href: ROUTES.ADMIN },
+	{ id: 'intro', label: 'nav.intro', href: ROUTES.HOME },
+	{ id: 'admin-panel', label: 'nav.admin-panel', href: ROUTES.ADMIN },
 ] as const
 
 export const NAV_ITEMS_VET = [
-	{ id: 'intro', label: 'Главная', href: ROUTES.HOME },
-	{ id: 'vet-appointments', label: 'Записи', href: ROUTES.VET_APPOINTMENTS },
+	{ id: 'intro', label: 'nav.intro', href: ROUTES.HOME },
+	{ id: 'vet-appointments', label: 'nav.vet-appointments', href: ROUTES.VET_APPOINTMENTS },
 ] as const
 
 export const ADMIN_NAV_ITEMS = [
